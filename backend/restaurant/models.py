@@ -14,12 +14,23 @@ def user_directory_path(instance, filename):
 
 class Restaurant(models.Model):
 
-    class PriceLevel(models.TextChoices):
-        zero = '0', 'No information'
-        one = '1', '$'
-        two = '2', '$$'
-        three = '3', '$$$'
+    PRICE_LEVEL = (
+        ('0', 'No information'),
+        ('1', '$'),
+        ('2', '$$'),
+        ('3', '$$$')
+    )
 
+    CATEGORIES = (
+        ('0', 'No categories'),
+        ('1', 'Vegan'),
+        ('2', 'Vegetarian'),
+        ('3', 'Fast food'),
+        ('4', 'All you can eat'),
+        ('5', 'Traditional'),
+        ('6', 'Haute cuisine'),
+        ('7', 'Kebab'),
+    )
 
     name = models.CharField(max_length=70)
     country = models.CharField('Country', max_length=170)
@@ -34,12 +45,16 @@ class Restaurant(models.Model):
     email = models.EmailField(max_length=70, blank=True)
     opening_hours_from = models.CharField(max_length=20, null=True)
     opening_hours_to = models.CharField(max_length=20, null=True)
-    price_level = models.CharField(max_length=2, choices=PriceLevel.choices, default=PriceLevel.zero)
     avatar = models.ImageField(upload_to=user_directory_path, blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True, null=True)
     owner = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, related_name='my_restaurants', null=True)
 
+    price_level = models.CharField(max_length=2, choices=PRICE_LEVEL, default='0')
+    categories = models.CharField(max_length=2, choices=CATEGORIES, default='0')
+
     def __str__(self):
         return f' Restaurant "{self.name}" owned by {self.owner}'
 
-
+    @property
+    def all_categories(self):
+        return self.CATEGORIES

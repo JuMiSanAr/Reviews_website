@@ -50,6 +50,8 @@ class CreateRestaurants(CreateAPIView):
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantSerializer
 
+    # def create - specify all the conditions - for the phone number
+
 
 
 class GetUpdateDeleteRestaurants(GenericAPIView):

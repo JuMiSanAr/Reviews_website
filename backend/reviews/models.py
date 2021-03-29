@@ -22,7 +22,7 @@ class Review(models.Model):
     author = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='my_reviews', null=True, blank=True)
     restaurant = models.ForeignKey(to=Restaurant, related_name='restaurant_reviews', on_delete=models.CASCADE, blank=True, null=True )
     liked_by = models.ManyToManyField(to=User, blank=True, related_name='liked_reviews')
-    # from relations: comments - check if there is displayed is relation with comments?
+
 
     def __str__(self):
         return f' Review with rating of: {self.rating}, by {self.author}  of {self.restaurant}"'

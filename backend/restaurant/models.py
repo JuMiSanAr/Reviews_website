@@ -28,8 +28,8 @@ class Restaurant(models.Model):
     website = models.CharField(max_length=70, blank=True)
     phone = models.CharField(max_length=20)
     email = models.EmailField(max_length=70, blank=True)
-    # opening_hours_from =
-    # opening hours_to =
+    # opening_hours_from = with library
+    # opening hours_to = CharField
     price_level = models.CharField(max_length=2, choices=PriceLevel.choices, default=PriceLevel.zero)
     avatar = models.ImageField(upload_to=user_directory_path, blank=True, null=True)
     owner = models.ForeignKey(to=User, on_delete=models.SET_NULL, related_name='my_restaurants', null=True, blank=True)

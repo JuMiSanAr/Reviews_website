@@ -39,7 +39,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('users.urls')),
     path('api/', include('restaurant.urls')),
-    path('api/reviews/', include('reviews.urls')),
+    path('api/', include('reviews.urls')),
     path('api/', include('comments.urls')),
     path('api/registration/', include('registration.urls')),
 

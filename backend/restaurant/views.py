@@ -8,7 +8,8 @@ from rest_framework.response import Response
 
 from restaurant.models import Restaurant
 from restaurant.permissions import IsOwnerOrAdmin
-from restaurant.serializers import RestaurantSerializer, RestaurantSerializerCategory, RestaurantSerializerBasic
+from restaurant.serializers import RestaurantSerializer, RestaurantSerializerCategory, RestaurantSerializerBasic, \
+    AllCategoriesSerializer
 
 
 class GetRestaurantsList(ListAPIView):
@@ -40,8 +41,8 @@ class GetRestaurantByCategory(ListAPIView):
     lookup_url_kwarg = 'category_id'
 
     def get_queryset(self):
-        category_id = self.kwargs.get('category_id')
-        return Restaurant.objects.filter(category_id__id=category_id)
+        category_id = self.kwargs['category_id']
+        return Restaurant.objects.filter(categories__icontains=category_id)
 
 
 class CreateRestaurants(CreateAPIView):
@@ -103,3 +104,11 @@ class GetUpdateDeleteRestaurants(GenericAPIView):
 
 # class HomeRestaurantView(ListCreateAPIView):
 #     def get(self, request, *args, **kwargs):
+
+
+class GetCategoriesListView(ListAPIView):
+    '''
+    GET: Get list of all restaurant categories
+    '''
+    queryset = Restaurant.objects.all()
+    serializer_class = AllCategoriesSerializer

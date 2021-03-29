@@ -1,9 +1,10 @@
 import React from 'react';
+import Alive from '../components/justexample';
 
 const Home = () => {
     return(
         <>
-        <h1> I AM ALIVE!!!!</h1>
+       <Alive />
         </>
     );
 };

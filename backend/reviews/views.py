@@ -1,48 +1,32 @@
-from django.shortcuts import render
-
 # Create your views here.
 from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
 
 from restaurant.models import Restaurant
 from reviews.models import Review
-from reviews.serializers import ReviewSerializer
+from reviews.serializers.serializers_main import ReviewSerializer
 
 
-# class CreateUpdateReview(CreateAPIView):
-#     '''
-#     POST: Create new review for a restaurant.
-#     '''
-#     #queryset = Review.objects.all()
-#     serializer_class = ReviewSerializer
-#     permission_classes = [IsAuthenticated]
-#     #lookup_url_kwarg = 'restaurant_id'
-#     # lookup_field = 'restaurant_id'
-#
-#     def perform_create(self, serializer):
-#         comment = Restaurant.objects.get(id=self.kwargs['pk'])
-#         serializer.save(commented_by=self.request.user)
-
-
-class CreateUpdateReview(CreateAPIView):
+class CreateReview(CreateAPIView):
     '''
     POST: Create new review for a restaurant.
     '''
     queryset = Restaurant.objects.all()
     serializer_class = ReviewSerializer
     lookup_url_kwarg = 'restaurant_id'
-    lookup_field = 'restaurant_id'
+    lookup_field = 'id'
 
     def create(self, request, *args, **kwargs):
-        post = self.get_object()
-        review = Review(user=request.user, post=post, review=request.data['review'])
-        review.save()
-        return Response(self.get_serializer(instance=review).data)
+        restaurant = Restaurant.objects.get(id=kwargs['restaurant_id'])
+        rating = self.request.data['rating']
 
-    def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
+        if rating in ['1', '2', '3', '4', '5']:
+            review = Review(author=self.request.user,
+                            restaurant=restaurant,
+                            text_content=request.data['review'],
+                            rating=rating)
+            review.save()
+            return Response(self.get_serializer(review).data)
 
-
-
-
-
+        else:
+            return Response("Please introduce a valid rating (1-5)", status=400)

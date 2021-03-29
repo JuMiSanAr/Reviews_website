@@ -1,10 +1,11 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import SearchPage from './pages/search';
+import SearchPage from './pages/searchPage';
 
-const Home = lazy(() => import('./pages/home'));
-const Login = lazy(() => import('./pages/login'));
-const UserProfile = lazy(() => import('./pages/userProfile'));
+const Home = lazy(() => import('./pages/homePage'));
+const LoginPage = lazy(() => import('./pages/loginPage'));
+const UserProfile = lazy(() => import('./pages/userProfilePage'));
+const RegistrationPage = lazy(() => import('./pages/registrationPage'));
 
 const  Routes = () => {
   return (
@@ -13,7 +14,9 @@ const  Routes = () => {
       <Switch>
       <Route exact path="/" component={Home}/>
       <Route exact path="/search" component={SearchPage}/>
-      <Route exact path="/login" component={Login}/>
+      <Route exact path="/registration" component={RegistrationPage}/>
+      <Route exact path="/login" component={LoginPage}/>
+
       <Route exact path="/userProfile" component={UserProfile}/>
       </Switch>
     </Suspense>

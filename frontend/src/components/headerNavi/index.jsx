@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../../assets/logo.png'
 import { HeaderNaviStyle, RightHeaderSection, LunaLogo, 
-    StyledLoginButton, StyledSignupButton, StyledTab } from '../../styles/components/headerNavi';
+    StyledLoginButton, StyledSignupButton, StyledTab } from '../../styles/componentStyles/headerNavi';
 
 import { useHistory } from "react-router-dom";
 

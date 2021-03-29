@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 
 export const HeaderNaviStyle = styled.div`
+margin-top: 0.5em;
+
 display: flex;
 align-items: center;
 justify-content: space-between;
@@ -18,7 +20,8 @@ margin-left: 0.75em;
 `;
 
 
-export const LeftHeaderSection = styled.div`
+export const RightHeaderSection = styled.div`
+margin-right: 0.5em;
 justify-items: end;
 display: flex;
 flex-direction: row;
@@ -31,7 +34,6 @@ padding: 1.5em;
 margin: 0.25em;
 border: none;
 background-color: transparent;
-font-family: 'Roboto', '"Helvetica Neue"', "Arial", "sans-serif";
 font-size: 0.75em;
 :hover{
     font-Weight: bold;

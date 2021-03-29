@@ -33,7 +33,7 @@ const LoginPage = () => {
             <HeaderNavi/>
             <LoginWrapper> 
                 <LoginTitle>LOGIN<span></span> </LoginTitle>
-                    <span></span>
+
                 <InputField>
                     <input
                         required

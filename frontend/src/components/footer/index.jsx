@@ -1,6 +1,6 @@
 import React from 'react';
 import { FooterButton, FooterLowerBar, FooterRightsText, FooterStyle, FooterUpperBar, 
-    FooterUpperLeftSide, FooterUpperRightSide, SocialButton, SocialButtonIcon } from '../../styles/components/footer';
+    FooterUpperLeftSide, FooterUpperRightSide, SocialButton, SocialButtonIcon } from '../../styles/componentStyles/footer';
 
 import facebook from '../../assets/facebook.svg';
 import twitter from '../../assets/twitter.svg';

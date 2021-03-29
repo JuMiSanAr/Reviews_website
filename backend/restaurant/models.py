@@ -34,9 +34,9 @@ class Restaurant(models.Model):
 
     NOISE_LEVEL = (
         ('0', 'No information'),
-        ('1', '$'),
-        ('2', '$$'),
-        ('3', '$$$')
+        ('1', '!'),
+        ('2', '!!'),
+        ('3', '!!!')
     )
 
     name = models.CharField(max_length=70)

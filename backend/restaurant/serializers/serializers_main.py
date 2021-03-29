@@ -1,14 +1,14 @@
 from rest_framework import serializers
 
 from restaurant.models import Restaurant
-from reviews.serializers.serializers_basic import ReviewSerializerBasic
+from reviews.serializers.serializers_basic import ReviewSerializerWithAuthor
 from users.serializers.serializers_main import UserSerializerBasic
 
 
 class RestaurantSerializer(serializers.ModelSerializer):
 
     owner = UserSerializerBasic(read_only=True)
-    restaurant_reviews = ReviewSerializerBasic(read_only=True, many=True)
+    restaurant_reviews = ReviewSerializerWithAuthor(read_only=True, many=True)
 
     class Meta:
         model = Restaurant
@@ -57,10 +57,10 @@ class RestaurantSerializerHome(serializers.ModelSerializer):
 
 class AllCategoriesSerializer(serializers.ModelSerializer):
 
-    all_categories = serializers.SerializerMethodField()
-
-    def get_all_categories(self, instance):
-        return instance.all_categories
+    # all_categories = serializers.SerializerMethodField()
+    #
+    # def get_all_categories(self, instance):
+    #     return instance.all_categories
 
     class Meta:
         model = Restaurant

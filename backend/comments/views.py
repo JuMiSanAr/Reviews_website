@@ -41,6 +41,9 @@ class CreateComment(CreateAPIView):
         return Response(self.get_serializer(instance=comment).data)
 
 
+# condition to check if the review is there
+# perform for the owner - to make it automatic and read only in serializer for owner 
+
 class DeleteComment(DestroyAPIView):
     '''
     delete: Delete the comment on the review.
@@ -48,7 +51,7 @@ class DeleteComment(DestroyAPIView):
     .
     '''
     serializer_class = CommentSerializer
-    queryset = Comment.objects.all()
+    queryset = Review.objects.all()
     lookup_url_kwarg = 'comment_id'
     permission_classes = [CommentDeletePermission]
 

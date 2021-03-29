@@ -3,7 +3,6 @@ from django.db.models import Q
 from rest_framework.response import Response
 from rest_framework.generics import ListAPIView, RetrieveUpdateAPIView, RetrieveAPIView
 
-
 from users.serializers import UserSerializer
 
 User = get_user_model()
@@ -11,9 +10,9 @@ User = get_user_model()
 
 class GetAllUsersList(ListAPIView):
     """
-     get = Get all users. (not required by spec)
+    get = Get all users. (not required by spec)
 
-    .Search for a user: /api/users/?search=<str:search_string>/
+    Search for a user: /api/users/?search=<str:search_string>/
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -26,9 +25,9 @@ class GetAllUsersList(ListAPIView):
 
         if search:
             queryset = queryset.filter(Q(username__icontains=search) |
-                                           Q(email__icontains=search) |
-                                           Q(first_name__icontains=search) |
-                                           Q(last_name__icontains=search))
+                                       Q(email__icontains=search) |
+                                       Q(first_name__icontains=search) |
+                                       Q(last_name__icontains=search))
 
             serializer = UserSerializer(queryset, many=True)
         else:

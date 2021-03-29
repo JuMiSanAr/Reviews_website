@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 const Home = lazy(() => import('./pages/home'));
 const LoginPage = lazy(() => import('./pages/login'));
+const UserProfile = lazy(() => import('./pages/userProfile'));
 
 const  Routes = () => {
   return (
@@ -12,6 +13,7 @@ const  Routes = () => {
       <Route exact path="/" component={Home}/>
       <Route exact path="/login" component={LoginPage}/>
 
+      <Route exact path="/userProfile" component={UserProfile}/>
       </Switch>
     </Suspense>
   </Router>

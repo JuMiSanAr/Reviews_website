@@ -1,15 +1,14 @@
 from django.contrib.auth import get_user_model
 from django.db.models import Q
-from rest_framework import serializers
 from rest_framework.response import Response
 from rest_framework.generics import ListAPIView, RetrieveUpdateAPIView, RetrieveAPIView
 
-from restaurant import serializers as restaurant_serializers
 from restaurant.models import Restaurant
+from restaurant.serializers import serializers_main as restaurant_serializers
 from reviews import serializers as review_serializers
 from reviews.models import Review
-from users import serializers as user_serializers
-from users.serializers import UserSerializer
+from users.serializers import serializers_main as user_serializers
+from users.serializers.serializers_main import UserSerializer
 
 User = get_user_model()
 

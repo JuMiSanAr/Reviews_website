@@ -41,7 +41,6 @@ urlpatterns = [
     path('api/', include('restaurant.urls')),
     path('api/reviews/', include('reviews.urls')),
     path('api/', include('comments.urls')),
-    path('api/', include('categories.urls')),
 
     path('api/docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 

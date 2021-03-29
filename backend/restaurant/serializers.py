@@ -5,6 +5,8 @@ from users.serializers import UserSerializerBasic
 
 
 class RestaurantSerializer(serializers.ModelSerializer):
+    owner = UserSerializerBasic(read_only=True)
+
     class Meta:
         model = Restaurant
         fields = '__all__'
@@ -27,15 +29,16 @@ class RestaurantSerializerBasic(serializers.ModelSerializer):
 
     class Meta:
         model = Restaurant
-        fields = ['id', 'name', 'category', 'created', 'owner']
-
+        fields = ['id', 'name',  'created', 'owner']
+# 'category',
 
 class RestaurantSerializerCategory(serializers.ModelSerializer):
     class Meta:
         model = Restaurant
-        fields = ['category', ]
+        fields = ['id',]
+# category',
 
 class RestaurantSerializerHome(serializers.ModelSerializer):
     class Meta:
         model = Restaurant
-        fields = ['cname', 'country', 'city', 'rating']
+        fields = ['name', 'country', 'city', 'rating']

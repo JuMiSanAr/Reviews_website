@@ -1,14 +1,14 @@
 from rest_framework import serializers
 
 from comments.models import Comment
-from reviews.serializers.serializers_basic import ReviewSerializerBasic
+from reviews.serializers.serializers_basic import ReviewSerializerWithAuthor
 from users.serializers.serializers_main import UserSerializerBasic
 
 
 class CommentSerializer(serializers.ModelSerializer):
     commented_by = UserSerializerBasic(read_only=True)
     liked_by = UserSerializerBasic(read_only=True)
-    review = ReviewSerializerBasic
+    review = ReviewSerializerWithAuthor
 
     class Meta:
         model = Comment

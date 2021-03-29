@@ -1,14 +1,13 @@
-from django.shortcuts import render
-
 # Create your views here.
-from rest_framework import permissions, status
+from rest_framework import status
 from rest_framework.generics import ListAPIView, CreateAPIView, GenericAPIView
-from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from restaurant.models import Restaurant
 from restaurant.permissions import IsOwnerOrAdmin
-from restaurant.serializers import RestaurantSerializer, RestaurantSerializerCategory, RestaurantSerializerBasic, \
+from restaurant.serializers.serializers_basic import RestaurantSerializerBasic
+from restaurant.serializers.serializers_main import RestaurantSerializer, \
     AllCategoriesSerializer
 
 
@@ -37,7 +36,7 @@ class GetRestaurantByCategory(ListAPIView):
     '''
     get: Get all the restaurants by category.
     '''
-    serializer_class = RestaurantSerializerBasic
+    serializer_class = RestaurantSerializer
     lookup_url_kwarg = 'category_id'
 
     def get_queryset(self):

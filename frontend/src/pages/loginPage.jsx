@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import HeaderNavi from '../components/headerNavi/index';
 import { loginAction } from '../store/actions/loginActions';
 import { baseUrl, headers } from '../store/constants';
-import { InputField, LoginTitle, LoginWrapper, MainContainer } from '../styles/pages/loginStyles';
+import { InputField, LoginTitle, LoginWrapper, MainContainer } from '../styles/pageStyles/loginStyles';
 
 //############################# Component ################################
 

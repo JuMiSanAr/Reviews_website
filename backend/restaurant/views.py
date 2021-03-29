@@ -43,6 +43,7 @@ class GetRestaurantByCategory(ListAPIView):
         category_id = self.kwargs.get('category_id')
         return Restaurant.objects.filter(category_id__id=category_id)
 
+
 class CreateRestaurants(CreateAPIView):
     '''
     POST: Create a new restaurant.
@@ -50,8 +51,8 @@ class CreateRestaurants(CreateAPIView):
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantSerializer
 
-    # def create - specify all the conditions - for the phone number
-
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
 
 class GetUpdateDeleteRestaurants(GenericAPIView):
@@ -74,7 +75,6 @@ class GetUpdateDeleteRestaurants(GenericAPIView):
     lookup_url_kwarg = 'id'
     lookup_field = 'id'
 
-    # two above are just for the url use of id <int:id> instead of pk
     def get(self, request, *args, **kwargs):
         instance = self.get_object()
         serializer = self.get_serializer(instance)
@@ -100,8 +100,6 @@ class GetUpdateDeleteRestaurants(GenericAPIView):
         instance = self.get_object()
         instance.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
-
 
 # class HomeRestaurantView(ListCreateAPIView):
 #     def get(self, request, *args, **kwargs):

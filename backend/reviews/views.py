@@ -1,8 +1,7 @@
 from django.shortcuts import render
 
 # Create your views here.
-from rest_framework.generics import CreateAPIView, GenericAPIView
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
 
 from restaurant.models import Restaurant
@@ -25,7 +24,7 @@ from reviews.serializers import ReviewSerializer
 #         serializer.save(commented_by=self.request.user)
 
 
-class CreateUpdateReview(GenericAPIView):
+class CreateUpdateReview(CreateAPIView):
     '''
     POST: Create new review for a restaurant.
     '''
@@ -34,10 +33,16 @@ class CreateUpdateReview(GenericAPIView):
     lookup_url_kwarg = 'restaurant_id'
     lookup_field = 'restaurant_id'
 
-    def post(self, request, *args, **kwargs):
-        instance = self.get_object()
-        serializer = self.get_serializer(instance)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data)
+    def create(self, request, *args, **kwargs):
+        post = self.get_object()
+        review = Review(user=request.user, post=post, review=request.data['review'])
+        review.save()
+        return Response(self.get_serializer(instance=review).data)
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
+
+
+
 

@@ -19,16 +19,8 @@ class Restaurant(models.Model):
         three = '3', '$$$'
 
 
-    CATEGORIES = (
-        ('1', 'Vegetarian'),
-        ('2', 'Vegan'),
-        ('3', 'Fast Food'),
-        ('4', 'All you can eat'),
-
-    )
-
     name = models.CharField(max_length=70)
-    category = models.CharField(choices=CATEGORIES, blank=True, max_length=2)
+    # category = models.CharField(choices=CATEGORIES, blank=True, max_length=2)
     country = models.CharField('Country', max_length=170)  # can get all countries for drop down?
     street = models.CharField('Street', max_length=70)
     city = models.CharField('City', max_length=70)

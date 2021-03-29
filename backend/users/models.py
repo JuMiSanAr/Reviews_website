@@ -14,7 +14,6 @@ class User(AbstractUser):
     # Additional fields required when using createsuperuser (USERNAME_FIELD and passwords are always required)
     REQUIRED_FIELDS = ['username']
 
-    user_id = models.IntegerField(blank=True, null=True) # only for test
     username = models.CharField(verbose_name='username', max_length=100, blank=True)
     first_name = models.CharField(verbose_name='first name', max_length=50, blank=True)
     last_name = models.CharField(verbose_name='last name',max_length=50, blank=True,)
@@ -28,5 +27,3 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
-
-# from relations: my_reviews, liked_reviews, my_comments, restaurants - to check if they are there!!

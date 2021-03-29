@@ -100,14 +100,6 @@ class GetUpdateDeleteRestaurants(GenericAPIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class GetRestaurantCategories(ListAPIView):
-    '''
-    get: Get the list of all the categories.
-    '''
-    queryset = Restaurant.objects.all()
-    serializer_class = RestaurantSerializerCategory
-# above returns not as expected -need to loop?
-
 
 # class HomeRestaurantView(ListCreateAPIView):
 #     def get(self, request, *args, **kwargs):

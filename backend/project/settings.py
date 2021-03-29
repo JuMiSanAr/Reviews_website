@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'restaurant',
     'reviews',
     'users',
+    'categories'
 ]
 
 MIDDLEWARE = [

@@ -43,9 +43,10 @@ font-size: 0.75em;
     box-shadow: 0px 2.5px #E47D31;
 }
 `
-export const StyledSignupButton = styled.button`
+
+const StyledSignupLoginButton = styled.button`
 cursor: pointer;
-margin-right: 0.02em;
+margin-right: 0.05em;
 font-size: 0.75em;
 width: 6em;
 height: 2.5em;
@@ -54,23 +55,18 @@ border-radius: 40px 0px 0px 40px;
 background-color: #E47D31;
 color: white;
 margin-top: 1em;
-padding: 0.6em;
+padding: 0.85em;
+
 :hover{
     font-Weight: bolder;
 }
 `
-export const StyledLoginButton = styled.button`
-cursor: pointer;
-font-size: 0.75em;
-width: 6em;    
-height: 2.5em;
-border: none;
+
+export const StyledSignupButton = styled(StyledSignupLoginButton)`
+border-radius: 40px 0px 0px 40px;
+margin-right: 0.075em;
+`
+export const StyledLoginButton = styled(StyledSignupLoginButton)`
 border-radius: 0px 40px 40px 0px;
-background-color: #E47D31;
-color: white;
-margin-top: 1em;
-padding: 0.6em;   
-:hover{
-    font-Weight: bolder;
-} 
+margin-left: 0.075em;
 `

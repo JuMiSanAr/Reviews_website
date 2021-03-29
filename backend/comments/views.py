@@ -50,8 +50,8 @@ class CreateComment(CreateAPIView):
 
     def create(self, request, *args, **kwargs):
         post = get_object_or_404(self.get_queryset(), id=kwargs['review_id'])
-        # user = request.user commented_by=user,
-        comment = Comment(comment_content=request.data['comment_content'],
+        # user = request.user
+        comment = Comment(comment_content=request.data['comment_content'], commented_by=request.user,
                           review=post)
         comment.save()
         return Response(self.get_serializer(instance=comment).data)

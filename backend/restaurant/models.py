@@ -34,9 +34,9 @@ class Restaurant(models.Model):
 
     NOISE_LEVEL = (
         ('0', 'No information'),
-        ('1', '$'),
-        ('2', '$$'),
-        ('3', '$$$')
+        ('1', '!'),
+        ('2', '!!'),
+        ('3', '!!!')
     )
 
     name = models.CharField(max_length=70)
@@ -65,10 +65,6 @@ class Restaurant(models.Model):
     credit_cards = models.BooleanField(verbose_name='Credit cards', null=True)
     waiter_service = models.BooleanField(verbose_name='Waiter service', null=True)
     noise_level = models.CharField(verbose_name='Noise level', max_length=2, choices=NOISE_LEVEL, default='0')
-
-
-
-
 
     def __str__(self):
         return f' Restaurant "{self.name}" owned by {self.owner}'

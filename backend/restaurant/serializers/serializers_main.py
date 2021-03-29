@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 from restaurant.models import Restaurant
 from reviews.serializers.serializers_basic import ReviewSerializerBasic
-from users.serializers.serializers_main import UserSerializerBasic
+from users.serializers.serializers_basic import UserSerializerBasic
 
 
 class RestaurantSerializer(serializers.ModelSerializer):

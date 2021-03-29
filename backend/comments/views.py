@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 # Create your views here.
-from rest_framework.generics import DestroyAPIView, CreateAPIView, ListAPIView, get_object_or_404
+from rest_framework.generics import DestroyAPIView, CreateAPIView, ListAPIView, get_object_or_404, UpdateAPIView
 from rest_framework.response import Response
 from comments.models import Comment
 from comments.permissions import CommentDeletePermission
@@ -62,7 +62,29 @@ class CreateComment(CreateAPIView):
         comment.save()
         return Response(self.get_serializer(comment).data)
 
+
 # spec. says there should be 1 url for both get & delete, this apparently might be done by creating custom mixin
 # MultipleFieldLookupMixin
 # https://www.django-rest-framework.org/api-guide/generic-views/#creating-custom-mixins
 # fot the time bing of luna project, luna creator adjusted url due to react calling so there is new url :)
+
+
+class ToggleLikeComment(UpdateAPIView):
+    serializer_class = CommentSerializer
+
+    def update(self, request, *args, **kwargs):
+        comment = Comment.objects.get(id=kwargs['pk'])
+        liked_comments = comment.liked_by.values()
+
+        if len(liked_comments) == 0:
+            comment.liked_by.add(request.user.profile)
+            return Response(self.get_serializer(comment).data)
+
+        for user in liked_comments:
+            if user['user_id'] == request.user.id:
+                comment.liked_by.remove(request.user.profile)
+                return Response(self.get_serializer(comment).data)
+
+            comment.liked_by.add(request.user.profile)
+            return Response(self.get_serializer(comment).data)
+

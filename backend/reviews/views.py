@@ -1,12 +1,11 @@
-from django.shortcuts import render
-
 # Create your views here.
 from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
 
 from restaurant.models import Restaurant
 from reviews.models import Review
-from reviews.serializers import ReviewSerializer
+from reviews.serializers.serializers_main import ReviewSerializer
+
 
 class CreateReview(CreateAPIView):
     '''
@@ -18,15 +17,16 @@ class CreateReview(CreateAPIView):
     lookup_field = 'id'
 
     def create(self, request, *args, **kwargs):
-        post = self.get_object()
-        review = Review(author=request.user, post=post, review=request.data['review'])
-        review.save()
-        return Response(self.get_serializer(instance=review).data)
+        restaurant = Restaurant.objects.get(id=kwargs['restaurant_id'])
+        rating = self.request.data['rating']
 
-    def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
+        if rating in ['1', '2', '3', '4', '5']:
+            review = Review(author=self.request.user,
+                            restaurant=restaurant,
+                            text_content=request.data['review'],
+                            rating=rating)
+            review.save()
+            return Response(self.get_serializer(review).data)
 
-
-
-
-
+        else:
+            return Response("Please introduce a valid rating (1-5)", status=400)

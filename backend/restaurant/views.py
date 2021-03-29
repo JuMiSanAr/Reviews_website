@@ -88,7 +88,6 @@ class GetUpdateDeleteRestaurants(GenericAPIView):
     #     serializer.save()
     #     return Response(serializer.data)
 
-    # why the hell is patch not working???!!!
     def patch(self, request, *args, **kwargs):
         instance = self.get_object()
         serializer = self.get_serializer(instance, data=request.data, partial=True)
@@ -101,9 +100,6 @@ class GetUpdateDeleteRestaurants(GenericAPIView):
         instance.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-# class HomeRestaurantView(ListCreateAPIView):
-#     def get(self, request, *args, **kwargs):
-
 
 class GetCategoriesListView(ListAPIView):
     '''
@@ -111,3 +107,7 @@ class GetCategoriesListView(ListAPIView):
     '''
     queryset = Restaurant.objects.all()
     serializer_class = AllCategoriesSerializer
+
+
+# class HomeRestaurantView(ListCreateAPIView):
+#     def get(self, request, *args, **kwargs):

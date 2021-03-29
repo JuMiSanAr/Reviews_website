@@ -68,3 +68,8 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+-------------------------------------
+Entity Relationship Diagram - created on https://editor.ponyorm.com/
+# ideally this is displayed: https://editor.ponyorm.com/user/veloqueen/Luna/designer
+![alt text](http://url/to/img.png)

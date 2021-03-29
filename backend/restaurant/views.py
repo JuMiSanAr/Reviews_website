@@ -50,6 +50,8 @@ class CreateRestaurants(CreateAPIView):
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantSerializer
 
+    # def create - specify all the conditions - for the phone number
+
 
 
 class GetUpdateDeleteRestaurants(GenericAPIView):
@@ -99,14 +101,6 @@ class GetUpdateDeleteRestaurants(GenericAPIView):
         instance.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-
-class GetRestaurantCategories(ListAPIView):
-    '''
-    get: Get the list of all the categories.
-    '''
-    queryset = Restaurant.objects.all()
-    serializer_class = RestaurantSerializerCategory
-# above returns not as expected -need to loop?
 
 
 # class HomeRestaurantView(ListCreateAPIView):

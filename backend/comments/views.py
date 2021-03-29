@@ -39,7 +39,8 @@ class CreateComment(CreateAPIView):
         comment = Comment(user=request.user, post=post, comment=request.data['comment'])
         comment.save()
         return Response(self.get_serializer(instance=comment).data)
-
+# condition to check if the review is there
+# perform for the owner - to make it automatic and read only in serializer for owner 
 
 class DeleteComment(DestroyAPIView):
     '''

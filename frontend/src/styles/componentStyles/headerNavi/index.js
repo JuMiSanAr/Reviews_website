@@ -59,6 +59,7 @@ padding: 0.85em;
 
 :hover{
     font-Weight: bolder;
+    font-size: 0.875em;
 }
 `
 
@@ -69,4 +70,23 @@ margin-right: 0.075em;
 export const StyledLoginButton = styled(StyledSignupLoginButton)`
 border-radius: 0px 40px 40px 0px;
 margin-left: 0.075em;
+`
+
+export const StyledSignoutButton = styled.button`
+cursor: pointer;
+margin-right: 0.05em;
+font-size: 0.75em;
+width: 6em;
+height: 2.5em;
+border: none;
+border-radius: 40px 0px 0px 40px;
+background-color: #E47D31;
+color: white;
+margin-top: 1em;
+padding: 0.85em;
+
+:hover{
+    font-Weight: bolder;
+    font-size: 0.75em;
+}
 `

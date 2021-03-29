@@ -41,8 +41,8 @@ class GetRestaurantByCategory(ListAPIView):
     lookup_url_kwarg = 'category_id'
 
     def get_queryset(self):
-        category_id = self.kwargs.get('category_id')
-        return Restaurant.objects.filter(category_id__id=category_id)
+        category_id = self.kwargs['category_id']
+        return Restaurant.objects.filter(categories__icontains=category_id)
 
 
 class CreateRestaurants(CreateAPIView):

@@ -1,10 +1,10 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-const Home = lazy(() => import('./pages/home'));
-const LoginPage = lazy(() => import('./pages/login'));
-const UserProfile = lazy(() => import('./pages/userProfile'));
-const RegistrationPage = lazy(() => import('./pages/registration'));
+const Home = lazy(() => import('./pages/homePage'));
+const LoginPage = lazy(() => import('./pages/loginPage'));
+const UserProfile = lazy(() => import('./pages/userProfilePage'));
+const RegistrationPage = lazy(() => import('./pages/registrationPage'));
 
 const  Routes = () => {
   return (

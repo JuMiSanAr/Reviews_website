@@ -35,4 +35,4 @@ class Review(models.Model):
     liked_by = models.ManyToManyField(to=User, blank=True, related_name='liked_reviews')
 
     def __str__(self):
-        return f' Review with rating of: {self.rating}, by {self.author}  of {self.restaurant}"'
+        return f'Review with rating of: {self.rating}, by {self.author} of {self.restaurant}'

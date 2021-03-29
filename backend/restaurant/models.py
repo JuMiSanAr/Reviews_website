@@ -66,10 +66,6 @@ class Restaurant(models.Model):
     waiter_service = models.BooleanField(verbose_name='Waiter service', null=True)
     noise_level = models.CharField(verbose_name='Noise level', max_length=2, choices=NOISE_LEVEL, default='0')
 
-
-
-
-
     def __str__(self):
         return f' Restaurant "{self.name}" owned by {self.owner}'
 

@@ -1,6 +1,6 @@
 # Create your views here.
 from rest_framework import status
-from rest_framework.generics import ListAPIView, CreateAPIView, GenericAPIView
+from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
@@ -55,7 +55,7 @@ class CreateRestaurants(CreateAPIView):
         serializer.save(owner=self.request.user)
 
 
-class GetUpdateDeleteRestaurants(GenericAPIView):
+class GetUpdateDeleteRestaurants(RetrieveUpdateDestroyAPIView):
     '''
     get: Get the details of a restaurant by providing the id of the restaurant.
 
@@ -103,7 +103,9 @@ class GetUpdateDeleteRestaurants(GenericAPIView):
 
 class GetCategoriesListView(ListAPIView):
     '''
-    GET: Get list of all restaurant categories
+    get: Get list of all restaurant categories.
+
+    .
     '''
     queryset = Restaurant.objects.all()
     serializer_class = AllCategoriesSerializer

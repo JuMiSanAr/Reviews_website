@@ -6,8 +6,8 @@ from users.serializers.serializers_basic import UserSerializerBasic
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    commented_by = UserSerializerBasic(read_only=True)
-    liked_by = UserSerializerBasic(read_only=True)
+    commented_by = UserSerializerBasic(read_only=True, many=True)
+    liked_by = UserSerializerBasic(read_only=True, many=True)
     review = ReviewSerializerBasic
 
     class Meta:
@@ -16,7 +16,8 @@ class CommentSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializerBasic(serializers.ModelSerializer):
-    commented_by = UserSerializerBasic(read_only=True)
+    commented_by = UserSerializerBasic(read_only=True, many=True)
+    liked_by = UserSerializerBasic(read_only=True, many=True)
 
     class Meta:
         model = Comment

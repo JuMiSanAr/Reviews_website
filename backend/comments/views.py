@@ -45,16 +45,17 @@ class CreateComment(CreateAPIView):
     '''
     serializer_class = CommentSerializer
     queryset = Review.objects.all()
-    permission_classes = []
     lookup_url_kwarg = 'review_id'
     lookup_field = 'review_id'
 
     def create(self, request, *args, **kwargs):
         post = get_object_or_404(self.get_queryset(), id=kwargs['review_id'])
-        comment = Comment(comment_content=request.data['comment_content'], commented_by=request.user,
+        # user = request.user commented_by=user,
+        comment = Comment(comment_content=request.data['comment_content'],
                           review=post)
         comment.save()
-        return Response(self.get_serializer(comment).data)
+        return Response(self.get_serializer(instance=comment).data)
+
 
 
 # spec. says there should be 1 url for both get & delete, this apparently might be done by creating custom mixin

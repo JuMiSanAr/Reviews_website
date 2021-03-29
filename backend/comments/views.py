@@ -64,6 +64,11 @@ class CreateComment(CreateAPIView):
 
 
 class ToggleLikeComment(UpdateAPIView):
+    '''
+    like&unlike a comment
+
+    .
+    '''
     serializer_class = CommentSerializer
 
     def update(self, request, *args, **kwargs):

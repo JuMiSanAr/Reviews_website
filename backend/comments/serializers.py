@@ -23,14 +23,3 @@ class CommentSerializerBasic(serializers.ModelSerializer):
         fields = ['id', 'review', 'commented_by', 'comment_content', 'liked_by']
 
 
-# class UserSerializerDetailed(UserSerializerBasic):
-#     # recipes = RecipeOnlySerializer(many=True)
-#     # amount_of_recipes = serializers.SerializerMethodField()
-#
-#     # @staticmethod
-#     # def get_amount_of_recipes(obj):
-#     #     return obj.recipes.all().count()
-#
-#     class Meta:
-#         model = User
-#         fields = UserSerializerBasic.Meta.fields + ['email', 'phone']

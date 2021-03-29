@@ -32,6 +32,13 @@ class Restaurant(models.Model):
         ('7', 'Kebab'),
     )
 
+    NOISE_LEVEL = (
+        ('0', 'No information'),
+        ('1', '$'),
+        ('2', '$$'),
+        ('3', '$$$')
+    )
+
     name = models.CharField(max_length=70)
     country = models.CharField('Country', max_length=170)
     street = models.CharField('Street', max_length=70)
@@ -51,6 +58,17 @@ class Restaurant(models.Model):
 
     price_level = models.CharField(max_length=2, choices=PRICE_LEVEL, default='0')
     categories = models.CharField(max_length=2, choices=CATEGORIES, default='0')
+    WIFI = models.BooleanField(null=True)
+    take_away = models.BooleanField(verbose_name='Take away', null=True)
+    delivery = models.BooleanField(null=True)
+    take_reservations = models.BooleanField(verbose_name='Take reservations', null=True)
+    credit_cards = models.BooleanField(verbose_name='Credit cards', null=True)
+    waiter_service = models.BooleanField(verbose_name='Waiter service', null=True)
+    noise_level = models.CharField(verbose_name='Noise level', max_length=2, choices=NOISE_LEVEL, default='0')
+
+
+
+
 
     def __str__(self):
         return f' Restaurant "{self.name}" owned by {self.owner}'

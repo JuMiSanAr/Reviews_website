@@ -1,10 +1,10 @@
 import React from 'react';
-import Alive from '../components/justexample';
+
 
 const Home = () => {
     return(
         <>
-       <Alive />
+       <button onClick={() => console.log('login')}>Login</button>
         </>
     );
 };

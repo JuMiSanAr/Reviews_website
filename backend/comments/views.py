@@ -36,12 +36,6 @@ class DeleteComment(DestroyAPIView):
     lookup_field = 'id'
     permission_classes = [CommentDeletePermission]
 
-    # def delete(self, request, *args, **kwargs):
-    #     review = self.get_object()
-    #     comment = Comment(commented_by=request.user, delete=review, comment=request.data['comment'])
-    #     comment.save()
-    #     return Response(self.get_serializer(instance=comment).data)
-
 
 class CreateComment(CreateAPIView):
     '''
@@ -70,6 +64,11 @@ class CreateComment(CreateAPIView):
 
 
 class ToggleLikeComment(UpdateAPIView):
+    '''
+    like&unlike a comment
+
+    .
+    '''
     serializer_class = CommentSerializer
 
     def update(self, request, *args, **kwargs):
@@ -77,14 +76,13 @@ class ToggleLikeComment(UpdateAPIView):
         liked_comments = comment.liked_by.values()
 
         if len(liked_comments) == 0:
-            comment.liked_by.add(request.user.profile)
+            comment.liked_by.add(request.user)
             return Response(self.get_serializer(comment).data)
 
         for user in liked_comments:
             if user['user_id'] == request.user.id:
-                comment.liked_by.remove(request.user.profile)
+                comment.liked_by.remove(request.user)
                 return Response(self.get_serializer(comment).data)
 
-            comment.liked_by.add(request.user.profile)
-            return Response(self.get_serializer(comment).data)
-
+        comment.liked_by.add(request.user)
+        return Response(self.get_serializer(comment).data)

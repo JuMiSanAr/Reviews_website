@@ -1,6 +1,6 @@
 import React from 'react';
 import HeaderNavi from '../components/headerNavi/index';
-import { InputField, LoginTitle, LoginWrapper, MainContainer } from '../styles/pages/loginStyles';
+import { InputField, LoginTitle, LoginWrapper, MainContainer } from '../styles/pageStyles/loginStyles';
 
 //############################# Component ################################
 
@@ -10,7 +10,7 @@ const LoginPage = () => {
             <HeaderNavi/>
             <LoginWrapper> 
                 <LoginTitle>LOGIN<span></span> </LoginTitle>
-                    <span></span>
+
                 <InputField>
                     <input
                         required

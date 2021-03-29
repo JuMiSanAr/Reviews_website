@@ -32,13 +32,27 @@ class RestaurantSerializerBasic(serializers.ModelSerializer):
         fields = ['id', 'name',  'created', 'owner']
 # 'category',
 
+
 class RestaurantSerializerCategory(serializers.ModelSerializer):
     class Meta:
         model = Restaurant
         fields = ['id',]
 # category',
 
+
 class RestaurantSerializerHome(serializers.ModelSerializer):
     class Meta:
         model = Restaurant
         fields = ['name', 'country', 'city', 'rating']
+
+
+class AllCategoriesSerializer(serializers.ModelSerializer):
+
+    all_categories = serializers.SerializerMethodField()
+
+    def get_all_categories(self, instance):
+        return instance.all_categories
+
+    class Meta:
+        model = Restaurant
+        fields = ['all_categories']

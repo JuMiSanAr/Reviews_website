@@ -1,14 +1,14 @@
-from django.shortcuts import render
-
 # Create your views here.
-from rest_framework import permissions, status
+from rest_framework import status
 from rest_framework.generics import ListAPIView, CreateAPIView, GenericAPIView
-from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from restaurant.models import Restaurant
 from restaurant.permissions import IsOwnerOrAdmin
-from restaurant.serializers import RestaurantSerializer, RestaurantSerializerCategory, RestaurantSerializerBasic
+from restaurant.serializers.serializers_basic import RestaurantSerializerBasic
+from restaurant.serializers.serializers_main import RestaurantSerializer, \
+    AllCategoriesSerializer
 
 
 class GetRestaurantsList(ListAPIView):
@@ -36,12 +36,12 @@ class GetRestaurantByCategory(ListAPIView):
     '''
     get: Get all the restaurants by category.
     '''
-    serializer_class = RestaurantSerializerBasic
+    serializer_class = RestaurantSerializer
     lookup_url_kwarg = 'category_id'
 
     def get_queryset(self):
-        category_id = self.kwargs.get('category_id')
-        return Restaurant.objects.filter(category_id__id=category_id)
+        category_id = self.kwargs['category_id']
+        return Restaurant.objects.filter(categories__icontains=category_id)
 
 
 class CreateRestaurants(CreateAPIView):
@@ -103,3 +103,11 @@ class GetUpdateDeleteRestaurants(GenericAPIView):
 
 # class HomeRestaurantView(ListCreateAPIView):
 #     def get(self, request, *args, **kwargs):
+
+
+class GetCategoriesListView(ListAPIView):
+    '''
+    GET: Get list of all restaurant categories
+    '''
+    queryset = Restaurant.objects.all()
+    serializer_class = AllCategoriesSerializer

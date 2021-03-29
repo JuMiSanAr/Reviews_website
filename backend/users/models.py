@@ -20,7 +20,7 @@ class User(AbstractUser):
     email = models.EmailField(unique=True)
     location = models.CharField(verbose_name='user location', max_length=100, blank=True)
     phone = models.CharField(max_length=20, blank=True)
-    things_i_love = models.CharField(verbose_name='Things I like', max_length=300, blank=True)
+    things_i_like = models.CharField(verbose_name='Things I like', max_length=300, blank=True)
     description = models.CharField(verbose_name='user description', max_length=700, blank=True)
     date_joined = models.DateTimeField(verbose_name='date joined', auto_now_add=True)
     avatar = models.ImageField(upload_to=user_directory_path, blank=True, null=True)

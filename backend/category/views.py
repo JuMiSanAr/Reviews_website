@@ -9,7 +9,7 @@ from category.serializers.serializers_main import CategoriesSerializer
 
 class ListAllCategories(ListAPIView):
     '''
-    GET: Get all categories
+    get: Get all categories.
 
     .
     '''

@@ -102,19 +102,19 @@ class GetUpdateDeleteRestaurants(RetrieveUpdateDestroyAPIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class GetCategoriesListView(ListAPIView):
-    '''
-    get: Get list of all restaurant categories.
-
-    .
-    '''
-
-    serializer_class = AllCategoriesSerializer
-
-    def get_queryset(self):
-        first_restaurant = Restaurant.objects.first()
-        queryset = Restaurant.objects.filter(id=first_restaurant.id)
-        return queryset
+# class GetCategoriesListView(ListAPIView):
+#     '''
+#     get: Get list of all restaurant categories.
+#
+#     .
+#     '''
+#
+#     serializer_class = AllCategoriesSerializer
+#
+#     def get_queryset(self):
+#         first_restaurant = Restaurant.objects.first()
+#         queryset = Restaurant.objects.filter(id=first_restaurant.id)
+#         return queryset
 
 
 class HomeRestaurantView(ListAPIView):

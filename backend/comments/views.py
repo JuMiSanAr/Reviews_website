@@ -1,10 +1,9 @@
-from django.shortcuts import render
 
 # Create your views here.
-from rest_framework.generics import DestroyAPIView, CreateAPIView, ListAPIView, get_object_or_404, UpdateAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView, get_object_or_404, UpdateAPIView, DestroyAPIView
 from rest_framework.response import Response
 from comments.models import Comment
-from comments.permissions import CommentDeletePermission
+from comments.permissions import CommentPermission
 from comments.serializers import CommentSerializer, CommentSerializerBasic
 from reviews.models import Review
 
@@ -34,7 +33,20 @@ class DeleteComment(DestroyAPIView):
     queryset = Comment.objects.all()
     lookup_url_kwarg = 'comment_id'
     lookup_field = 'id'
-    permission_classes = [CommentDeletePermission]
+    permission_classes = [CommentPermission]
+
+
+class UpdateComment(UpdateAPIView):
+    '''
+    patch: Update comment on the review.
+
+    .
+    '''
+    serializer_class = CommentSerializer
+    queryset = Comment.objects.all()
+    lookup_url_kwarg = 'comment_id'
+    lookup_field = 'id'
+    permission_classes = [CommentPermission]
 
 
 class CreateComment(CreateAPIView):
@@ -56,7 +68,6 @@ class CreateComment(CreateAPIView):
         return Response(self.get_serializer(instance=comment).data)
 
 
-
 # spec. says there should be 1 url for both get & delete, this apparently might be done by creating custom mixin
 # MultipleFieldLookupMixin
 # https://www.django-rest-framework.org/api-guide/generic-views/#creating-custom-mixins
@@ -65,7 +76,7 @@ class CreateComment(CreateAPIView):
 
 class ToggleLikeComment(UpdateAPIView):
     '''
-    Like&unlike a comment.
+    like & unlike a comment
 
     .
     '''
@@ -80,7 +91,7 @@ class ToggleLikeComment(UpdateAPIView):
             return Response(self.get_serializer(comment).data)
 
         for user in liked_comments:
-            if user['user_id'] == request.user.id:
+            if user['id'] == request.user.id:
                 comment.liked_by.remove(request.user)
                 return Response(self.get_serializer(comment).data)
 

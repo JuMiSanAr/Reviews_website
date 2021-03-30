@@ -12,7 +12,7 @@ class ReviewSerializerWithAuthor(serializers.ModelSerializer):
 
     class Meta:
         model = Review
-        fields = ['author', 'text_content', 'rating', 'created', 'modified', 'liked_by']
+        fields = ['id', 'author', 'text_content', 'rating', 'created', 'modified', 'liked_by']
 
 
 class ReviewSerializerWithRestaurant(serializers.ModelSerializer):
@@ -21,4 +21,4 @@ class ReviewSerializerWithRestaurant(serializers.ModelSerializer):
 
     class Meta:
         model = Review
-        fields = ['restaurant', 'text_content', 'rating', 'created', 'modified', 'liked_by']
+        fields = ['id', 'restaurant', 'text_content', 'rating', 'created', 'modified', 'liked_by']

@@ -6,10 +6,13 @@ import styled from 'styled-components';
 import Footer from '../components/footer';
 import HeaderNavi from '../components/headerNavi';
 import LittleMap from '../components/restaurantPageComponents/map';
+import RightSection from '../components/restaurantPageComponents/lowerRightSection';
 // ===================================================
 // ================ styled components ================
 import RestaurantTitle from '../components/restaurantPageComponents/bannerTitle';
-import { RestaurantBanner, RestaurantInfoBanner } from '../styles/pageStyles/restaurantStyles';
+import { LowerSection, 
+ RestaurantBanner, RestaurantInfoBanner } from '../styles/pageStyles/restaurantStyles';
+import LeftSection from '../components/restaurantPageComponents/lowerLeftSection';
 // ===================================================
 
 
@@ -27,46 +30,74 @@ const restaurant = {
     phoneNumbner: '+41 44 211 53 72',
     website: 'laederach.com',
     latLan: [47.372, 8.539],
+    priceLevel: '$$$',
+    openingHours: 'Monday-Friady 9:00 am - 8:00 pm',
+    reviews:[
+        { 
+            reviewerName: 'Laurent H.',
+            numberOfReviewsOfReviewer: '6',
+            score: '3.5',
+            date: '01.01.2018 15:22',
+            content: 'this location at the Bahnhofstrasse is quite friendly and easily located across the street from the train station. The people there seem to be quite good and helpful in their service.',
+            numberOfReviewLikes: '63',
+            comment: [
+                {
+                    commenterName: 'Colin Wirz',
+                    commentDate: '01.01.2018 15:22',
+                    commentContent: 'Actually you have no taste!'
+                },
+                {
+                    commenterName: 'Laurent Meyer',
+                    commentDate: '01.01.2018 15:22',
+                    commentContent: 'Sorry bro!'
+                },
+                {
+                    commenterName: 'Laurent Meyer',
+                    commentDate: '01.01.2018 15:22',
+                    commentContent: 'I cant imagine!'
+                },
+            ]
+    
+        },
+        { 
+            reviewerName: 'Laurent H.',
+            numberOfReviewsOfReviewer: '6',
+            score: '3.5',
+            date: '01.01.2018 15:22',
+            content: 'this location at the Bahnhofstrasse is quite friendly and easily located across the street from the train station. The people there seem to be quite good and helpful in their service.',
+            numberOfReviewLikes: '63',
+            comment: [
+                {
+                    commenterName: 'Colin Wirz',
+                    commentDate: '01.01.2018 15:22',
+                    commentContent: 'Actually you have no taste!'
+                },
+                {
+                    commenterName: 'Laurent Meyer',
+                    commentDate: '01.01.2018 15:22',
+                    commentContent: 'Sorry bro!'
+                },
+                {
+                    commenterName: 'Laurent Meyer',
+                    commentDate: '01.01.2018 15:22',
+                    commentContent: 'I cant imagine!'
+                },
+            ]
+    
+        },
+
+    ]
+
 }
 
-const LowerSection = styled.div `
-    display: flex;
-    flex-direction:row;
-    height:600px;
-    width:100vw;
-`
-
-const LowerRightSection = styled.div `
-    border: solid 1px black;
-    width: 50vw;
-`
-const LowerLeftSection = styled.div `
-    border: solid 1px black;
-    width: 50vw;
-`
-
-const OrangeButton = styled.button `
-    background-color: #E47D31;
-    padding: 10px 20px;
-    width: 200px;
-    height: 56px;
-    align-self: center;
-    border-radius: 28px;
-    color: #fff;
-    border: none;
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: all 0.3s;
-
-    :hover {
-        box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.4);
-        transform: scale(1.05) translateY(-5px);
-    }
-`
 
 const RestaurantPage = () => {
+    const writeReviewHandler = (event) => {
+        console.log(event);
+    }
+    const editDataHandler = (event) => {
+        console.log(event);
+    }
 
     return(
         <>
@@ -78,17 +109,9 @@ const RestaurantPage = () => {
                 </RestaurantInfoBanner>
             </RestaurantBanner>
             <LowerSection>
-                <LowerLeftSection>
+                <LeftSection reviews={restaurant.reviews}/>
 
-                </LowerLeftSection>
-
-                <LowerRightSection>
-                    <p></p>
-                    <p></p>
-                    <OrangeButton>WRITE A REVIEW</OrangeButton>
-                    <OrangeButton>EDIT DATA</OrangeButton>
-                </LowerRightSection>
-
+                <RightSection restaurant={restaurant}/>
             </LowerSection>
             <Footer/>
         </>

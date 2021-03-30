@@ -1,6 +1,8 @@
 # Create your views here.
+from statistics import mean
+
 from rest_framework import status
-from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveUpdateDestroyAPIView, RetrieveAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
@@ -8,7 +10,7 @@ from restaurant.models import Restaurant
 from restaurant.permissions import IsOwnerOrAdmin
 from restaurant.serializers.serializers_basic import RestaurantSerializerBasic
 from restaurant.serializers.serializers_main import RestaurantSerializer, \
-    AllCategoriesSerializer
+    AllCategoriesSerializer, BestRatedRestaurantsSerializer
 
 
 class GetRestaurantsList(ListAPIView):
@@ -107,7 +109,26 @@ class GetCategoriesListView(ListAPIView):
 
     .
     '''
-    queryset = Restaurant.objects.all()
+
     serializer_class = AllCategoriesSerializer
 
+    def get_queryset(self):
+        first_restaurant = Restaurant.objects.first()
+        queryset = Restaurant.objects.filter(id=first_restaurant.id)
+        return queryset
+
+
+class HomeRestaurantView(ListAPIView):
+    '''
+    get: Get list of the best rated restaurants
+
+    .
+    '''
+
+    serializer_class = BestRatedRestaurantsSerializer
+
+    def get_queryset(self):
+        first_restaurant = Restaurant.objects.first()
+        queryset = Restaurant.objects.filter(id=first_restaurant.id)
+        return queryset
 

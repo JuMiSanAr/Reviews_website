@@ -29,6 +29,10 @@ const HeaderNavi = () => {
     const loginHandler = (event) => {
         console.log(event.target.title);
     };
+
+    const logoutHandler = (event) => {
+        localStorage.clear();
+    };
         
 
     return(
@@ -41,7 +45,7 @@ const HeaderNavi = () => {
                 <StyledTab title='profile' onClick={(event) => tabHandler(event)}>Profile</StyledTab>
 
                 {
-                    token ? <StyledSignoutButton>LOGOUT</StyledSignoutButton> : 
+                    token ? <StyledSignoutButton onClick={logoutHandler()}>LOGOUT</StyledSignoutButton> : 
                     (<>
                         <StyledSignupButton title='signup' onClick={(event) => singupHandler(event)}>SIGNUP</StyledSignupButton>
                         <StyledLoginButton title='login' onClick={(event) => loginHandler(event)}>LOGIN</StyledLoginButton>

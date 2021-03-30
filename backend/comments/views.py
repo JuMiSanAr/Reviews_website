@@ -49,6 +49,21 @@ class UpdateComment(UpdateAPIView):
     permission_classes = [CommentPermission]
 
 
+# class ListCommentsFromUser(MultipleFieldLookupMixin, generics.RetrieveAPIView):
+#     queryset = Comment.objects.all()
+#     serializer_class = CommentSerializerBasic
+#     lookup_fields = ['commented_by_id']
+#
+#     def retrieve(self, request, *args, **kwargs):
+#         instance = Comment.objects.filter(commented_by_id__id=kwargs['commented_by_id'])
+#         serializer = self.get_serializer(instance)
+#         return Response(serializer.data)
+#
+#     # def get_queryset(self):
+#     #     commented_by_id = self.kwargs.get('commented_by_id')
+#     #     return Comment.objects.filter(commented_by_id__id=commented_by_id)
+
+
 class CreateComment(CreateAPIView):
     '''
     post: Comment on the review.

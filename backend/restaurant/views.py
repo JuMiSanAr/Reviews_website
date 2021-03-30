@@ -9,8 +9,7 @@ from rest_framework.response import Response
 from restaurant.models import Restaurant
 from restaurant.permissions import IsOwnerOrAdmin
 from restaurant.serializers.serializers_basic import RestaurantSerializerBasic
-from restaurant.serializers.serializers_main import RestaurantSerializer, \
-    AllCategoriesSerializer, BestRatedRestaurantsSerializer
+from restaurant.serializers.serializers_main import RestaurantSerializer, BestRatedRestaurantsSerializer
 
 
 class GetRestaurantsList(ListAPIView):
@@ -62,7 +61,7 @@ class CreateRestaurants(CreateAPIView):
     serializer_class = RestaurantSerializer
 
     def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+        serializer.save(owner=self.request.user, categories=self.request.data['categories'])
 
 
 class GetUpdateDeleteRestaurants(RetrieveUpdateDestroyAPIView):

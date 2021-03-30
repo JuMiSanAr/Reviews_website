@@ -21,3 +21,13 @@ export const RestaurantInfoBanner = styled.div `
     justify-content: space-between;
     z-index: 10;
 `;
+
+export const LowerSection = styled.div `
+    display: flex;
+    flex-direction:row;
+    height: 600px;
+    width: 100vw;
+    background-color: #F7F7F7;
+`
+
+

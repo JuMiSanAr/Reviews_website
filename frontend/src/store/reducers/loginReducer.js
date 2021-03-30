@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT } from "../constants";
+import { LOGIN } from "../constants";
 
 
 
@@ -9,7 +9,7 @@ const initialState = {
     authenticated: null
 };
 
-export const logInOrOutReducer = (state = initialState, action) => {
+export const logInReducer = (state = initialState, action) => {
     if (action.type === LOGIN) {
         console.log('hello from the login reducer', action.payload);
         return {
@@ -18,10 +18,6 @@ export const logInOrOutReducer = (state = initialState, action) => {
             // user: action.payload.user,
             authenticated: true
         }
-    } else if (action.type === LOGOUT) {
-        console.log('byebye from the logout reducer', action);
-        localStorage.clear();
-        return initialState;
     }
     return state;
 };

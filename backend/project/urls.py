@@ -24,9 +24,9 @@ from rest_framework_simplejwt import views as jwt_views
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="Luna API 🌚🌙",
+        title="Luna API 🌚♑️🌙",
         default_version='v5',
-        description="Description of our trip to the moon - Luna's APIs, enjoy!",
+        description="Description of The Capricorn's team - Luna's APIs, enjoy!",
         terms_of_service="https://www.google.com/policies/terms/",
         contact=openapi.Contact(email="learn@propulsionacademy.com"),
         license=openapi.License(name="BSD License"),
@@ -41,7 +41,7 @@ urlpatterns = [
     path('api/', include('restaurant.urls')),
     path('api/reviews/', include('reviews.urls')),
     path('api/', include('comments.urls')),
-    path('api/registration/', include('registration.urls')),
+    path('api/', include('registration.urls')),
 
     path('api/docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 

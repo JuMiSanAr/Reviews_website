@@ -25,7 +25,7 @@ class ListCommentsFromUser(ListAPIView):
 
 class DeleteComment(DestroyAPIView):
     '''
-    delete: Delete the comment on the review.
+    DELETE: Delete the comment on the review.
 
     .
     '''
@@ -51,7 +51,7 @@ class UpdateComment(UpdateAPIView):
 
 class CreateComment(CreateAPIView):
     '''
-    post: Comment on the review.
+    POST: Comment on the review.
 
     .
     '''
@@ -62,7 +62,6 @@ class CreateComment(CreateAPIView):
 
     def create(self, request, *args, **kwargs):
         post = get_object_or_404(self.get_queryset(), id=kwargs['review_id'])
-        # user = request.user
         comment = Comment(comment_content=request.data['comment_content'], commented_by=request.user,
                           review=post)
         comment.save()

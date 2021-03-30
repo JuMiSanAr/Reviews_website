@@ -15,7 +15,9 @@ from restaurant.serializers.serializers_main import RestaurantSerializer, \
 
 class GetRestaurantsList(ListAPIView):
     '''
-    GET: Get the list of all the restaurant.
+    get: Get the list of all the restaurant.
+
+    .
     '''
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantSerializer
@@ -25,6 +27,8 @@ class GetRestaurantsList(ListAPIView):
 class GetRestaurantByUser(ListAPIView):
     '''
     get: Get the all the restaurants created by a specific user in chronological order.
+
+    .
     '''
     serializer_class = RestaurantSerializerBasic
     lookup_url_kwarg = 'owner_id'
@@ -37,6 +41,8 @@ class GetRestaurantByUser(ListAPIView):
 class GetRestaurantByCategory(ListAPIView):
     '''
     get: Get all the restaurants by category.
+
+    .
     '''
     serializer_class = RestaurantSerializer
     lookup_url_kwarg = 'category_id'
@@ -48,7 +54,9 @@ class GetRestaurantByCategory(ListAPIView):
 
 class CreateRestaurants(CreateAPIView):
     '''
-    POST: Create a new restaurant.
+    post: Create a new restaurant.
+
+    .
     '''
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantSerializer
@@ -81,14 +89,6 @@ class GetUpdateDeleteRestaurants(RetrieveUpdateDestroyAPIView):
         instance = self.get_object()
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
-
-    # not required by spec
-    # def put(self, request, *args, **kwargs):
-    #     instance = self.get_object()
-    #     serializer = self.get_serializer(instance, data=request.data)
-    #     serializer.is_valid(raise_exception=True)
-    #     serializer.save()
-    #     return Response(serializer.data)
 
     def patch(self, request, *args, **kwargs):
         instance = self.get_object()

@@ -13,6 +13,4 @@ urlpatterns = [
     path('restaurants/categories/list/', GetCategoriesListView.as_view()),
     path('home/', HomeRestaurantView.as_view()),
 
-    # path('restaurants/category/<int:category_id>/',), not working yet
-
 ]

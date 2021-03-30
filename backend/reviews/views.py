@@ -16,6 +16,8 @@ User = get_user_model()
 class CreateReviewView(CreateAPIView):
     '''
     POST: Create new review for a restaurant.
+
+    .
     '''
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer

@@ -1,6 +1,5 @@
 # Create your views here.
 from django.contrib.auth import get_user_model
-from rest_framework import status
 from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveUpdateDestroyAPIView, UpdateAPIView
 from rest_framework.response import Response
 
@@ -15,7 +14,7 @@ User = get_user_model()
 
 class CreateReviewView(CreateAPIView):
     '''
-    POST: Create new review for a restaurant.
+    post: Create new review for a restaurant.
 
     .
     '''
@@ -42,8 +41,11 @@ class CreateReviewView(CreateAPIView):
 
 class ListRestaurantReviewsView(ListAPIView):
     '''
-    GET: List reviews for a restaurant.
+    get: List reviews for a restaurant.
+
+    .
     '''
+
     serializer_class = ReviewSerializerWithAuthor
     lookup_url_kwarg = 'restaurant_id'
     lookup_field = 'id'
@@ -55,7 +57,7 @@ class ListRestaurantReviewsView(ListAPIView):
 
 class ListUserReviewsView(ListAPIView):
     '''
-    GET: List reviews from a user
+    get: List reviews from a user.
 
     .
     '''
@@ -70,9 +72,15 @@ class ListUserReviewsView(ListAPIView):
 
 class GetUpdateDeleteReviewView(RetrieveUpdateDestroyAPIView):
     '''
-    GET: Get single review.
-    PATCH: Update single review.
-    DELETE: Delete single review
+    get: Get single review.
+
+    .
+
+    patch: Update single review.
+
+    .
+    
+    delete: Delete single review.
 
     .
     '''
@@ -85,7 +93,7 @@ class GetUpdateDeleteReviewView(RetrieveUpdateDestroyAPIView):
 
 class GetReviewsCommentedByUser(ListAPIView):
     '''
-    GET: List of distinct reviews with comments from the user
+    get: List of distinct reviews with comments from the user
 
     .
     '''
@@ -98,7 +106,7 @@ class GetReviewsCommentedByUser(ListAPIView):
 
 class ToggleReviewLikeView(UpdateAPIView):
         '''
-        like & unlike a review
+        Like & unlike a review
 
         .
         '''

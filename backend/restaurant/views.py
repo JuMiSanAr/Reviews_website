@@ -9,8 +9,7 @@ from rest_framework.response import Response
 from restaurant.models import Restaurant
 from restaurant.permissions import IsOwnerOrAdmin
 from restaurant.serializers.serializers_basic import RestaurantSerializerBasic
-from restaurant.serializers.serializers_main import RestaurantSerializer, \
-    AllCategoriesSerializer, BestRatedRestaurantsSerializer
+from restaurant.serializers.serializers_main import RestaurantSerializer, BestRatedRestaurantsSerializer
 
 
 class GetRestaurantsList(ListAPIView):
@@ -62,7 +61,7 @@ class CreateRestaurants(CreateAPIView):
     serializer_class = RestaurantSerializer
 
     def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+        serializer.save(owner=self.request.user, categories=self.request.data['categories'])
 
 
 class GetUpdateDeleteRestaurants(RetrieveUpdateDestroyAPIView):
@@ -103,17 +102,19 @@ class GetUpdateDeleteRestaurants(RetrieveUpdateDestroyAPIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class GetCategoriesListView(ListAPIView):
-    '''
-    get: Get list of all restaurant categories.
-    '''
-
-    serializer_class = AllCategoriesSerializer
-
-    def get_queryset(self):
-        first_restaurant = Restaurant.objects.first()
-        queryset = Restaurant.objects.filter(id=first_restaurant.id)
-        return queryset
+# class GetCategoriesListView(ListAPIView):
+#     '''
+#     get: Get list of all restaurant categories.
+#
+#     .
+#     '''
+#
+#     serializer_class = AllCategoriesSerializer
+#
+#     def get_queryset(self):
+#         first_restaurant = Restaurant.objects.first()
+#         queryset = Restaurant.objects.filter(id=first_restaurant.id)
+#         return queryset
 
 
 class HomeRestaurantView(ListAPIView):
@@ -129,3 +130,4 @@ class HomeRestaurantView(ListAPIView):
         first_restaurant = Restaurant.objects.first()
         queryset = Restaurant.objects.filter(id=first_restaurant.id)
         return queryset
+

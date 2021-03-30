@@ -1,10 +1,8 @@
 import json
 
-import jsonpickle
-from django.http import JsonResponse
 from rest_framework import serializers
-from rest_framework.response import Response
 
+from category.serializers.serializers_basic import CategoriesBasicSerializer
 from restaurant.models import Restaurant
 from reviews.serializers.serializers_basic import ReviewSerializerWithAuthor
 
@@ -15,6 +13,7 @@ class RestaurantSerializer(serializers.ModelSerializer):
 
     owner = UserSerializerBasic(read_only=True)
     restaurant_reviews = ReviewSerializerWithAuthor(read_only=True, many=True)
+    categories = CategoriesBasicSerializer(read_only=True, many=True)
 
     class Meta:
         model = Restaurant
@@ -38,24 +37,6 @@ class RestaurantSerializer(serializers.ModelSerializer):
                   'categories',
                   'price_level',
                   'average_rating']
-
-
-class RestaurantSerializerHome(serializers.ModelSerializer):
-    class Meta:
-        model = Restaurant
-        fields = ['name', 'country', 'city', 'average_rating']
-
-
-class AllCategoriesSerializer(serializers.ModelSerializer):
-
-    all_categories = serializers.SerializerMethodField()
-
-    def get_all_categories(self, instance):
-        return instance.CATEGORIES
-
-    class Meta:
-        model = Restaurant
-        fields = ['id', 'all_categories']
 
 
 class BestRatedRestaurantsSerializer(serializers.ModelSerializer):

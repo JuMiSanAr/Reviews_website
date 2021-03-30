@@ -12,12 +12,10 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Registration',
+            name='Category',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('code', models.CharField(help_text='random code used for registration and for password reset', max_length=15)),
-                ('used', models.BooleanField(default=False)),
-                ('action', models.CharField(choices=[('R', 'registration'), ('PR', 'password reset')], default='R', max_length=2)),
+                ('name', models.CharField(max_length=40)),
             ],
         ),
     ]

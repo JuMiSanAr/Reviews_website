@@ -2,13 +2,14 @@ import styled from 'styled-components';
 
 
 export const HeaderNaviStyle = styled.div`
-margin-top: 0.5em;
+margin-top: 0.65em;
 
 display: flex;
 align-items: center;
 justify-content: space-between;
-width: 100%;
+width: 100vw;
 height: 2em;
+padding: 1em;
 `;
 
 export const LunaLogo = styled.img`
@@ -59,7 +60,6 @@ padding: 0.85em;
 
 :hover{
     font-Weight: bolder;
-    font-size: 0.875em;
 }
 `
 

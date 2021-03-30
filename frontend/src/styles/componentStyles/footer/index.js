@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export const FooterStyle = styled.div`
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 100vw;
 `
 export const FooterUpperBar = styled.div`
     border-bottom: solid 0.05em lightgray;

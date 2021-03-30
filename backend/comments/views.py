@@ -71,7 +71,7 @@ class CreateComment(CreateAPIView):
 # spec. says there should be 1 url for both get & delete, this apparently might be done by creating custom mixin
 # MultipleFieldLookupMixin
 # https://www.django-rest-framework.org/api-guide/generic-views/#creating-custom-mixins
-# fot the time bing of luna project, luna creator adjusted url due to react calling so there is new url :)
+# fot the time bing of luna project, additional url is created due to time limit
 
 
 class ToggleLikeComment(UpdateAPIView):

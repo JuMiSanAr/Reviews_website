@@ -42,6 +42,8 @@ class CreateReviewView(CreateAPIView):
 class ListRestaurantReviewsView(ListAPIView):
     '''
     get: List reviews for a restaurant.
+
+    .
     '''
 
     serializer_class = ReviewSerializerWithAuthor
@@ -73,9 +75,11 @@ class GetUpdateDeleteReviewView(RetrieveUpdateDestroyAPIView):
     get: Get single review.
 
     .
+
     patch: Update single review.
 
     .
+    
     delete: Delete single review.
 
     .

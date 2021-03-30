@@ -8,4 +8,3 @@ class IsOwnerOrAdmin(BasePermission):
         if obj.owner == request.user or request.user.is_superuser:
             return True
 
-# will i not have here patch and delete as that's why it's needed!

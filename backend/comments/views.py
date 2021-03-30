@@ -91,7 +91,7 @@ class CreateComment(CreateAPIView):
 
 class ToggleLikeComment(UpdateAPIView):
     '''
-    Like & unlike a comment
+    Like & unlike a comment.
 
     .
     '''

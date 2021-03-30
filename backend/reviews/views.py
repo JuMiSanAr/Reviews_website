@@ -93,7 +93,7 @@ class GetUpdateDeleteReviewView(RetrieveUpdateDestroyAPIView):
 
 class GetReviewsCommentedByUser(ListAPIView):
     '''
-    get: List of distinct reviews with comments from the user
+    get: List of distinct reviews with comments from the user.
 
     .
     '''
@@ -106,7 +106,7 @@ class GetReviewsCommentedByUser(ListAPIView):
 
 class ToggleReviewLikeView(UpdateAPIView):
         '''
-        Like & unlike a review
+        Like & unlike a review.
 
         .
         '''

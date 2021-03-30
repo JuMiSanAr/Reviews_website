@@ -14,7 +14,7 @@ from restaurant.serializers.serializers_main import RestaurantSerializer, BestRa
 
 class GetRestaurantsList(ListAPIView):
     '''
-    get: Get the list of all the restaurant.
+    get: Get the list of all the restaurants.
 
     .
     '''
@@ -119,7 +119,7 @@ class GetUpdateDeleteRestaurants(RetrieveUpdateDestroyAPIView):
 
 class HomeRestaurantView(ListAPIView):
     '''
-    get: Get list of the best rated restaurants
+    get: Get list of the best rated restaurants.
 
     .
     '''

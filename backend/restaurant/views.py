@@ -111,5 +111,3 @@ class GetCategoriesListView(ListAPIView):
     serializer_class = AllCategoriesSerializer
 
 
-# class HomeRestaurantView(ListCreateAPIView):
-#     def get(self, request, *args, **kwargs):

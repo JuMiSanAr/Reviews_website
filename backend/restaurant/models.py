@@ -56,7 +56,7 @@ class Restaurant(models.Model):
     created = models.DateTimeField(auto_now_add=True, null=True)
     owner = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, related_name='my_restaurants', null=True)
 
-    price_level = models.CharField(max_length=2, choices=PRICE_LEVEL, default='0')
+    price_level = models.CharField(verbose_name='Price level', max_length=2, choices=PRICE_LEVEL, default='0')
     categories = models.CharField(max_length=2, choices=CATEGORIES, default='0')
     WIFI = models.BooleanField(null=True)
     take_away = models.BooleanField(verbose_name='Take away', null=True)

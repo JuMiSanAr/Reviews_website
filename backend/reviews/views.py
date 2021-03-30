@@ -13,7 +13,7 @@ User = get_user_model()
 
 class CreateReviewView(CreateAPIView):
     '''
-    POST: Create new review for a restaurant.
+    post: Create new review for a restaurant.
 
     .
     '''
@@ -39,6 +39,7 @@ class CreateReviewView(CreateAPIView):
 
 
 class ListRestaurantReviewsView(ListAPIView):
+
     serializer_class = ReviewSerializerWithAuthor
     lookup_url_kwarg = 'restaurant_id'
     lookup_field = 'id'

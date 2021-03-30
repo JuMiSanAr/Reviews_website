@@ -29,18 +29,6 @@ class RestaurantSerializer(serializers.ModelSerializer):
                   'created',
                   'restaurant_reviews',
                   'price_level']
-    # Name
-    # Category
-    # Country
-    # Street
-    # City
-    # ZIP
-    # Website
-    # Phone
-    # E - Mail
-    # opening_hours
-    # price_level
-    # Image
 
 
 class RestaurantSerializerCategory(serializers.ModelSerializer):

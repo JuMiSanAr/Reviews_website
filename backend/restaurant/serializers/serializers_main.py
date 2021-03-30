@@ -1,6 +1,7 @@
 import json
 
 import jsonpickle
+from django.http import JsonResponse
 from rest_framework import serializers
 from rest_framework.response import Response
 
@@ -8,7 +9,6 @@ from restaurant.models import Restaurant
 from reviews.serializers.serializers_basic import ReviewSerializerWithAuthor
 
 from users.serializers.serializers_basic import UserSerializerBasic
-
 
 
 class RestaurantSerializer(serializers.ModelSerializer):
@@ -35,6 +35,7 @@ class RestaurantSerializer(serializers.ModelSerializer):
                   'avatar',
                   'created',
                   'restaurant_reviews',
+                  'categories',
                   'price_level',
                   'average_rating']
 
@@ -61,33 +62,13 @@ class BestRatedRestaurantsSerializer(serializers.ModelSerializer):
 
     best_four = serializers.SerializerMethodField()
 
-    # owner = UserSerializerBasic(read_only=True)
-    # restaurant_reviews = ReviewSerializerWithAuthor(read_only=True, many=True)
-
     def get_best_four(self, instance):
         restaurants = Restaurant.objects.all()
         ordered_restaurants = sorted(restaurants, key=lambda x: x.average_rating, reverse=True)
-        best_four = ordered_restaurants[:4]
-        return Response(jsonpickle.encode(best_four), status=200)
+        best_four_restaurants = ordered_restaurants[:4]
+
+        return RestaurantSerializer(best_four_restaurants, many=True).data
 
     class Meta:
         model = Restaurant
         fields = ['best_four']
-
-        # fields = ['id',
-        #           'name',
-        #           'owner',
-        #           'country',
-        #           'city',
-        #           'zip_code',
-        #           'street',
-        #           'website',
-        #           'phone',
-        #           'email',
-        #           'opening_hours_from',
-        #           'opening_hours_to',
-        #           'avatar',
-        #           'created',
-        #           'restaurant_reviews',
-        #           'price_level',
-        #           'average_rating']

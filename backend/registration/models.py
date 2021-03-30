@@ -20,5 +20,7 @@ class Registration(models.Model):
 
     used = models.BooleanField(default=False, blank=False)
 
+    action = models.CharField(choices=[('R', 'registration'), ('PR', 'password reset')], max_length=2, default='R')
+
     def __str__(self):
         return f'Registration profile {self.pk}: {self.user.email}'

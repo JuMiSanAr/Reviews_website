@@ -1,3 +1,5 @@
+from statistics import mean
+
 from django.contrib.auth import get_user_model
 from django.core.validators import RegexValidator
 from django.db import models
@@ -56,6 +58,9 @@ class Restaurant(models.Model):
     created = models.DateTimeField(auto_now_add=True, null=True)
     owner = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, related_name='my_restaurants', null=True)
 
+    longitude = models.CharField(max_length=50, null=True)
+    latitude = models.CharField(max_length=50, null=True)
+
     price_level = models.CharField(max_length=2, choices=PRICE_LEVEL, default='0')
     categories = models.CharField(max_length=2, choices=CATEGORIES, default='0')
     WIFI = models.BooleanField(null=True)
@@ -72,3 +77,14 @@ class Restaurant(models.Model):
     @property
     def all_categories(self):
         return self.CATEGORIES
+
+    @property
+    def average_rating(self):
+        ratings_list = []
+        reviews = self.restaurant_reviews.values()
+        for review in reviews:
+            ratings_list.append(int(review['rating']))
+        if len(ratings_list) > 0:
+            return round(mean(ratings_list), 2)
+        else:
+            return 0

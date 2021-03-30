@@ -14,7 +14,7 @@ class User(AbstractUser):
     # Additional fields required when using createsuperuser (USERNAME_FIELD and passwords are always required)
     REQUIRED_FIELDS = ['username']
 
-    username = models.CharField(verbose_name='username', max_length=100, blank=True)
+    username = models.CharField(verbose_name='username', max_length=100, blank=True, unique=True)
     first_name = models.CharField(verbose_name='first name', max_length=50, blank=True)
     last_name = models.CharField(verbose_name='last name',max_length=50, blank=True,)
     email = models.EmailField(unique=True)

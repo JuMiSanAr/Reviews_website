@@ -2,7 +2,7 @@
 from django.urls import path
 
 from restaurant.views import GetRestaurantsList, CreateRestaurants, GetUpdateDeleteRestaurants, \
-    GetRestaurantByUser, GetRestaurantByCategory, GetCategoriesListView
+    GetRestaurantByUser, GetRestaurantByCategory, GetCategoriesListView, HomeRestaurantView
 
 urlpatterns = [
     path('restaurants/', GetRestaurantsList.as_view()),
@@ -11,8 +11,7 @@ urlpatterns = [
     path('restaurants/user/<int:owner_id>/', GetRestaurantByUser.as_view()),
     path('restaurants/category/<int:category_id>/', GetRestaurantByCategory.as_view()),
     path('restaurants/categories/list/', GetCategoriesListView.as_view()),
-
-    # path('home', HomeRestaurantView.as_view()),
+    path('home/', HomeRestaurantView.as_view()),
 
     # path('restaurants/category/<int:category_id>/',), not working yet
 

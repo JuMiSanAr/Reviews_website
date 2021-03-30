@@ -46,13 +46,13 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
 
-
     #own
     'comments',
     'registration',
     'restaurant',
     'reviews',
     'users',
+    'category'
 ]
 
 MIDDLEWARE = [
@@ -167,7 +167,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 5,
+    'PAGE_SIZE': 20,
 
 }
 

@@ -105,6 +105,8 @@ class GetUpdateDeleteRestaurants(RetrieveUpdateDestroyAPIView):
 # class GetCategoriesListView(ListAPIView):
 #     '''
 #     get: Get list of all restaurant categories.
+#
+#     .
 #     '''
 #
 #     serializer_class = AllCategoriesSerializer
@@ -128,3 +130,4 @@ class HomeRestaurantView(ListAPIView):
         first_restaurant = Restaurant.objects.first()
         queryset = Restaurant.objects.filter(id=first_restaurant.id)
         return queryset
+

@@ -1,6 +1,7 @@
 import React from 'react'
-import star from '../../../assets/star.svg'
+
 import styled from 'styled-components'
+import {stars} from "../../../styles";
 
 const Container = styled.div `
     display: flex;
@@ -62,13 +63,9 @@ const CardRestaurant = ({restaurant_data}) => {
                     <p>{restaurant_data.street}</p>
                 <StarRatings>
                     <div>
-                        <img className='star' src={star} alt="" srcSet=""/>
-                        <img className='star' src={star} alt="" srcSet=""/>
-                        <img className='star' src={star} alt="" srcSet=""/>
-                        <img className='star' src={star} alt="" srcSet=""/>
-                        <img className='star' src={star} alt="" srcSet=""/>
+                        {restaurant_data.average_rating === 0 ? <p>No ratings</p> : stars(restaurant_data.average_rating)}
                     </div>
-                    <span>52</span>
+                    <span>{restaurant_data.restaurant_reviews.length}</span>
                 </StarRatings>
                 </div> 
                 <CardImage src={restaurant_data.avatar} alt="" />

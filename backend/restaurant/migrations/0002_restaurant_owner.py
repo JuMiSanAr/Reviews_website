@@ -11,13 +11,13 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('registration', '0001_initial'),
+        ('restaurant', '0001_initial'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='registration',
-            name='user',
-            field=models.OneToOneField(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='registration_profile', to=settings.AUTH_USER_MODEL),
+            model_name='restaurant',
+            name='owner',
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='my_restaurants', to=settings.AUTH_USER_MODEL),
         ),
     ]

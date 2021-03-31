@@ -70,6 +70,7 @@ const UserProfileWrapper = styled.div`
         align-items: center;
         border-bottom: 1px solid #EBEBEB;
         background-color: white;
+        cursor: pointer;
         :hover{
             border-left: 5px solid #E47D31;
             background-color: rgba(0, 0, 0, 0.0837);

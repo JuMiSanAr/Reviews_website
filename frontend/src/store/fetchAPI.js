@@ -2,10 +2,9 @@ import {baseUrlLocal, baseUrlServer} from "./constants";
 
 
 export const fetchAPI = (url, body, method, headers = true, expectData = true, fileExpected = false) => {
+console.log(url)
 
-    const thisUrl = `${baseUrlServer}${url}`;
-    console.log('fetchedUrl', thisUrl)
-
+    const thisUrl = `${baseUrlLocal}${url}`;
     let config = {};
 
     if (headers && body && !fileExpected) {
@@ -40,12 +39,12 @@ export const fetchAPI = (url, body, method, headers = true, expectData = true, f
                     console.log('in the data')
                     return response.json();
                   } else {
-                    console.log('no data')
+                    console.log('no data');
                     return true;
                   }
                 } else {
-                  console.log('error')
-                  throw Error();
+                  console.log('error');
+                  throw Error(`${response.status}`);
                 }
             })
 };

@@ -7,6 +7,7 @@ from django.core.mail import send_mail
 import os
 
 # Create your views here.
+from django.db import IntegrityError
 from rest_framework import status
 from rest_framework.generics import CreateAPIView, UpdateAPIView
 from rest_framework.response import Response
@@ -31,20 +32,60 @@ class NewRegistrationView(CreateAPIView):
     serializer_class = RegistrationSerializer
     permission_classes = []
 
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        perform_create = self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+
+        if perform_create.status_code == 200:
+            return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+        if perform_create.status_code == 400:
+            return Response('A user already exists with this email', status=400, headers=headers)
+
+        if perform_create.status_code == 401:
+            return Response('New registration code sent', status=401, headers=headers)
+
+
     def perform_create(self, serializer):
         email = self.request.data["email"]
         code = code_generator()
 
-        send_mail(
-            'Luna registration code',
-            f'Your registration code for the Luna Website is : {code}',
-            os.environ.get('DEFAULT_FROM_EMAIL'),
-            [email],
-            fail_silently=False,
-        )
-        new_user = User(email=email, username=code)
-        new_user.save()
-        serializer.save(code=code, user=new_user)
+        try:
+            existing_user = User.objects.get(email=email)
+
+            if existing_user.registration_profile.used:
+                return Response(status=400)
+
+            elif not existing_user.registration_profile.used:
+                send_mail(
+                    'Luna registration code',
+                    f'Your registration code for the Luna Website is : {code}',
+                    os.environ.get('DEFAULT_FROM_EMAIL'),
+                    [email],
+                    fail_silently=False,
+                )
+
+                registration = Registration.objects.get(user=existing_user)
+                registration.code = code
+                registration.save()
+
+                return Response(status=401)
+
+        except User.DoesNotExist:
+            send_mail(
+                'Luna registration code',
+                f'Your registration code for the Luna Website is : {code}',
+                os.environ.get('DEFAULT_FROM_EMAIL'),
+                [email],
+                fail_silently=False,
+            )
+            new_user = User(email=email, username=code)
+            new_user.save()
+
+            serializer.save(code=code, user=new_user)
+            return Response(status=200)
 
 
 class ValidationView(UpdateAPIView):
@@ -69,18 +110,12 @@ class ValidationView(UpdateAPIView):
                 registration.used = True
                 registration.save()
                 user.username = self.request.data["username"]
-                user.first_name = self.request.data["first_name"]
-                user.last_name = self.request.data["last_name"]
                 user.password = make_password(self.request.data["password1"])
-                user.phone = self.request.data["phone"]
                 user.location = self.request.data['location']
-                user.things_i_like = self.request.data["things_I_like"]
-                user.description = self.request.data["description"]
-                user.avatar = self.request.data["avatar"]
                 user.save()
                 return Response("Code matched successfully")
             else:
-                return Response("Password1 didn't match password2", status=401)
+                return Response("Password1 didn't match password2", status=400)
         else:
             return Response("Code in request didn't match registration code for that email", status=401)
 

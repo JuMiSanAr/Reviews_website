@@ -70,6 +70,7 @@ const UserProfileWrapper = styled.div`
         align-items: center;
         border-bottom: 1px solid #EBEBEB;
         background-color: white;
+        cursor: pointer;
         :hover{
             border-left: 5px solid #E47D31;
             background-color: rgba(0, 0, 0, 0.0837);
@@ -214,22 +215,22 @@ const UserProfile = () => {
         <ProfileWrapper>
             <ProfileInnerWrapper>
                 <UserProfileWrapper>
-                <img src="https://res.cloudinary.com/tennam/image/upload/v1613260389/Propulsion/Tenzin.png" alt="" srcset=""/>
+                <img src="https://res.cloudinary.com/tennam/image/upload/v1613260389/Propulsion/Tenzin.png" alt="" srcSet=""/>
                 <h2>Lauren's Profile</h2>
                 <div className="clickelement" onClick={() => toggleTab(1)}>
-                    <img src={star} alt="" srcset=""/>
+                    <img src={star} alt="" srcSet=""/>
                     <span>Reviews</span>
                 </div>
                 <div className="clickelement" onClick={() => toggleTab(2)}>
-                    <img src={comment} alt="" srcset=""/>
+                    <img src={comment} alt="" srcSet=""/>
                     <span>Comments</span>
                 </div>
                 <div className="clickelement" onClick={() => toggleTab(3)}>
-                    <img src={restaurant} alt="" srcset=""/>
+                    <img src={restaurant} alt="" srcSet=""/>
                     <span>Restaurants</span>
                 </div>
                 <div className="clickelement" onClick={() => toggleTab(4)}>
-                    <img src={edit} alt="" srcset=""/>
+                    <img src={edit} alt="" srcSet=""/>
                     <span>Edit profile</span>
                 </div>
                 </UserProfileWrapper>

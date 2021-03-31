@@ -1,6 +1,7 @@
 import React from 'react'
-import star from '../../../assets/star.svg'
+
 import styled from 'styled-components'
+import {stars} from "../../../styles";
 
 const Container = styled.div `
     display: flex;
@@ -53,25 +54,21 @@ const CardImage = styled.img `
     width: 271px;
 `;
 
-const CardRestaurant = () => {
+const CardRestaurant = ({restaurant_data}) => {
     return (
         <Container>
             <CardWrapper>
                 <div className='cardTitle'>
-                    <p>Restaurant Name</p>
-                    <p>Address</p> 
+                    <p>{restaurant_data.name}</p>
+                    <p>{restaurant_data.street}</p>
                 <StarRatings>
                     <div>
-                        <img className='star' src={star} alt="" srcset=""/>
-                        <img className='star' src={star} alt="" srcset=""/>
-                        <img className='star' src={star} alt="" srcset=""/>
-                        <img className='star' src={star} alt="" srcset=""/>
-                        <img className='star' src={star} alt="" srcset=""/>
+                        {restaurant_data.average_rating === 0 ? <p>No ratings</p> : stars(restaurant_data.average_rating)}
                     </div>
-                    <span>52</span>
+                    <span>{restaurant_data.restaurant_reviews.length}</span>
                 </StarRatings>
                 </div> 
-                <CardImage src="https://source.unsplash.com/featured/?restaurant,food" alt="" srcset=""/>
+                <CardImage src={restaurant_data.avatar} alt="" />
                 
             </CardWrapper>
         </Container>

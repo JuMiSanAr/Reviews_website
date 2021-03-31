@@ -1,12 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import logo from '../../assets/logo.png'
 import { HeaderNaviStyle, RightHeaderSection, LunaLogo, 
     StyledLoginButton, StyledSignupButton, StyledTab, StyledSignoutButton } from '../../styles/componentStyles/headerNavi';
 
-import { useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
   
 const HeaderNavi = () => {
+
+
     const token = localStorage.getItem('token');
     let history = useHistory();
     const homeHandler = (event) => {
@@ -22,12 +24,12 @@ const HeaderNavi = () => {
       };
 
     const singupHandler = (event) => {
-        console.log(event.target.title);
+        history.push("/registration");
     };
 
 
     const loginHandler = (event) => {
-        console.log(event.target.title);
+        history.push("/login");
     };
 
     const logoutHandler = () => {
@@ -48,8 +50,8 @@ const HeaderNavi = () => {
                 {
                     token ? <StyledSignoutButton onClick={logoutHandler}>LOGOUT</StyledSignoutButton> :
                     (<>
-                        <StyledSignupButton title='signup' onClick={(event) => singupHandler(event)}>SIGNUP</StyledSignupButton>
-                        <StyledLoginButton title='login' onClick={(event) => loginHandler(event)}>LOGIN</StyledLoginButton>
+                        <StyledSignupButton title='signup' onClick={singupHandler}>SIGNUP</StyledSignupButton>
+                        <StyledLoginButton title='login' onClick={loginHandler}>LOGIN</StyledLoginButton>
                     </>)
                 }
             </RightHeaderSection>

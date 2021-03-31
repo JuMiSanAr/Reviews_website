@@ -130,4 +130,3 @@ class HomeRestaurantView(ListAPIView):
         first_restaurant = Restaurant.objects.first()
         queryset = Restaurant.objects.filter(id=first_restaurant.id)
         return queryset
-

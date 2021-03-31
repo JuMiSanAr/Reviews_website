@@ -23,7 +23,7 @@ export const ScoreAndReviewsInBanner = styled.div `
     margin-left: -0.115em;
 ` 
 export const StarIcon = styled.img `
-    height: 1.05em;
+    height: 1.25em;
     margin: 0.115em;
     
 `

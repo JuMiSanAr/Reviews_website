@@ -10,7 +10,7 @@ from reviews.models import Review
 
 class ListCommentsFromUser(ListAPIView):
     '''
-    GET: Get all the comments from a single user.
+    get: Get all the comments from a single user.
 
     .
     '''
@@ -25,7 +25,7 @@ class ListCommentsFromUser(ListAPIView):
 
 class DeleteComment(DestroyAPIView):
     '''
-    DELETE: Delete the comment on the review.
+    delete: Delete the comment on the review.
 
     .
     '''
@@ -66,7 +66,7 @@ class UpdateComment(UpdateAPIView):
 
 class CreateComment(CreateAPIView):
     '''
-    POST: Comment on the review.
+    post: Comment on the review.
 
     .
     '''
@@ -86,12 +86,12 @@ class CreateComment(CreateAPIView):
 # spec. says there should be 1 url for both get & delete, this apparently might be done by creating custom mixin
 # MultipleFieldLookupMixin
 # https://www.django-rest-framework.org/api-guide/generic-views/#creating-custom-mixins
-# fot the time bing of luna project, luna creator adjusted url due to react calling so there is new url :)
+# fot the time bing of luna project, additional url is created due to time limit
 
 
 class ToggleLikeComment(UpdateAPIView):
     '''
-    like & unlike a comment
+    Like & unlike a comment
 
     .
     '''

@@ -13,9 +13,10 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 16px;
     font-family: 'Helvetica','Roboto', 'Arial', 'sans-serif';
     box-sizing: border-box;
+    transition: all 0.25s linear;
     }
     body {
-        background-color: white;
+        background-color: #f2f2f2;
     }
 `;
 

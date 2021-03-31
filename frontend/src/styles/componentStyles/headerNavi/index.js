@@ -2,14 +2,15 @@ import styled from 'styled-components';
 
 
 export const HeaderNaviStyle = styled.div`
-margin-top: 0.65em;
+/* margin-top: 0.5em; */
 
 display: flex;
 align-items: center;
 justify-content: space-between;
 width: 100vw;
 height: 2em;
-padding: 1em;
+background-color: white;
+padding: 22px 15px 22px 15px;
 `;
 
 export const LunaLogo = styled.img`

@@ -1,14 +1,19 @@
+import json
+
 from rest_framework import serializers
 
+from category.serializers.serializers_basic import CategoriesBasicSerializer
 from restaurant.models import Restaurant
-from reviews.serializers.serializers_basic import ReviewSerializerBasic
-from users.serializers.serializers_main import UserSerializerBasic
+from reviews.serializers.serializers_basic import ReviewSerializerWithAuthor
+
+from users.serializers.serializers_basic import UserSerializerBasic
 
 
 class RestaurantSerializer(serializers.ModelSerializer):
 
     owner = UserSerializerBasic(read_only=True)
-    restaurant_reviews = ReviewSerializerBasic(read_only=True, many=True)
+    restaurant_reviews = ReviewSerializerWithAuthor(read_only=True, many=True)
+    categories = CategoriesBasicSerializer(read_only=True, many=True)
 
     class Meta:
         model = Restaurant
@@ -19,6 +24,8 @@ class RestaurantSerializer(serializers.ModelSerializer):
                   'city',
                   'zip_code',
                   'street',
+                  'latitude',
+                  'longitude',
                   'website',
                   'phone',
                   'email',
@@ -27,41 +34,22 @@ class RestaurantSerializer(serializers.ModelSerializer):
                   'avatar',
                   'created',
                   'restaurant_reviews',
-                  'price_level']
-    # Name
-    # Category
-    # Country
-    # Street
-    # City
-    # ZIP
-    # Website
-    # Phone
-    # E - Mail
-    # opening_hours
-    # price_level
-    # Image
+                  'categories',
+                  'price_level',
+                  'average_rating']
 
 
-class RestaurantSerializerCategory(serializers.ModelSerializer):
-    class Meta:
-        model = Restaurant
-        fields = ['id',]
-# category',
+class BestRatedRestaurantsSerializer(serializers.ModelSerializer):
 
+    best_four = serializers.SerializerMethodField()
 
-class RestaurantSerializerHome(serializers.ModelSerializer):
-    class Meta:
-        model = Restaurant
-        fields = ['name', 'country', 'city', 'rating']
+    def get_best_four(self, instance):
+        restaurants = Restaurant.objects.all()
+        ordered_restaurants = sorted(restaurants, key=lambda x: x.average_rating, reverse=True)
+        best_four_restaurants = ordered_restaurants[:4]
 
-
-class AllCategoriesSerializer(serializers.ModelSerializer):
-
-    all_categories = serializers.SerializerMethodField()
-
-    def get_all_categories(self, instance):
-        return instance.all_categories
+        return RestaurantSerializer(best_four_restaurants, many=True).data
 
     class Meta:
         model = Restaurant
-        fields = ['all_categories']
+        fields = ['best_four']

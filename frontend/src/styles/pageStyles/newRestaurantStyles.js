@@ -39,6 +39,7 @@ export const NewRestaurantWrapper = styled.div`
                 box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.4);
                 transform: scale(1.05) translateY(-5px);
         }
+    }
 `
 
 

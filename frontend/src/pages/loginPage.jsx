@@ -40,7 +40,7 @@ const LoginPage = () => {
 
     return (
         <>
-            {/*{redirect ? <Redirect to='/' /> : ''}*/}
+            {redirect ? <Redirect to='/' /> : ''}
             <MainContainer>
                 <HeaderNavi/>
                 <LoginWrapper>

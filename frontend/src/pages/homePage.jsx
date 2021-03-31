@@ -102,6 +102,10 @@ const HomePage = () => {
     const best_four_res = useSelector(state => state.homeCardReducer.restaurant.data);
     console.log("Hello, World from use selector data", best_four_res )
 
+    const handleSearchRestaurant = (e) => {
+        e.preventDefault();
+    }
+
     useEffect( () => {
         homeCardFetch()
             .then(data => {
@@ -114,6 +118,7 @@ const HomePage = () => {
 
   }, []);
 
+
     return(
         <>
         <MainContainer>
@@ -121,7 +126,7 @@ const HomePage = () => {
         <HomeBanner>
             <SearchBox>
             <input type="search" name=""  placeholder='Search..'/>
-            <button type="submit">Search</button>
+            <button type="submit" onClick={handleSearchRestaurant}>Search</button>
             </SearchBox>
         </HomeBanner>
         <ContentWrapper>

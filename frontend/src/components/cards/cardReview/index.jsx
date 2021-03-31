@@ -54,7 +54,7 @@ const ContentWrapper = styled.div `
     }
 `;
 
-const FeaturedComment = styled.p `
+const FeaturedComment = styled.div `
    width: 249px;
    p{
     overflow: hidden;

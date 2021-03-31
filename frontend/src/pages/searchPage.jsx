@@ -166,10 +166,10 @@ const SearchPage = () => {
                     <CardRestaurant/>
                     <CardRestaurant/>*/}
                         {
-               best_four_res ? best_four_res.map((data )=> {
+               best_four_res ? best_four_res.map((data, index)=> {
                    return (
 
-                        <CardRestaurant restaurant_data={data}/>
+                        <CardRestaurant key={index} restaurant_data={data}/>
 
                        );
                }) : "...Loading"

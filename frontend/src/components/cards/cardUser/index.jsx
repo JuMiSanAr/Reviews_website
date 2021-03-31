@@ -53,7 +53,7 @@ const ContentWrapper = styled.div `
     }
 `;
 
-const AboutMe = styled.p `
+const AboutMe = styled.div `
    width: 249px;
    p{
     overflow: hidden;

@@ -1,8 +1,10 @@
+import {baseUrlServer} from "./constants";
 
 
 export const fetchAPI = (url, body, method, headers = true, expectData = true, fileExpected = false) => {
 
-    const thisUrl = `https://motion.propulsion-home.ch/backend/${url}`;
+    const thisUrl = `${baseUrlServer}${url}`;
+    console.log('fetchedUrl', thisUrl)
 
     let config = {};
 

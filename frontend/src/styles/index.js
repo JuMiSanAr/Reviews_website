@@ -16,7 +16,7 @@ export const GlobalStyle = createGlobalStyle`
     transition: all 0.25s linear;
     }
     body {
-        background-color: white;
+        background-color: #f2f2f2;
     }
 `;
 

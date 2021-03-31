@@ -3,6 +3,7 @@ import { RegistrationTitle } from "../../styles/pageStyles/registrationStyles";
 import { VerificationFields } from "../../styles/pageStyles/regisValidStyles";
 import {Redirect} from "react-router-dom";
 import React, {useState} from "react";
+import {activateAccountFetch} from "../../store/fetches/signup_fetches";
 
  
 
@@ -47,9 +48,30 @@ min-height: 100vh;
 
 const RegistrationValidation = (props) => {
 
+    const [email, setEmail] = useState('')
+    const [code, setCode] = useState('')
+    const [username, setUsername] = useState('')
+    const [location, setLocation] = useState('')
+    const [password1, setPassword1] = useState('')
+    const [password2, setPassword2] = useState('')
+
     const [redirect, setRedirect] = useState(false)
 
     const activateAccount = () => {
+        const body = {
+            email: email,
+            code: code,
+            username: username,
+            password1: password1,
+            password2: password2,
+            location: location
+        }
+        console.log('body',body)
+        activateAccountFetch(body)
+            .then(data => {
+                console.log(data)
+            })
+
         setRedirect(true)
     }
 
@@ -62,7 +84,7 @@ const RegistrationValidation = (props) => {
                     <VerificationInputField>
                     <input
                         required
-                        // onChange={}
+                        onChange={event => setEmail(event.target.value)}
                         // value={}
                         name='email'
                         type='text'
@@ -70,7 +92,7 @@ const RegistrationValidation = (props) => {
                     />
                     <input
                         required
-                        // onChange={}
+                        onChange={event => setUsername(event.target.value)}
                         // value={}
                         name='username'
                         type='text'
@@ -78,7 +100,7 @@ const RegistrationValidation = (props) => {
                     />
                     <input
                         required
-                        // onChange={}
+                        onChange={event => setPassword1(event.target.value)}
                         // value={}
                         name='password'
                         type='password'
@@ -89,7 +111,7 @@ const RegistrationValidation = (props) => {
                     <VerificationInputField>
                     <input
                         required
-                        // onChange={}
+                        onChange={event => setCode(event.target.value)}
                         // value={}
                         name='code'
                         type='text'
@@ -98,7 +120,7 @@ const RegistrationValidation = (props) => {
 
                     <input
                         required
-                        // onChange={}
+                        onChange={event => setLocation(event.target.value)}
                         // value={}
                         name='email'
                         type='text'
@@ -107,7 +129,7 @@ const RegistrationValidation = (props) => {
                     
                     <input
                         required
-                        // onChange={}
+                        onChange={event => setPassword2(event.target.value)}
                         // value={}
                         name='password repeat'
                         type='password'

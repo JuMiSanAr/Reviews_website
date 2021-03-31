@@ -5,6 +5,7 @@ import RegistrationFieldComponent from '../components/registration/registrationF
 import RegistrationMessage from '../components/registration/registrationMessage';
 import RegistrationValidation from '../components/registration/registrationValidation';
 import { MainContainer, RegistrationWrapper } from '../styles/pageStyles/registrationStyles';
+import RegistrationMessageEmailUsed from "../components/registration/registrationMessageEmailUsed";
 
 //############################# Component ################################
 
@@ -20,6 +21,7 @@ const RegistrationPage = () => {
             <RegistrationWrapper>
                 {stage === 'entering email' ? <RegistrationFieldComponent setStage={setStage}/> : ''}
                 {stage === 'email sent' ? <RegistrationMessage setStage={setStage}/> : ''}
+                {stage === 'email used' ? <RegistrationMessageEmailUsed setStage={setStage}/> : ''}
                 {stage === 'activating user' ? <RegistrationValidation/> : ''}
             </RegistrationWrapper>
             <Footer/>

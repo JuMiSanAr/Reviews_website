@@ -10,12 +10,24 @@ const RegistrationFieldComponent = (props) => {
 
     const [ email, setEmail ] = useState('');
 
+    const [ errorUsedEmail, setErrorUsedEmail ] = useState(false);
+    const [ errorEmptyEmail, setErrorEmptyEmail ] = useState(false);
+
     const sendEmail = () => {
 
-        signupCodeFetch(email)
+        if (email !== ''){
+            signupCodeFetch(email)
             .then(data => {
-                console.log('success!')
+                props.setStage('email sent');
             })
+            .catch((error) => {
+                setErrorUsedEmail(true);
+                props.setStage('email used');
+            });
+        }
+        else {
+            setErrorEmptyEmail(true);
+        }
 
         // loginFetch(email, password)
         // .then(data => {
@@ -31,6 +43,7 @@ const RegistrationFieldComponent = (props) => {
         // props.setStage('email sent')
     }
 
+
     return (
         <>
                 <RegistrationTitle>Registration <span></span></RegistrationTitle>
@@ -42,6 +55,15 @@ const RegistrationFieldComponent = (props) => {
                         type='text'
                         placeholder='E-Mail address'
                     />
+                    {errorEmptyEmail ?
+                        <h1>Email field cannot be empty</h1>
+                        : ''}
+                    {errorUsedEmail ?
+                        <>
+                        <h1>A registration code was already sent to this email address</h1>
+                        <h1>Please check your inbox and your spam folder</h1>
+                        </>
+                        : ''}
                     <button onClick={sendEmail}>Register</button>
                 </RegistrationField>
         </>

@@ -15,7 +15,7 @@ User = get_user_model()
 
 class GetAllUsersList(ListAPIView):
     '''
-    get: get all users & Search for a user at: /api/users/?search=<str:search_string>/
+    get: Get all users & Search for a user at: /api/users/?search=<str:search_string>/
 
     .
     '''
@@ -42,7 +42,7 @@ class GetAllUsersList(ListAPIView):
 
 class GetSpecificUser(RetrieveAPIView):
     '''
-    get: get a specific user profile.
+    get: Get a specific user profile.
 
     .
     '''

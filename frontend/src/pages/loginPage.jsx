@@ -6,6 +6,7 @@ import { baseUrlLocal, headers } from '../store/constants';
 import { InputField, LoginTitle, LoginWrapper, MainContainer } from '../styles/pageStyles/loginStyles';
 import loginFetch from "../store/fetches/login";
 import { Redirect } from 'react-router-dom';
+import Footer from '../components/footer/index';
 
 //############################# Component ################################
 
@@ -13,6 +14,7 @@ const LoginPage = () => {
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
 
+    const [errorMessage, setErrorMessage] = useState(false);
     const [redirect, setRedirect] = useState(false);
 
     const dispatch = useDispatch();
@@ -26,9 +28,13 @@ const LoginPage = () => {
             dispatch(action)
 
             localStorage.setItem('token', data.access);
-        })
-    }
 
+            setRedirect(true)
+        })
+        .catch(() => {
+                setErrorMessage(true);
+            })
+    }
 
 
     return (
@@ -60,6 +66,7 @@ const LoginPage = () => {
                     <button onClick={() => loginHandler}>Login</button>
                 </LoginWrapper>
             </MainContainer>
+            <p>{errorMessage ? 'Invalid username or password' : ''}</p>
         </>
     )
 }

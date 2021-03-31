@@ -10,7 +10,7 @@ display: flex;
 justify-content: center;
 align-items: left;
 flex-direction: column;
-margin: 40px 10px 20px 250px;
+margin: 20px 10px 10px 250px;
 border: 1px solid #E3E3E3;
 box-sizing: border-box;
 border-radius: 3px;
@@ -67,8 +67,8 @@ export const RatingField = styled.div `
         position: relative;
         
         width: 832px;
-        margin: 30px 75px 10px 10px;
-        padding: 10;
+        margin: 30px 15px 1px 110px;
+        padding: 0;
         align-items: center;
         display: flex;
         justify-content: center;
@@ -88,9 +88,8 @@ export const RatingField = styled.div `
         
         button {
         border: none;
-        background: #F0F0F0;
           background-color: transparent;
-        border: transparent;
+
         }
 `
 

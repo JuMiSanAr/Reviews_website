@@ -10,7 +10,8 @@ import HeaderNavi from '../components/headerNavi';
 import RestaurantTitle from '../components/restaurantPageComponents/bannerTitle';
 import { RestaurantInfoBanner } from '../styles/pageStyles/restaurantStyles';
 import {BtnReview, InputReviewField, MainContainer, P, RatingField} from "../styles/pageStyles/newReviewStyles";
-import star from "../assets/star.svg";
+import {FaStar} from "react-icons/all";
+
 
 
 
@@ -121,6 +122,18 @@ const ReviewPage = () => {
     //     console.log(event);
     // }
 
+    // const [rating1, serRating1] = useState('');
+    // const [reviewInput, setReviewInput] = useState('');
+    //
+    // const setReviewInput = (e) => {
+    //     console.log(reviewInput)
+    // };
+    //
+    //
+    // const submitReview = () => {
+    //
+    // }
+
     return(
         <>
             <HeaderNavi/> 
@@ -131,29 +144,27 @@ const ReviewPage = () => {
             </ReviewBanner>
             <MainContainer>
             <RatingField>
-                <button><img src={star} alt=""/></button>
-                <button><img src={star} alt=""/></button>
-                <button><img src={star} alt=""/></button>
-                <button><img src={star} alt=""/></button>
-                <button><img src={star} alt=""/></button>
+                {/*<button onClick={saveRating1}><FaStar /></button>*/}
+                <button><FaStar /></button>
+                <button><FaStar /></button>
+                <button><FaStar /></button>
+                <button><FaStar /></button>
             <h5>Select your rating</h5>
             </RatingField>
-            <InputReviewField> 
-
+            <InputReviewField>
                 <p>Your review helps others learn about great local businesses.</p>
                 <p style={{color:"white"}}>.</p>
                 <p>Please don't review this business if you received a freebie for writing this review, <br />or if you're connected in any way to the owner or employees.</p>
-                    <input
+
+                <input
+                    //value={reviewInput}
+                    //onChange= {e => setReviewInput(e.target.value)}
                     type='text'
-                    // value = { review }
-                    // onChange= {event => setReview(event.target.value)}
-                    label='review'
-                    minlength='10'
-                    maxlength='500'
                     required/>
 
                 </InputReviewField>
                 <BtnReview>SUBMIT</BtnReview>
+                {/*<BtnReview onClick={submitReview}>SUBMIT</BtnReview>*/}
                 {/* onClick to do for Submit btn! if condition if inpout fulfiled or not maybe make display this field is required only when submitting empty field  */}
                 <P>This field is required *to be displayed when clicking button with empty input field</P>
                 

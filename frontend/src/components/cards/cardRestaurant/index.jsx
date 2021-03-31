@@ -9,7 +9,8 @@ const Container = styled.div `
     width: 271px;
     height: 410px;
     box-sizing: border-box;
-    margin-bottom: 100px;
+    margin: 10px;
+    /* margin-bottom: 100px; */
 `;
 const CardWrapper = styled.div `
     background: #FFFFFF;
@@ -67,10 +68,10 @@ const CardRestaurant = () => {
                         <img className='star' src={star} alt="" srcset=""/>
                         <img className='star' src={star} alt="" srcset=""/>
                     </div>
-                    <p>52</p>
+                    <span>52</span>
                 </StarRatings>
                 </div> 
-                <CardImage src="https://source.unsplash.com/random" alt="" srcset=""/>
+                <CardImage src="https://source.unsplash.com/featured/?restaurant,food" alt="" srcset=""/>
                 
             </CardWrapper>
         </Container>

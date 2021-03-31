@@ -7,7 +7,7 @@ const FormWrapper = styled.div`
         display: flex;
         flex-direction: column;
     input{
-        width: 324px;
+        width: 300px;
         height: 52px;
         border-radius: 5px;
         border: 1px solid #EBEBEB;
@@ -17,7 +17,7 @@ const FormWrapper = styled.div`
         /* margin-bottom: 50px; */
     }
     textarea{
-        width: 582px;
+        width: 300px;
         height: 52px;
         border-radius: 5px;
         border: 1px solid #EBEBEB;
@@ -39,6 +39,7 @@ const ButtonWrapper = styled.div`
         border-radius: 28px;
         border-style:none;
         margin-left: 10px;
+        margin-right: 10px;
         font-size: 20px;
         line-height: 23px;
         text-align: center;

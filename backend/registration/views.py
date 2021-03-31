@@ -24,7 +24,7 @@ def code_generator(length=5):
 
 class NewRegistrationView(CreateAPIView):
     '''
-    Sends email with registration code and creates a new user
+    Sends email with registration code and creates a new user.
 
     .
     '''
@@ -49,7 +49,7 @@ class NewRegistrationView(CreateAPIView):
 
 class ValidationView(UpdateAPIView):
     '''
-    Validates the code and completes the user profile
+    Validates the code and completes the user profile.
 
     .
     '''
@@ -87,7 +87,7 @@ class ValidationView(UpdateAPIView):
 
 class PasswordResetView(UpdateAPIView):
     '''
-    Sends email with link to reset password
+    Sends email with link to reset password.
 
     .
     '''
@@ -122,7 +122,7 @@ class PasswordResetView(UpdateAPIView):
 
 class PasswordResetValidationView(UpdateAPIView):
     '''
-    Validates password-reset code and updates password
+    Validates password-reset code and updates password.
 
     .
     '''

@@ -27,7 +27,8 @@ export const theme = {
 
 
 export const stars = (score) => {
-    if (score >= 0) return <> <StarIcon src={emptyStar}/> <StarIcon src={emptyStar}/> <StarIcon src={emptyStar}/> <StarIcon src={emptyStar}/> <StarIcon src={emptyStar}/> </>
+    
+    if (score <= 0) return <> <StarIcon src={emptyStar}/> <StarIcon src={emptyStar}/> <StarIcon src={emptyStar}/> <StarIcon src={emptyStar}/> <StarIcon src={emptyStar}/> </>
     if (score > 0 && score < 1) return <> <StarIcon src={halfStar}/> <StarIcon src={emptyStar}/> <StarIcon src={emptyStar}/> <StarIcon src={emptyStar}/> <StarIcon src={emptyStar}/> </>
     if (score === 1) return <> <StarIcon src={fullStar}/> <StarIcon src={emptyStar}/> <StarIcon src={emptyStar}/> <StarIcon src={emptyStar}/> <StarIcon src={emptyStar}/> </>
     if (score > 1 && score < 2) return <> <StarIcon src={fullStar}/> <StarIcon src={halfStar}/> <StarIcon src={emptyStar}/> <StarIcon src={emptyStar}/> <StarIcon src={emptyStar}/> </>

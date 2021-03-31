@@ -3,9 +3,7 @@ import {baseUrlLocal, baseUrlServer} from "./constants";
 
 export const fetchAPI = (url, body, method, headers = true, expectData = true, fileExpected = false) => {
 
-    const thisUrl = `${baseUrlServer}${url}`;
-    console.log('fetchedUrl', thisUrl)
-    console.log('body', body)
+    const thisUrl = `${baseUrlLocal}${url}`;
     let config = {};
 
     if (headers && body && !fileExpected) {
@@ -45,8 +43,7 @@ export const fetchAPI = (url, body, method, headers = true, expectData = true, f
                   }
                 } else {
                   console.log('error');
-                  console.log('response', response);
-                  throw Error();
+                  throw Error(`${response.status}`);
                 }
             })
 };

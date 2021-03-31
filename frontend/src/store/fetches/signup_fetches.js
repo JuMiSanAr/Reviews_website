@@ -24,7 +24,6 @@ export const activateAccountFetch = (body) => {
             location: body.location
             },
         'PATCH',
-        headers,
-        false
+        headers
     )
 }

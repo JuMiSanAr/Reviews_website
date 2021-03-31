@@ -3,7 +3,12 @@ import { RegistrationField, RegistrationTitle } from '../../styles/pageStyles/re
 
 
 
-const RegistrationMessage = () => {
+const RegistrationMessage = (props) => {
+
+        const validateUser = () => {
+        console.log(props.setStage('activating user'))
+    }
+
     return (
         <>
                 <RegistrationTitle>Registration <span></span></RegistrationTitle>
@@ -14,7 +19,7 @@ const RegistrationMessage = () => {
                     <p>Since monkeys aren't good in writing the message could</p>
                     <p>end up in you junk folder. Our apologies for any </p>
                     <p>inconvenience. Thank you!</p>
-                    <button type='submit'>Got it!</button> 
+                    <button onClick={validateUser}>Got it!</button>
                     {/* This will redirect to the Verification Page! */}
                 </RegistrationField>
         </>

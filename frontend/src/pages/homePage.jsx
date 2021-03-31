@@ -1,8 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import CardRestaurant from '../components/cards/cardRestaurant';
 import styled from 'styled-components'
 import HeaderNavi from '../components/headerNavi/index'
 import Footer from '../components/footer/index'
+import {homeCardAction} from "../store/actions/homeCardActions";
+import {useDispatch, useSelector} from "react-redux";
+import homeCardFetch from "../store/fetches/home_card_fetches";
+
 
 const MainContainer = styled.div`
     min-height: 100vh;
@@ -54,6 +58,7 @@ const SearchBox = styled.div `
         text-align: center;
         color: #FFFFFF;
         outline:none;
+        cursor: pointer;
     }
 `;
 const FilterTitle = styled.div `
@@ -92,6 +97,28 @@ const ContentWrapper = styled.div`
 `;
 
 const HomePage = () => {
+
+    const dispatch = useDispatch();
+    const best_four_res = useSelector(state => state.homeCardReducer.restaurant.data);
+    console.log("Hello, World from use selector data", best_four_res )
+
+    const handleSearchRestaurant = (e) => {
+        e.preventDefault();
+    }
+
+    useEffect( () => {
+        homeCardFetch()
+            .then(data => {
+                console.log("homepage", data.results[0].best_four)
+                const action = homeCardAction(data.results[0].best_four);
+                dispatch(action);
+                console.log("from use effect", data.results[0]);
+
+            })
+
+  }, []);
+
+
     return(
         <>
         <MainContainer>
@@ -99,7 +126,7 @@ const HomePage = () => {
         <HomeBanner>
             <SearchBox>
             <input type="search" name=""  placeholder='Search..'/>
-            <button type="submit">Search</button>
+            <button type="submit" onClick={handleSearchRestaurant}>Search</button>
             </SearchBox>
         </HomeBanner>
         <ContentWrapper>
@@ -108,14 +135,16 @@ const HomePage = () => {
             <span></span>
         </FilterTitle>
         <FeaturedRestaurant>
-            <CardRestaurant/>
-            <CardRestaurant/>
-            <CardRestaurant/>
-            <CardRestaurant/>
-            <CardRestaurant/>
-            <CardRestaurant/>
-            <CardRestaurant/>
-            <CardRestaurant/>
+            {
+               best_four_res ? best_four_res.map((data, index)=> {
+                   return (
+
+                        <CardRestaurant key={index} restaurant_data={data}/>
+
+                       );
+               }) : "...Loading"
+            }
+
         </FeaturedRestaurant>
         </ContentWrapper>
         <Footer/>

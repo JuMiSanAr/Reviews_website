@@ -7,6 +7,7 @@ import CardRestaurant from '../components/cards/cardRestaurant/index';
 import CardUser from '../components/cards/cardUser/index'
 import Footer from '../components/footer/index';
 import { useState } from "react";
+import {useSelector} from "react-redux";
 
 
 const MainContainer = styled.div `
@@ -77,14 +78,14 @@ const TabsContainer = styled.div`
     line-height: 23px;
     text-align: center;
     text-transform: uppercase;
-
-color: #4C4C4C;
+    color: #4C4C4C;
     span{
         width: 500px;
         border-bottom: 1px solid #EBEBEB;
     }
     .reviewtitle{
         display: flex;
+        cursor: pointer;
         div{
         margin: 0 80px 0 0;
         :hover {
@@ -120,6 +121,8 @@ const ContentWrapper = styled.div`
 `;
 
 const SearchPage = () => {
+
+    const best_four_res = useSelector(state => state.homeCardReducer.restaurant.data);
     
     const [toggleState, setToggleState] = useState(1);
 
@@ -158,10 +161,19 @@ const SearchPage = () => {
             </TabsContainer>
             <ResCardContainer> 
                 <div className={toggleState === 1 ? " active-content" : "content"}>
+                    {/*<CardRestaurant/>
                     <CardRestaurant/>
                     <CardRestaurant/>
-                    <CardRestaurant/>
-                    <CardRestaurant/>
+                    <CardRestaurant/>*/}
+                        {
+               best_four_res ? best_four_res.map((data )=> {
+                   return (
+
+                        <CardRestaurant restaurant_data={data}/>
+
+                       );
+               }) : "...Loading"
+            }
                 </div>
                 <div className={toggleState === 2 ? "active-content" : "content"}>
                    <CardReview/>

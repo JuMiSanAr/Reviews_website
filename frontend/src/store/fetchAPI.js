@@ -6,7 +6,7 @@ console.log(url)
 
     const thisUrl = `${baseUrlServer}${url}`;
     console.log('fetchedUrl', thisUrl)
-
+    console.log('body', body)
     let config = {};
 
     if (headers && body && !fileExpected) {
@@ -41,11 +41,12 @@ console.log(url)
                     console.log('in the data')
                     return response.json();
                   } else {
-                    console.log('no data')
+                    console.log('no data');
                     return true;
                   }
                 } else {
-                  console.log('error')
+                  console.log('error');
+                  console.log('response', response);
                   throw Error();
                 }
             })

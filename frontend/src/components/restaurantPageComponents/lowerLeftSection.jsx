@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import { OrangeButton } from '../../styles/componentStyles/restaurant/lowerRightSection';
-import ReviewCard from './review';
+import ReviewCard from './reviewCard';
 
 
 export const LowerLeftSection = styled.div `
@@ -40,6 +40,8 @@ const LeftSection = (props) => {
         console.log(filter);
     }
 
+    
+
     return(
         <LowerLeftSection>
             <FilterRow>
@@ -52,7 +54,10 @@ const LeftSection = (props) => {
             />
             <FilterButton onClick={ () => filterHandler() }>FILTER</FilterButton>
             </FilterRow>
-            <ReviewCard reviews={props.reviews} />
+            {
+                !props.reviews.length ? '' : props.reviews.map((review, index) =><ReviewCard key={index} review={review} /> )  
+            }
+            
         </LowerLeftSection>
     );
 };

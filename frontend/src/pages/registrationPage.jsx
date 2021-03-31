@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Footer from '../components/footer';
 import HeaderNavi from '../components/headerNavi/index';
 import RegistrationFieldComponent from '../components/registration/registrationField';
@@ -10,13 +10,17 @@ import { MainContainer, RegistrationWrapper } from '../styles/pageStyles/registr
 
 
 const RegistrationPage = () => {
+
+    const [ stage, setStage ] = useState('entering email');
+
+
     return (
         <MainContainer>
             <HeaderNavi/>
             <RegistrationWrapper>
-                <RegistrationFieldComponent/>
-                <RegistrationMessage/>
-                <RegistrationValidation/>
+                {stage === 'entering email' ? <RegistrationFieldComponent setStage={setStage}/> : ''}
+                {stage === 'email sent' ? <RegistrationMessage setStage={setStage}/> : ''}
+                {stage === 'activating user' ? <RegistrationValidation/> : ''}
             </RegistrationWrapper>
             <Footer/>
         </MainContainer>

@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { RegistrationTitle } from "../../styles/pageStyles/registrationStyles";
 import { VerificationFields } from "../../styles/pageStyles/regisValidStyles";
+import {Redirect} from "react-router-dom";
+import React, {useState} from "react";
 
  
 
@@ -43,10 +45,18 @@ min-height: 100vh;
 }
 `
 
-const RegistrationValidation = () => {
+const RegistrationValidation = (props) => {
+
+    const [redirect, setRedirect] = useState(false)
+
+    const activateAccount = () => {
+        setRedirect(true)
+    }
+
     return (
         <>
         <ValidationWrapper>
+            {/*{redirect ? <Redirect to='/login' /> : ''}*/}
                 <RegistrationTitle>Verification <span></span></RegistrationTitle>
                 <VerificationFields>
                     <VerificationInputField>
@@ -107,7 +117,7 @@ const RegistrationValidation = () => {
                     </VerificationInputField>
                     
                 </VerificationFields>
-                <button type='submit'>Finish Registration</button>
+                <button onClick={activateAccount}>Finish Registration</button>
         </ValidationWrapper>
         </>
     )

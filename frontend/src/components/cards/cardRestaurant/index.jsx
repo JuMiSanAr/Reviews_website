@@ -62,11 +62,11 @@ const CardRestaurant = ({restaurant_data}) => {
                     <p>{restaurant_data.street}</p>
                 <StarRatings>
                     <div>
-                        <img className='star' src={star} alt="" srcset=""/>
-                        <img className='star' src={star} alt="" srcset=""/>
-                        <img className='star' src={star} alt="" srcset=""/>
-                        <img className='star' src={star} alt="" srcset=""/>
-                        <img className='star' src={star} alt="" srcset=""/>
+                        <img className='star' src={star} alt="" srcSet=""/>
+                        <img className='star' src={star} alt="" srcSet=""/>
+                        <img className='star' src={star} alt="" srcSet=""/>
+                        <img className='star' src={star} alt="" srcSet=""/>
+                        <img className='star' src={star} alt="" srcSet=""/>
                     </div>
                     <span>52</span>
                 </StarRatings>

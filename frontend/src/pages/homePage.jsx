@@ -2,6 +2,7 @@ import React from 'react';
 import CardRestaurant from '../components/cards/cardRestaurant';
 import styled from 'styled-components'
 import HeaderNavi from '../components/headerNavi/index'
+import Footer from '../components/footer/index'
 
 const MainContainer = styled.div`
     min-height: 100vh;
@@ -10,12 +11,12 @@ const MainContainer = styled.div`
 const HomeBanner = styled.div `
     height: 351px;
     width: 100vw;
-    background-image: url('https://source.unsplash.com/random');
+    background-image: url('https://source.unsplash.com/featured/?open restaurant');
     background-size: cover;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 5px 0 40px 0;
+    margin: 0 0 40px 0;
 `;
 
 const SearchBox = styled.div `
@@ -73,17 +74,22 @@ const FilterTitle = styled.div `
     span {
         width: 256px;
         border: 3px solid #E47D31;
+        background-color: #E47D31;
         margin-bottom: 50px;
     }
 `;
 
-const CardContainer = styled.div `
+const FeaturedRestaurant = styled.div `
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     flex-wrap: wrap;
 `;
 
+const ContentWrapper = styled.div`
+    margin: auto;
+    max-width: 80vw;
+`;
 
 const HomePage = () => {
     return(
@@ -96,16 +102,23 @@ const HomePage = () => {
             <button type="submit">Search</button>
             </SearchBox>
         </HomeBanner>
+        <ContentWrapper>
         <FilterTitle>
             <p>Best Rated Restaurants</p>
             <span></span>
         </FilterTitle>
-        <CardContainer>
+        <FeaturedRestaurant>
             <CardRestaurant/>
             <CardRestaurant/>
             <CardRestaurant/>
             <CardRestaurant/>
-        </CardContainer>
+            <CardRestaurant/>
+            <CardRestaurant/>
+            <CardRestaurant/>
+            <CardRestaurant/>
+        </FeaturedRestaurant>
+        </ContentWrapper>
+        <Footer/>
         </MainContainer>
         </>
     );

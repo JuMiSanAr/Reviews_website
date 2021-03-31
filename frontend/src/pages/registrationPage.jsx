@@ -1,4 +1,5 @@
 import React from 'react'
+import Footer from '../components/footer';
 import HeaderNavi from '../components/headerNavi/index';
 import RegistrationFieldComponent from '../components/registration/registrationField';
 import RegistrationMessage from '../components/registration/registrationMessage';
@@ -13,10 +14,11 @@ const RegistrationPage = () => {
         <MainContainer>
             <HeaderNavi/>
             <RegistrationWrapper>
-                {/* <RegistrationFieldComponent/> */}
+                <RegistrationFieldComponent/>
                 <RegistrationMessage/>
-                {/* <RegistrationValidation/> */}
+                <RegistrationValidation/>
             </RegistrationWrapper>
+            <Footer/>
         </MainContainer>
     )
 }

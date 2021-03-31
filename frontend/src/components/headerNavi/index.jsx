@@ -17,8 +17,8 @@ const HeaderNavi = () => {
         history.push("search");
       };
      
-      const tabHandler = (event) => {
-        console.log(event.target.title);
+      const profileHandler = (event) => {
+        history.push("userProfile");
       };
 
     const singupHandler = (event) => {
@@ -42,7 +42,7 @@ const HeaderNavi = () => {
             <RightHeaderSection>
                 <StyledTab title='home' onClick={homeHandler}>Home</StyledTab>
                 <StyledTab title='search' onClick={searchHandler}>Search</StyledTab>
-                <StyledTab title='profile' onClick={(event) => tabHandler(event)}>Profile</StyledTab>
+                <StyledTab title='profile' onClick={(event) => profileHandler(event)}>Profile</StyledTab>
 
                 {
                     token ? <StyledSignoutButton onClick={logoutHandler()}>LOGOUT</StyledSignoutButton> : 

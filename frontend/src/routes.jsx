@@ -6,6 +6,7 @@ const Home = lazy(() => import('./pages/homePage'));
 const LoginPage = lazy(() => import('./pages/loginPage'));
 const UserProfile = lazy(() => import('./pages/userProfilePage'));
 const RegistrationPage = lazy(() => import('./pages/registrationPage'));
+const NewRestaurantPage = lazy(() => import('./pages/newRestaurantPage'))
 
 const  Routes = () => {
   return (
@@ -16,6 +17,7 @@ const  Routes = () => {
       <Route exact path="/search" component={SearchPage}/>
       <Route exact path="/registration" component={RegistrationPage}/>
       <Route exact path="/login" component={LoginPage}/>
+      <Route exact path="/newRestaurant" component={NewRestaurantPage}/>
 
       <Route exact path="/userProfile" component={UserProfile}/>
       </Switch>

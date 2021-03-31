@@ -4,6 +4,7 @@ import HeaderNavi from '../components/headerNavi/index';
 import { loginAction } from '../store/actions/loginActions';
 import { baseUrl, headers } from '../store/constants';
 import { InputField, LoginTitle, LoginWrapper, MainContainer } from '../styles/pageStyles/loginStyles';
+import Footer from '../components/footer/index';
 
 //############################# Component ################################
 
@@ -54,6 +55,7 @@ const LoginPage = () => {
                 </InputField>
                 <button onClick={loginHandler()}>Login</button>
             </LoginWrapper>
+            <Footer/>
         </MainContainer>            
     )
 }

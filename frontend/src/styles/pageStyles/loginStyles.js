@@ -14,7 +14,7 @@ flex-direction: column;
 margin-top: 5px;
 align-items: center;
 background: #F2F2F2;
-min-height: 100vh;
+min-height: 92vh;
 
     button {
         background-color: #E47D31;

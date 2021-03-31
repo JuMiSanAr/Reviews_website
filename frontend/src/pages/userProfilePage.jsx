@@ -24,10 +24,15 @@ const ProfileBanner = styled.div `
     justify-content: center;
     margin: 0 0 40px 0;
     color: WHite;
+    @media (max-width: 768px) {
+        .userdetails{
+            display:none;
+        }
+  }
 `;
 
 const ProfileWrapper = styled.div`
-   min-height: 75vh;
+    min-height: 75vh;
     max-width: 85vw;
     margin: auto;
     display: flex;
@@ -52,6 +57,7 @@ const UserProfileWrapper = styled.div`
     margin-top: -160px;
     width: 232px;
     margin-right: 5px;
+    margin-bottom: 60px;
     img{
         height: 234px;
     }
@@ -74,6 +80,9 @@ const UserProfileWrapper = styled.div`
             margin: 5px 20px 5px 5px;
         }
     }
+    @media (max-width: 768px) {
+        width: auto;
+  }
 `;
 
 const ContentWrapper = styled.div`
@@ -83,6 +92,7 @@ const ContentWrapper = styled.div`
     padding: 20px;
     margin-top: -40px;
     margin-right: 7px;
+    margin-bottom: 20px;
     background-color: white;
     .content {
             display: none;
@@ -93,6 +103,9 @@ const ContentWrapper = styled.div`
             justify-content: flex-start;
             
     }
+    @media (max-width: 768px) {
+        width: auto;
+  }
 `;
 
 const ReviewsWrapper = styled.div`
@@ -173,6 +186,9 @@ const AboutWrapper = styled.div`
         font-style: light;
       }
     }
+    @media (max-width: 768px) {
+        width: auto;
+  }
 `;
 
 const UserProfile = () => {

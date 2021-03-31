@@ -1,9 +1,9 @@
-import {baseUrlServer} from "./constants";
+import {baseUrlLocal, baseUrlServer} from "./constants";
 
 
 export const fetchAPI = (url, body, method, headers = true, expectData = true, fileExpected = false) => {
 
-    const thisUrl = `${baseUrlServer}${url}`;
+    const thisUrl = `${baseUrlLocal}${url}`;
     console.log('fetchedUrl', thisUrl)
 
     let config = {};

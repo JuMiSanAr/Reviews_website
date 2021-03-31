@@ -106,7 +106,7 @@ class GetReviewsCommentedByUser(ListAPIView):
 
 class ToggleReviewLikeView(UpdateAPIView):
         '''
-        Like & unlike a review.
+        patch: Like & unlike a review.
 
         .
         '''

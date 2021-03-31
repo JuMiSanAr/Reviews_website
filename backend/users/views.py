@@ -14,11 +14,11 @@ User = get_user_model()
 
 
 class GetAllUsersList(ListAPIView):
-    """
-    get = Get all users. (not required by spec)
+    '''
+    get: get all users & Search for a user at: /api/users/?search=<str:search_string>/
 
-    Search for a user: /api/users/?search=<str:search_string>/
-    """
+    .
+    '''
     queryset = User.objects.all()
     serializer_class = UserSerializer
     lookup_url_kwarg = 'id'
@@ -41,6 +41,11 @@ class GetAllUsersList(ListAPIView):
 
 
 class GetSpecificUser(RetrieveAPIView):
+    '''
+    get: get a specific user profile.
+
+    .
+    '''
     queryset = User.objects.all()
     serializer_class = UserSerializer
     lookup_url_kwarg = 'id'
@@ -52,7 +57,6 @@ class GetUpdateMyUserProfile(RetrieveUpdateAPIView):
     get: Get the user profile.
 
     .
-
     patch: Update the user profile.
 
     .
@@ -65,6 +69,11 @@ class GetUpdateMyUserProfile(RetrieveUpdateAPIView):
 
 
 class SearchView(ListAPIView):
+    '''
+    get: Search for ‘restaurants’, ‘reviews’ or ‘users’. {type: ‘restaurants’, ‘search_string’: ‘Pub’}
+
+    .
+    '''
 
     def get_serializer_class(self):
         type = self.request.query_params.get('type')

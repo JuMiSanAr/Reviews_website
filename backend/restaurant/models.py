@@ -1,9 +1,12 @@
+from statistics import mean
+
 from django.contrib.auth import get_user_model
 from django.core.validators import RegexValidator
 from django.db import models
 from django.conf import settings
 
 # Create your models here.
+from category.models import Category
 
 User = get_user_model()
 
@@ -19,17 +22,6 @@ class Restaurant(models.Model):
         ('1', '$'),
         ('2', '$$'),
         ('3', '$$$')
-    )
-
-    CATEGORIES = (
-        ('0', 'No categories'),
-        ('1', 'Vegan'),
-        ('2', 'Vegetarian'),
-        ('3', 'Fast food'),
-        ('4', 'All you can eat'),
-        ('5', 'Traditional'),
-        ('6', 'Haute cuisine'),
-        ('7', 'Kebab'),
     )
 
     NOISE_LEVEL = (
@@ -56,19 +48,30 @@ class Restaurant(models.Model):
     created = models.DateTimeField(auto_now_add=True, null=True)
     owner = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, related_name='my_restaurants', null=True)
 
+    longitude = models.CharField(max_length=50, blank=True, null=True)
+    latitude = models.CharField(max_length=50, blank=True, null=True)
+
     price_level = models.CharField(max_length=2, choices=PRICE_LEVEL, default='0')
-    categories = models.CharField(max_length=2, choices=CATEGORIES, default='0')
     WIFI = models.BooleanField(null=True)
     take_away = models.BooleanField(verbose_name='Take away', null=True)
     delivery = models.BooleanField(null=True)
     take_reservations = models.BooleanField(verbose_name='Take reservations', null=True)
     credit_cards = models.BooleanField(verbose_name='Credit cards', null=True)
     waiter_service = models.BooleanField(verbose_name='Waiter service', null=True)
-    noise_level = models.CharField(verbose_name='Noise level', max_length=2, choices=NOISE_LEVEL, default='0')
+    noise_level = models.CharField(verbose_name='Noise level', max_length=2, choices=NOISE_LEVEL, default='0', blank=True)
+
+    categories = models.ManyToManyField(to=Category, related_name='restaurants', blank=True)
 
     def __str__(self):
         return f' Restaurant "{self.name}" owned by {self.owner}'
 
     @property
-    def all_categories(self):
-        return self.CATEGORIES
+    def average_rating(self):
+        ratings_list = []
+        reviews = self.restaurant_reviews.values()
+        for review in reviews:
+            ratings_list.append(int(review['rating']))
+        if len(ratings_list) > 0:
+            return round(mean(ratings_list), 2)
+        else:
+            return 0

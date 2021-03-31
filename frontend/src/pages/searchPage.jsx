@@ -77,14 +77,14 @@ const TabsContainer = styled.div`
     line-height: 23px;
     text-align: center;
     text-transform: uppercase;
-
-color: #4C4C4C;
+    color: #4C4C4C;
     span{
         width: 500px;
         border-bottom: 1px solid #EBEBEB;
     }
     .reviewtitle{
         display: flex;
+        cursor: pointer;
         div{
         margin: 0 80px 0 0;
         :hover {

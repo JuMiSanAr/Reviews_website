@@ -4,8 +4,8 @@ import {store} from "./index";
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const SIGNUP = 'SIGNUP';
-
 export const SEARCH = 'SEARCH';
+export const HOME_CARD = 'HOME_CARD';
 
 // Base URLs to use for fetching
 export const baseUrlLocal = 'http://localhost:8000/api/';

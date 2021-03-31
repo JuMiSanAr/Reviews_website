@@ -125,6 +125,7 @@ class HomeRestaurantView(ListAPIView):
     '''
 
     serializer_class = BestRatedRestaurantsSerializer
+    permission_classes = []
 
     def get_queryset(self):
         first_restaurant = Restaurant.objects.first()

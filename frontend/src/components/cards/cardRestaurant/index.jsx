@@ -53,13 +53,13 @@ const CardImage = styled.img `
     width: 271px;
 `;
 
-const CardRestaurant = () => {
+const CardRestaurant = ({restaurant_data}) => {
     return (
         <Container>
             <CardWrapper>
                 <div className='cardTitle'>
-                    <p>Restaurant Name</p>
-                    <p>Address</p> 
+                    <p>{restaurant_data.name}</p>
+                    <p>{restaurant_data.street}</p>
                 <StarRatings>
                     <div>
                         <img className='star' src={star} alt="" srcset=""/>
@@ -71,7 +71,7 @@ const CardRestaurant = () => {
                     <span>52</span>
                 </StarRatings>
                 </div> 
-                <CardImage src="https://source.unsplash.com/featured/?restaurant,food" alt="" srcset=""/>
+                <CardImage src={restaurant_data.avatar} alt="" />
                 
             </CardWrapper>
         </Container>

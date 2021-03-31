@@ -2,11 +2,9 @@ import React, { useState }  from 'react';
 import { useDispatch } from 'react-redux';
 import HeaderNavi from '../components/headerNavi/index';
 import { loginAction } from '../store/actions/loginActions';
-import { baseUrlLocal, headers } from '../store/constants';
 import { InputField, LoginTitle, LoginWrapper, MainContainer } from '../styles/pageStyles/loginStyles';
-import loginFetch from "../store/fetches/login";
+import loginFetch from "../store/fetches/login_fetches";
 import { Redirect } from 'react-router-dom';
-import Footer from '../components/footer/index';
 
 //############################# Component ################################
 
@@ -19,22 +17,19 @@ const LoginPage = () => {
 
     const dispatch = useDispatch();
 
+
     const loginHandler = () => {
 
         loginFetch(email, password)
-        .then(data => {
-
-            const action = loginAction(data.access);
-
-            dispatch(action)
-
-            localStorage.setItem('token', data.access);
-
-            setRedirect(true)
-        })
-        .catch(() => {
-                setErrorMessage(true);
+            .then(data => {
+                const action = loginAction(data.access);
+                dispatch(action);
+                localStorage.setItem('token', data.access);
+                setRedirect(true);
             })
+            .catch(() => {
+                    setErrorMessage(true);
+                })
     }
 
 
@@ -53,7 +48,7 @@ const LoginPage = () => {
                             value={email}
                             name='username'
                             type='text'
-                            placeholder='Username'
+                            placeholder='Email'
                         />
                         <input
                             required

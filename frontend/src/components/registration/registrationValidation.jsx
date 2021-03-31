@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { RegistrationTitle } from "../../styles/pageStyles/registrationStyles";
+import {RegistrationField, RegistrationTitle} from "../../styles/pageStyles/registrationStyles";
 import { VerificationFields } from "../../styles/pageStyles/regisValidStyles";
 import {Redirect} from "react-router-dom";
 import React, {useState} from "react";
@@ -57,7 +57,17 @@ const RegistrationValidation = (props) => {
 
     const [redirect, setRedirect] = useState(false)
 
+    const [ errorCode, setErrorCode ] = useState(false);
+    const [ errorPassword, setErrorPassword ] = useState(false);
+    const [ errorEmpty, setErrorEmpty] = useState(false);
+
     const activateAccount = () => {
+        if ((email || code || username || password1 || password2 || location) === '') {
+            setErrorEmpty(true);
+            return 0;
+        }
+        setErrorEmpty(false);
+
         const body = {
             email: email,
             code: code,
@@ -66,19 +76,30 @@ const RegistrationValidation = (props) => {
             password2: password2,
             location: location
         }
-        console.log('body',body)
         activateAccountFetch(body)
             .then(data => {
                 console.log(data)
+                setRedirect(true)
             })
+            .catch(response => {
+                console.log(response)
+                const statusLastChar = response.toString().slice(-1);
 
-        setRedirect(true)
+                if (statusLastChar === '0') {
+                    setErrorPassword(true);
+                    setErrorCode(false);
+                }
+                else {
+                    setErrorPassword(false);
+                    setErrorCode(true);
+                }
+            })
     }
 
     return (
         <>
         <ValidationWrapper>
-            {/*{redirect ? <Redirect to='/login' /> : ''}*/}
+            {redirect ? <Redirect to='/login' /> : ''}
                 <RegistrationTitle>Verification <span></span></RegistrationTitle>
                 <VerificationFields>
                     <VerificationInputField>
@@ -137,8 +158,18 @@ const RegistrationValidation = (props) => {
                     />
 
                     </VerificationInputField>
-                    
                 </VerificationFields>
+                {errorEmpty ?
+                    <h1>Please make sure to fill in all fields</h1>
+                    : ''}
+                {errorCode ?
+                    <h1>Email and code don't match</h1>
+                    : ''}
+                {errorPassword ?
+                    <>
+                    <h1>The two passwords introduced didn't match</h1>
+                    </>
+                    : ''}
                 <button onClick={activateAccount}>Finish Registration</button>
         </ValidationWrapper>
         </>

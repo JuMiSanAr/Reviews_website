@@ -23,6 +23,7 @@ const LoginPage = () => {
 
         loginFetch(email, password)
         .then(data => {
+
             const action = loginAction(data.access);
 
             dispatch(action)
@@ -39,7 +40,7 @@ const LoginPage = () => {
 
     return (
         <>
-            {redirect ? <Redirect to='/' /> : ''}
+            {/*{redirect ? <Redirect to='/' /> : ''}*/}
             <MainContainer>
                 <HeaderNavi/>
                 <LoginWrapper>
@@ -63,10 +64,11 @@ const LoginPage = () => {
                             placeholder='Password'
                         />
                     </InputField>
-                    <button onClick={() => loginHandler}>Login</button>
+                    <h1>{errorMessage ? 'Invalid username or password' : ''}</h1>
+                    <button onClick={loginHandler}>Login</button>
                 </LoginWrapper>
             </MainContainer>
-            <p>{errorMessage ? 'Invalid username or password' : ''}</p>
+
         </>
     )
 }

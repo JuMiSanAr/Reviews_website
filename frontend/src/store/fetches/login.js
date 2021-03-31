@@ -1,7 +1,5 @@
 import {fetchAPI} from "../fetchAPI";
 import {headers} from "../constants";
-import {loginAction} from "../actions/loginActions";
-import {useDispatch} from "react-redux";
 
 
 const loginFetch = (email, password) => {

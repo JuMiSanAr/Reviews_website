@@ -4,6 +4,7 @@ import {  restaurantsReducer } from './restaurantsReducer';
 import {searchReducer} from "./searchReducer";
 import {categoriesReducer} from "./categoriesReducer";
 
+
 const rootReducer = combineReducers({
     logInReducer,
     restaurantsReducer,

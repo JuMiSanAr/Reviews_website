@@ -6,7 +6,7 @@ import Footer from '../components/footer/index'
 import {homeCardAction} from "../store/actions/homeCardActions";
 import {useDispatch, useSelector} from "react-redux";
 import homeCardFetch from "../store/fetches/home_card_fetches";
-import spinner from "../assets/spinner.gif"
+import loading from "../assets/loading.gif"
 import searchResFetch from "../store/fetches/search_fetches";
 import {searchResAction} from "../store/actions/searchActions";
 import {useHistory} from "react-router-dom";
@@ -121,11 +121,11 @@ const HomePage = () => {
                 dispatch(action);
             });
 
-        allRestaurantsFetch()
-            .then(data => {
-                const action = getAllRestaurantsAction(data.results);
-                dispatch(action);
-            });
+        // allRestaurantsFetch()
+        //     .then(data => {
+        //         const action = getAllRestaurantsAction(data.results);
+        //         dispatch(action);
+        //     });
 
     // Fetch user info and send it to redux store
         getLoggedInUserInfoFetch()
@@ -135,8 +135,8 @@ const HomePage = () => {
     }, []);
 
 
-    // Get list of all restaurants
-    const allRestaurants = useSelector(state => state.restaurantsReducer.all_restaurants.data);
+    /*// Get list of all restaurants
+    const allRestaurants = useSelector(state => state.restaurantsReducer.all_restaurants.data);*/
 
 
     // Show best four restaurants
@@ -155,7 +155,10 @@ const HomePage = () => {
                 history.push("/search");
             })
     }
-
+    // check the restaurant at restaurant page
+    const checkRestaurantHandler = (data) => {
+        console.log(data);
+    }
 
     return(
         <>
@@ -163,8 +166,11 @@ const HomePage = () => {
         <HeaderNavi/>
         <HomeBanner>
             <SearchBox>
-            <input type="search" name=""  placeholder='Search..' onChange={(event) => setSearchValue(event.target.value)}/>
-            <button type="submit" onClick={handleSearchRestaurant} onKeyUp={ event => event.key === 'Enter' ? handleSearchRestaurant() : ''}>Search</button>
+            <input type="search" name=""  placeholder='Search..'
+                onChange={(event) => setSearchValue(event.target.value)}
+                onKeyUp={ event => event.key === 'Enter' ? handleSearchRestaurant() : ''}
+            />
+            <button type="submit" onClick={handleSearchRestaurant} >Search</button>
             </SearchBox>
         </HomeBanner>
         <ContentWrapper>
@@ -174,13 +180,12 @@ const HomePage = () => {
         </FilterTitle>
         <FeaturedRestaurant>
             {
-               bestFourRes ? bestFourRes.map((data, index)=> {
+               bestFourRes ? bestFourRes.map((data, index) => {
                    return (
 
-                        <CardRestaurant key={index} restaurant_data={data}/>
-
+                        <CardRestaurant key={ index } restaurant_data={ data } onClick={ checkRestaurantHandler(data) }/>
                        );
-               }) : <img src={spinner} alt="...loading"/>
+               }) : <img src={loading} alt="...loading"/>
             }
 
         </FeaturedRestaurant>

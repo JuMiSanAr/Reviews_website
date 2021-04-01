@@ -11,8 +11,10 @@ export const ALL_RESTAURANTS = 'ALL_RESTAURANTS';
 // export const NEW_RESTAURANT = 'NEW_RESTAURANT';
 
 export const ALL_CATEGORIES = 'ALL_CATEGORIES';
+export const PASS_RESTAURANT_DATA = 'PASS_RESTAURANT_DATA'
 
 export const HOME_CARD = 'HOME_CARD';
+
 
 // Base URLs to use for fetching
 export const baseUrlLocal = 'http://localhost:8000/api/';

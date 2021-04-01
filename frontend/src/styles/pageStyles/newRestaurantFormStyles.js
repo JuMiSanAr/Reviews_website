@@ -160,7 +160,7 @@ export const InputOpeningHours = styled.div`
     display: block;
     justify-content: space-evenly;
 
-    input, select {
+    select {
             font-size: 15px;
             font-style: normal;
             font-weight: 700;
@@ -173,6 +173,7 @@ export const InputOpeningHours = styled.div`
             height: 52px;
             border: none;
             outline: none;
+            cursor: pointer;
 
             ::placeholder {
                 font-size: 1rem;
@@ -204,6 +205,9 @@ export const InputFields = styled.div`
                 font-size: 1rem;
             }
         }
+    select {
+            cursor: pointer;
+    }
 
 `
 

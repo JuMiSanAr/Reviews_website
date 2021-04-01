@@ -1,7 +1,7 @@
-import {ALL_RESTAURANTS} from "../constants";
+import {ALL_RESTAURANTS, NEW_RESTAURANT} from "../constants";
 
 
-export const getAllRestaurants = (data) => {
+export const getAllRestaurantsAction = (data) => {
     return {
         type: ALL_RESTAURANTS,
         payload: {
@@ -9,3 +9,12 @@ export const getAllRestaurants = (data) => {
         }
     }
 };
+
+// export const newRestaurantAction = (data) => {
+//     return {
+//         type: NEW_RESTAURANT,
+//         payload: {
+//             data
+//         }
+//     }
+// };

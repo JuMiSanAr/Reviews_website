@@ -1,4 +1,4 @@
-import {ALL_RESTAURANTS, HOME_CARD} from "../constants";
+import {ALL_RESTAURANTS, HOME_CARD, NEW_RESTAURANT} from "../constants";
 
 
 

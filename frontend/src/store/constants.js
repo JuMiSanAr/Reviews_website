@@ -8,6 +8,7 @@ export const SEARCH_REVIEWS = 'SEARCH_REVIEWS';
 export const SEARCH_USERS = 'SEARCH_USERS';
 
 export const ALL_RESTAURANTS = 'ALL_RESTAURANTS';
+// export const NEW_RESTAURANT = 'NEW_RESTAURANT';
 
 export const ALL_CATEGORIES = 'ALL_CATEGORIES';
 
@@ -25,10 +26,8 @@ export const headers = new Headers({
 });
 
 export const headersWithToken = new Headers({
-    headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
-      },
 })
 
 

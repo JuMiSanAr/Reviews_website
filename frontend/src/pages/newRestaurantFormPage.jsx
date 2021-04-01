@@ -53,6 +53,14 @@ const NewRestaurantFormPage = () => {
 
     const allCategories = useSelector(state => state.categoriesReducer.categories.data);
 
+    const [errorName, setErrorName] = useState(false);
+    const [errorCategory, setErrorCategory] = useState(false);
+    const [errorCountry, setErrorCountry] = useState(false);
+    const [errorStreet, setErrorStreet] = useState(false);
+    const [errorCity, setErrorCity] = useState(false);
+    const [errorPhone, setErrorPhone] = useState(false);
+    const [errorHours, setErrorHours] = useState(false);
+
     console.log(firstDay)
 
     useEffect(() => {
@@ -80,16 +88,20 @@ const NewRestaurantFormPage = () => {
         // Make sure phone matches the requirements
         formData.append('phone', phone);
 
-        // Create opening hours string
         formData.append('firstDay', firstDay);
         formData.append('lastDay', lastDay);
+        formData.append('openingHour', openingHour);
+        formData.append('closingHour', closingHour);
+
+        console.log(formData)
+
     }
 
     return (
         <MainContainer>
             <HeaderNavi/>
                 <NewRestaurantWrapper>
-                    <CreatNewRestaurantTitle>Create New Restaurant<span></span></CreatNewRestaurantTitle>
+                    <CreatNewRestaurantTitle>Create New Restaurant<span> </span></CreatNewRestaurantTitle>
                         <form>
                             <FieldsetTitle className='p'>Basic</FieldsetTitle>
                             <FormRows>
@@ -100,7 +112,7 @@ const NewRestaurantFormPage = () => {
                             <FormRows>
                                 <InputFields>
                                     <input
-                                        required
+                                        required="required"
                                         onChange={event => setName(event.target.value)}
                                     />
                                 </InputFields>
@@ -159,8 +171,8 @@ const NewRestaurantFormPage = () => {
                                 </InputFields>
                             </FormRows>
                             <FormRows>
-                                <RequiredLeft>This field is required</RequiredLeft>
-                                <RequiredCenter>This field is required</RequiredCenter>
+                                {errorStreet ? <RequiredLeft>This field is required</RequiredLeft> : ''}
+                                {errorCity ? <RequiredCenter>This field is required</RequiredCenter> : ''}
                             </FormRows>
 
                             <FieldsetTitle className='p'>Contact</FieldsetTitle>
@@ -253,8 +265,7 @@ const NewRestaurantFormPage = () => {
                                 <RequiredLeft>This field is required</RequiredLeft>
                             </FormRows>
                         </form>
-                        <button type="submit" className='button_save'>Save</button>
-                        
+                    <button className='button_save'>Save</button>
                 </NewRestaurantWrapper>
             <Footer/>
         </MainContainer>

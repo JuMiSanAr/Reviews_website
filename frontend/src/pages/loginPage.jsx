@@ -57,6 +57,7 @@ const LoginPage = () => {
                             name='password'
                             type='password'
                             placeholder='Password'
+                            onKeyUp={ event => event.key === 'Enter' ? loginHandler() : ''}
                         />
                     </InputField>
                     <h1>{errorMessage ? 'Invalid username or password' : ''}</h1>

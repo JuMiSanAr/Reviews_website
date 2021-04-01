@@ -155,6 +155,8 @@ const RegistrationValidation = (props) => {
                         name='password repeat'
                         type='password'
                         placeholder='Password repeat'
+                        onKeyUp={ event => event.key === 'Enter' ? activateAccount() : ''}
+
                     />
 
                     </VerificationInputField>

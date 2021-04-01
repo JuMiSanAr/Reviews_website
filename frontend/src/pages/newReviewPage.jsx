@@ -1,21 +1,42 @@
 import React, { useState } from 'react';
 
+import styled from 'styled-components';
+
+// ================ components ================
 import Footer from '../components/footer';
 import HeaderNavi from '../components/headerNavi';
 
+// ================ styled components ================
 import RestaurantTitle from '../components/restaurantPageComponents/bannerTitle';
 import { RestaurantInfoBanner } from '../styles/pageStyles/restaurantStyles';
-import {
-    BtnReview,
-    InputReviewField,
-    MainContainer,
-    P,
-    RatingField,
-    ReviewBanner
-} from "../styles/pageStyles/newReviewStyles";
+import {BtnReview, InputReviewField, MainContainer, P, RatingField} from "../styles/pageStyles/newReviewStyles";
 import {FaStar} from "react-icons/all";
-import newReviewFetch from "../store/fetches/review_fetches";
 
+
+
+
+// two below to adjust 
+export const ReviewBanner = styled.div `
+    height: 150px;
+    width: 100vw;
+    background-image: url('https://source.unsplash.com/random');
+    background-size: cover;
+    display: flex;
+    align-items: start;
+    margin-top:0.5em;
+    z-index: 0;
+`;
+
+
+// export const InputField = styled.input `
+// display: flex;
+// justify-content: center;
+// align-items: center;
+// flex-direction: column;
+// height: 40px;
+// width: 40px;
+
+// `
 
 
 
@@ -94,25 +115,24 @@ const restaurant = {
 
 
 const ReviewPage = () => {
+    // const writeReviewHandler = (event) => {
+    //     console.log(event);
+    // }
+    // const editDataHandler = (event) => {
+    //     console.log(event);
+    // }
 
-
-   // const [rating1, serRating1] = useState('');
-    const [reviewInput, setReviewInput] = useState('');
-
-
-    const changeReviewInput = (e) => {
-        console.log(reviewInput);
-        setReviewInput(e.target.value)
-    };
-
-    const submitReview = () => {
-
-        newReviewFetch(reviewInput)
-        .then(data => {
-            console.log(data);
-
-    });
-    };
+    // const [rating1, serRating1] = useState('');
+    // const [reviewInput, setReviewInput] = useState('');
+    //
+    // const setReviewInput = (e) => {
+    //     console.log(reviewInput)
+    // };
+    //
+    //
+    // const submitReview = () => {
+    //
+    // }
 
     return(
         <>
@@ -137,15 +157,15 @@ const ReviewPage = () => {
                 <p>Please don't review this business if you received a freebie for writing this review, <br />or if you're connected in any way to the owner or employees.</p>
 
                 <input
-                    value={reviewInput}
-                    onChange= {e => changeReviewInput(e)}
-                    // onChange= {e => setReviewInput(e.target.value)}
+                    //value={reviewInput}
+                    //onChange= {e => setReviewInput(e.target.value)}
                     type='text'
                     required/>
 
                 </InputReviewField>
-                <BtnReview onClick={submitReview}>SUBMIT</BtnReview>
-                {/* onClick to do for Submit btn! if condition if input fulfiled or not maybe make display this field is required only when submitting empty field  */}
+                <BtnReview>SUBMIT</BtnReview>
+                {/*<BtnReview onClick={submitReview}>SUBMIT</BtnReview>*/}
+                {/* onClick to do for Submit btn! if condition if inpout fulfiled or not maybe make display this field is required only when submitting empty field  */}
                 <P>This field is required *to be displayed when clicking button with empty input field</P>
                 
             <Footer />

@@ -1,8 +1,19 @@
 import {fetchAPI} from "../fetchAPI";
-import {headers} from "../constants";
+import {headers, headersWithToken} from "../constants";
 
 
-const allUsersFetch = () => {
+export const getLoggedInUserInfoFetch = () => {
+    return fetchAPI(
+        'me/',
+        false,
+        'GET',
+        headersWithToken
+    )
+}
+
+
+
+export const allUsersFetch = () => {
 
     return fetchAPI(
         'users/list/',
@@ -11,5 +22,3 @@ const allUsersFetch = () => {
         headers
     )
 }
-
-export default allUsersFetch;

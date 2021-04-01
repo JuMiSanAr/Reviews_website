@@ -8,11 +8,8 @@ import CardUser from '../components/cards/cardUser/index'
 import Footer from '../components/footer/index';
 import { useState } from "react";
 import {useDispatch, useSelector} from "react-redux";
-import loading  from '../assets/loading.gif'
-import allRestaurantsFetch from "../store/fetches/restaurant_fetches";
 import {filterRestaurantData, getAllRestaurants} from "../store/actions/restaurantActions";
-import allUsersFetch from "../store/fetches/all_users_fetches";
-import {allUserAction} from "../store/actions/getAllUserActions";
+import {allRestaurantsFetch} from "../store/fetches/restaurant_fetches";
 
 
 const MainContainer = styled.div `
@@ -138,7 +135,7 @@ const SearchPage = () => {
       const filteredRestaurant = useSelector(state => state.restaurantsReducer.filtered_restaurant);
 
     // console.log("from use selector", allRestaurants)
-    
+
     const [toggleState, setToggleState] = useState(1);
    const [searchTerm, setSearchTerm] = useState("");
 /*   const [filteredRestaurant, setFilteredRestaurant] = useState([])*/
@@ -181,7 +178,6 @@ const SearchPage = () => {
 
 
     return (
-
         <>
         <MainContainer>
             <HeaderNavi/>

@@ -5,6 +5,7 @@ from restaurant.models import Restaurant
 
 
 class RestaurantSerializerBasic(serializers.ModelSerializer):
+
     categories = CategoriesBasicSerializer
 
     class Meta:

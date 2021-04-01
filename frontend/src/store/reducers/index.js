@@ -3,14 +3,15 @@ import { logInReducer } from './loginReducer';
 import {  restaurantsReducer } from './restaurantsReducer';
 import {searchReducer} from "./searchReducer";
 import {usersReducer} from "./usersReducer";
+import {categoriesReducer} from "./categoriesReducer";
 
 
 const rootReducer = combineReducers({
     logInReducer,
     searchReducer,
     restaurantsReducer,
-    UsersReducer: usersReducer,
-
+    categoriesReducer,
+    usersReducer
 });
 
 export default rootReducer;

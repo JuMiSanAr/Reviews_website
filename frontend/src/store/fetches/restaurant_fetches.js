@@ -1,8 +1,8 @@
 import {fetchAPI} from "../fetchAPI";
-import {headers} from "../constants";
+import {headers, headersWithToken} from "../constants";
 
 
-const allRestaurantsFetch = () => {
+export const allRestaurantsFetch = () => {
 
     return fetchAPI(
         `restaurants/`,
@@ -12,4 +12,14 @@ const allRestaurantsFetch = () => {
     )
 }
 
-export default allRestaurantsFetch;
+export const newRestaurantFetch = (formData) => {
+
+        return fetchAPI(
+        `restaurants/new/`,
+        formData,
+        'POST',
+        headersWithToken,
+        true,
+        true,
+    )
+}

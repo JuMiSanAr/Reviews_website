@@ -1,4 +1,4 @@
-import {ALL_RESTAURANTS, FILTER_RESTAURANT_DATA, PASS_RESTAURANT_DATA} from "../constants";
+import {NEW_RESTAURANT, ALL_RESTAURANTS, FILTER_RESTAURANT_DATA, PASS_RESTAURANT_DATA} from "../constants";
 
 
 export const getAllRestaurants = (data) => {
@@ -9,6 +9,15 @@ export const getAllRestaurants = (data) => {
         }
     }
 };
+
+// export const newRestaurantAction = (data) => {
+//     return {
+//         type: NEW_RESTAURANT,
+//         payload: {
+//             data
+//         }
+//     }
+// };
 
 
 export const passRestaurantData = (data) => {

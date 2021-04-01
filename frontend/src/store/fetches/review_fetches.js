@@ -2,11 +2,11 @@ import {fetchAPI} from "../fetchAPI";
 import {headersWithToken} from "../constants";
 
 
-const newReviewFetch = (text_content) => {
+const newReviewFetch = (addValueHere) => {
 
     return fetchAPI(
         'reviews/new/{restaurant_id}/',
-        //{text_content: reviewInput},
+        {text_content: addValueHere},
         'POST',
         headersWithToken
     )

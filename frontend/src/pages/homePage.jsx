@@ -10,6 +10,7 @@ import loading from "../assets/loading.gif"
 import searchResFetch from "../store/fetches/search_fetches";
 import {searchResAction} from "../store/actions/searchActions";
 import {useHistory} from "react-router-dom";
+import { passRestaurantData } from '../store/actions/restaurantActions';
 
 
 const MainContainer = styled.div`
@@ -146,10 +147,12 @@ const HomePage = () => {
                 history.push("/search");
             })
     }
-    // check the restaurant at restaurant page
+    // See the restaurant at restaurant page
     const checkRestaurantHandler = (data) => {
-        console.log(data); 
-    }
+        const action = passRestaurantData(data);
+        dispatch(action);
+        history.push("/restaurant");
+    };
 
     return(
         <>
@@ -174,7 +177,7 @@ const HomePage = () => {
                bestFourRes ? bestFourRes.map((data, index) => {
                    return (
 
-                        <CardRestaurant key={ index } restaurant_data={ data } onClick={ checkRestaurantHandler(data) }/>
+                        <CardRestaurant key={ index } restaurant_data={ data } onClickHandler={ checkRestaurantHandler }/>
                        );
                }) : <img src={loading} alt="...loading"/>
             }

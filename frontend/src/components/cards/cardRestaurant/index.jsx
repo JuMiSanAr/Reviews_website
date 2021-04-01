@@ -55,9 +55,10 @@ const CardImage = styled.img `
     width: 271px;
 `;
 
-const CardRestaurant = ({restaurant_data}) => {
+const CardRestaurant = ({restaurant_data, onClickHandler}) => {
+
     return (
-        <Container>
+        <Container onClick={() => onClickHandler(restaurant_data)} >
             <CardWrapper>
                 <div className='cardTitle'>
                     <p>{restaurant_data.name}</p>

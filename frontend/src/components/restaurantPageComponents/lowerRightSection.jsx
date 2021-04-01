@@ -10,7 +10,9 @@ import money from '../../assets/money.svg';
 
 
 const RightSection = (props) => {
-    const { openingHours, priceLevel } = props.restaurant
+    const { opening_hours_from, opening_hours_to, price_level, owner} = props.restaurant_data.data
+    console.log(owner)
+
     const writeReviewHandler = (event) => {
         console.log(event);
     }
@@ -18,16 +20,25 @@ const RightSection = (props) => {
         console.log(event);
     }
 
+    const priceLevel = (price) => {
+        if(price < 2) return '$';
+        if(price === 2) return '$$';
+        if(price > 2) return '$$$';
+    }
+
     return(
         <LowerRightSection>
             <LowerRightRow>
-                <OpeningHours><Icon src={clock}/>{openingHours}</OpeningHours>
+                <OpeningHours><Icon src={clock}/>{opening_hours_from} - {opening_hours_to}</OpeningHours>
             </LowerRightRow>
             <LowerRightRow>
-                <PriceLevel><Icon src={money}/>Price level: {priceLevel}</PriceLevel>
+                <PriceLevel><Icon src={money}/>Price level: {priceLevel(Number(price_level))}</PriceLevel>
             </LowerRightRow>
             <LowerRightRow>
                 <RightSideButton onClick={ (event) => writeReviewHandler(event)}>WRITE A REVIEW</RightSideButton>
+                {/* {
+                    user_id !== owner.id ? '' : <RightSideButton onClick={ (event) => editDataHandler(event)}>EDIT DATA</RightSideButton> 
+                } */}
                 <RightSideButton onClick={ (event) => editDataHandler(event)}>EDIT DATA</RightSideButton>
             </LowerRightRow>
         </LowerRightSection>

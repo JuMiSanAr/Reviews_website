@@ -39,7 +39,8 @@ const CommentContent = styled.p `
 const ReviewCard = (props) => {
     const { reviewerName, reviewerImage, numberOfReviewsOfReviewer, score, date,
         content, numberOfReviewLikes, comments } = props.review;
-        
+    
+        console.log(props)
   
 
         const likeHandler = () => {

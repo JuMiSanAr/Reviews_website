@@ -40,7 +40,7 @@ const LeftSection = (props) => {
         console.log(filter);
     }
 
-    
+    console.log(props)
 
     return(
         <LowerLeftSection>

@@ -23,29 +23,10 @@ const ReviewPage = () => {
     const restaurant_data = useSelector(state => state.restaurantsReducer.restaurant_data);
 
 
-    // const [rating1, serRating1] = useState('');
     const [reviewInput, setReviewInput] = useState('');
     const [noInput, setNoInputMessage] = useState(false);
 
-    // const ratingInput = (ratingButton) => {
-    //     if (ratingButton === rating1){
-    //         return '1'
-    //     }else if (ratingButton === rating2){
-    //         return '2'
-    //     }else if (ratingButton === rating3){
-    //         return '3'
-    //     }else{
-    //         return '0'
-    //     }};
 
-
-    // const setReviewInput = (e) => {
-    //     console.log(reviewInput)
-    // };
-// const onChangeReview = e =>{
-//     console.log(reviewInput)
-//     setReviewInput(e.target.value);
-// }
 
         const submitReviewAndRating = () => {
         if (reviewInput === ''){
@@ -61,14 +42,7 @@ const ReviewPage = () => {
     });
     };
 
-    //     const submitReviewAndRating = () => {
-    //
-    //     newReviewFetch(reviewInput)
-    //     .then(data => {
-    //         console.log(data);
-    //
-    // });
-    // };
+
 
     return(
         <>
@@ -97,9 +71,7 @@ const ReviewPage = () => {
                 <input
                     value={reviewInput}
                     onChange= {e => setReviewInput(e.target.value)}
-                    // onChange={e => onChangeReview(e)}
                     type='text'
-                    // name='reviewInput'
                     required/>
 
                 </InputReviewField>

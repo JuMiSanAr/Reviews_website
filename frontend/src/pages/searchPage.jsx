@@ -8,9 +8,8 @@ import CardUser from '../components/cards/cardUser/index'
 import Footer from '../components/footer/index';
 import { useState } from "react";
 import {useDispatch, useSelector} from "react-redux";
-import loading  from '../assets/loading.gif'
-import allRestaurantsFetch from "../store/fetches/restaurant_fetches";
-import {getAllRestaurants} from "../store/actions/restaurantActions";
+import {filterRestaurantData, getAllRestaurants} from "../store/actions/restaurantActions";
+import {allRestaurantsFetch} from "../store/fetches/restaurant_fetches";
 
 
 const MainContainer = styled.div `

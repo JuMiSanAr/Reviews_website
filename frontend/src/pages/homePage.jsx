@@ -10,8 +10,9 @@ import loading from "../assets/loading.gif"
 import searchResFetch from "../store/fetches/search_fetches";
 import {searchResAction} from "../store/actions/searchActions";
 import {useHistory} from "react-router-dom";
-import allRestaurantsFetch from "../store/fetches/restaurant_fetches";
 import {getAllRestaurants} from "../store/actions/restaurantActions";
+import {getLoggedInUserInfoFetch} from "../store/fetches/all_users_fetches";
+import {allRestaurantsFetch} from "../store/fetches/restaurant_fetches";
 
 const MainContainer = styled.div`
     min-height: 100vh;

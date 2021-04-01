@@ -1,6 +1,5 @@
 from rest_framework import serializers
 
-from comments.serializers import CommentSerializerBasic
 from restaurant.serializers.serializers_basic import RestaurantSerializerBasic
 from reviews.models import Review
 from users.serializers.serializers_basic import UserSerializerBasic

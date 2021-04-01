@@ -24,10 +24,10 @@ const apiKey = 'pk.90118e3bf831e84aa39b925394cce279&q'
 
 const LittleMap = (props) => {
     // const { street, streetNumber, city, zipCode, country, phoneNumbner, website, latLan} = props.restaurant
-    const { city, country, latitude, longitude, phone, street, website, zip_code} = props.restaurant_data.data;
+    const { city, country, latitude, longitude, phone, street, website, zip_code} = props.restaurant_data;
     let lonLan = !latitude ? '' : [ Number(longitude), Number(latitude) ];
-    const tempLonLan = [47.372, 8.539];
-    const [ position ] = useState(lonLan.length === 0 ? tempLonLan : lonLan)
+    const tempLonLat = [47.372, 8.539];
+    const [ position ] = useState(tempLonLat)
     // const [ position ] = useState(latLan);
     let zoom = 15;
 

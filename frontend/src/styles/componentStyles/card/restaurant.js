@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
  export const RestaurantContainer = styled.div `
+    cursor: pointer;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;

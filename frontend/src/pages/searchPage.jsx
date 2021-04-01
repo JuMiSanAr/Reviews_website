@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import HeaderNavi from '../components/headerNavi/index'
 import styled from 'styled-components'
 import CardReview from '../components/cards/cardReview';
@@ -7,7 +7,10 @@ import CardRestaurant from '../components/cards/cardRestaurant/index';
 import CardUser from '../components/cards/cardUser/index'
 import Footer from '../components/footer/index';
 import { useState } from "react";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import loading  from '../assets/loading.gif'
+import allRestaurantsFetch from "../store/fetches/restaurant_fetches";
+import {getAllRestaurants} from "../store/actions/restaurantActions";
 
 
 const MainContainer = styled.div `
@@ -94,11 +97,12 @@ const TabsContainer = styled.div`
         cursor: pointer;
         div{
         margin: 0 80px 0 0;
-        :hover {
-            padding-bottom: 10px;
-            border-bottom: 3px solid #E47D31;
-        }
-    }        
+            :hover {
+                padding-bottom: 10px;
+                border-bottom: 3px solid #E47D31;
+            }
+        } 
+    }       
 `;
 
 const ResCardContainer = styled.div `
@@ -124,15 +128,30 @@ const ContentWrapper = styled.div`
 `;
 
 const SearchPage = () => {
-
-    const best_four_res = useSelector(state => state.homeCardReducer.restaurant.data);
+    const dispatch = useDispatch();
+/*
+    const searchedRestaurants = useSelector(state => state.searchReducer.restaurants.data);*/
+    // Get list of all restaurants
+    const allRestaurants = useSelector(state => state.restaurantsReducer.all_restaurants.data);
     
     const [toggleState, setToggleState] = useState(1);
+/*    const [filterSearchState, setfilterSearchState] = useState(null);*/
+
 
     const toggleTab = (index) => {
       setToggleState(index);
     // console.log(index)
     };
+
+    useEffect(() => {
+         allRestaurantsFetch()
+            .then(data => {
+                const action = getAllRestaurants(data.results);
+                dispatch(action);
+                /*console.log(data.results[0].categories.map(one => one.name))
+                 console.log(data.results)*/
+            });
+    }, [])
 
     return (
         <>
@@ -142,12 +161,15 @@ const SearchPage = () => {
                 <SearchBox><input type="search" name=""  placeholder='Search..'/></SearchBox>
                 <SelectCategory>
                 <span></span>
-                <select id="selectbox1">
+                <select>
                     <option value="">Select a category&hellip;</option>
-                    <option value="Indian">Indian</option>
-                    <option value="Tibetan">Tibetan</option>
-                    <option value="Swiss">Swiss</option>
-                    <option value="French">French</option>
+                    {
+                         allRestaurants ? allRestaurants.map((data, index)=> {
+                            return (
+                                <option key={index} >{data.categories.map(category => category.name)}</option>
+                                     );
+                                }) : "...loading"
+                    }
                 </select>
                 {/* <img src={arrow} alt="select arrow"/> */}
                 </SelectCategory>
@@ -164,19 +186,27 @@ const SearchPage = () => {
             </TabsContainer>
             <ResCardContainer> 
                 <div className={toggleState === 1 ? " active-content" : "content"}>
-                    {/*<CardRestaurant/>
-                    <CardRestaurant/>
-                    <CardRestaurant/>
-                    <CardRestaurant/>*/}
-                        {
-               best_four_res ? best_four_res.map((data, index)=> {
+
+                   {/*     {
+               searchedRestaurants ? searchedRestaurants.map((data, index)=> {
                    return (
 
                         <CardRestaurant key={index} restaurant_data={data}/>
 
                        );
                }) : "...Loading"
+            }*/}
+
+                 {
+               allRestaurants ? allRestaurants.map((data, index)=> {
+                   return (
+
+                        <CardRestaurant key={index} restaurant_data={data}/>
+
+                       );
+               }) : <img src={loading} alt="...loading"/>
             }
+
                 </div>
                 <div className={toggleState === 2 ? "active-content" : "content"}>
                    <CardReview/>

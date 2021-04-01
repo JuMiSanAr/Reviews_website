@@ -1,14 +1,11 @@
 from rest_framework import serializers
 
+from category.serializers.serializers_basic import CategoriesBasicSerializer
 from restaurant.models import Restaurant
 
 
 class RestaurantSerializerBasic(serializers.ModelSerializer):
-
-    categories = serializers.SerializerMethodField(read_only=True)
-
-    def get_categories(self, instance):
-        return filter(lambda category: category[0] in instance.categories, instance.all_categories)
+    categories = CategoriesBasicSerializer
 
     class Meta:
         model = Restaurant

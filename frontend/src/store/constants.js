@@ -1,11 +1,17 @@
-import {store} from "./index";
 
 // Action types
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
-export const SIGNUP = 'SIGNUP';
-export const SEARCH = 'SEARCH';
+
+export const SEARCH_RESTAURANTS = 'SEARCH_RESTAURANTS';
+export const SEARCH_REVIEWS = 'SEARCH_REVIEWS';
+export const SEARCH_USERS = 'SEARCH_USERS';
+
+export const ALL_RESTAURANTS = 'ALL_RESTAURANTS';
+export const PASS_RESTAURANT_DATA = 'PASS_RESTAURANT_DATA'
+
 export const HOME_CARD = 'HOME_CARD';
+
 
 // Base URLs to use for fetching
 export const baseUrlLocal = 'http://localhost:8000/api/';
@@ -19,10 +25,6 @@ export const headers = new Headers({
 });
 
 export const headersWithToken = new Headers({
-    headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      },
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`
 })
-
-

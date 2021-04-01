@@ -2,11 +2,12 @@ import {baseUrlLocal, baseUrlServer} from "./constants";
 
 
 export const fetchAPI = (url, body, method, headers = true, expectData = true, fileExpected = false) => {
-
+console.log(headers)
     const thisUrl = `${baseUrlServer}${url}`;
     let config = {};
 
     if (headers && body && !fileExpected) {
+        console.log('polkpol')
         config = {
             method: method,
             headers: headers,

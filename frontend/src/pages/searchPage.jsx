@@ -9,8 +9,8 @@ import Footer from '../components/footer/index';
 import { useState } from "react";
 import {useDispatch, useSelector} from "react-redux";
 import loading  from '../assets/loading.gif'
-import allRestaurantsFetch from "../store/fetches/restaurant_fetches";
-import {getAllRestaurants} from "../store/actions/restaurantActions";
+import {allRestaurantsFetch} from "../store/fetches/restaurant_fetches";
+import {getAllRestaurantsAction} from "../store/actions/restaurantActions";
 
 
 const MainContainer = styled.div `
@@ -117,7 +117,7 @@ const ResCardContainer = styled.div `
             display: flex;
             flex-direction: row;
             justify-content: space-evenly;
-            flex-wrap: wrap;
+            flex-wrap: wrap;asg
         }
 
 `;
@@ -133,7 +133,7 @@ const SearchPage = () => {
     const searchedRestaurants = useSelector(state => state.searchReducer.restaurants.data);*/
     // Get list of all restaurants
     const allRestaurants = useSelector(state => state.restaurantsReducer.all_restaurants.data);
-    
+
     const [toggleState, setToggleState] = useState(1);
 /*    const [filterSearchState, setfilterSearchState] = useState(null);*/
 
@@ -146,7 +146,7 @@ const SearchPage = () => {
     useEffect(() => {
          allRestaurantsFetch()
             .then(data => {
-                const action = getAllRestaurants(data.results);
+                const action = getAllRestaurantsAction(data.results);
                 dispatch(action);
                 /*console.log(data.results[0].categories.map(one => one.name))
                  console.log(data.results)*/

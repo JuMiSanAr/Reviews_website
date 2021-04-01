@@ -6,12 +6,10 @@ import Footer from '../components/footer/index'
 import {homeCardAction} from "../store/actions/homeCardActions";
 import {useDispatch, useSelector} from "react-redux";
 import homeCardFetch from "../store/fetches/home_card_fetches";
-import spinner from "../assets/spinner.gif"
+import loading from "../assets/loading.gif"
 import searchResFetch from "../store/fetches/search_fetches";
 import {searchResAction} from "../store/actions/searchActions";
 import {useHistory} from "react-router-dom";
-import allRestaurantsFetch from "../store/fetches/restaurant_fetches";
-import {getAllRestaurants} from "../store/actions/restaurantActions";
 
 
 const MainContainer = styled.div`
@@ -120,16 +118,16 @@ const HomePage = () => {
                 dispatch(action);
             });
 
-        allRestaurantsFetch()
+       /* allRestaurantsFetch()
             .then(data => {
                 const action = getAllRestaurants(data.results);
                 dispatch(action);
-            });
+            });*/
     }, []);
 
 
-    // Get list of all restaurants
-    const allRestaurants = useSelector(state => state.restaurantsReducer.all_restaurants.data);
+    /*// Get list of all restaurants
+    const allRestaurants = useSelector(state => state.restaurantsReducer.all_restaurants.data);*/
 
 
     // Show best four restaurants
@@ -173,7 +171,7 @@ const HomePage = () => {
                         <CardRestaurant key={index} restaurant_data={data}/>
 
                        );
-               }) : <img src={spinner} alt="...loading"/>
+               }) : <img src={loading} alt="...loading"/>
             }
 
         </FeaturedRestaurant>

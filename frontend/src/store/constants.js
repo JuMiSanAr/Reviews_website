@@ -25,18 +25,6 @@ export const headers = new Headers({
 });
 
 export const headersWithToken = new Headers({
-
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-<<<<<<< HEAD
-
-});
-
-
-
-
-
-=======
-      },
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`
 })
->>>>>>> dev

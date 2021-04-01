@@ -30,6 +30,7 @@ const FileUploader = props => {
   const hiddenFileInput = React.useRef(null);
 
   const handleClick = event => {
+      event.preventDefault()
     hiddenFileInput.current.click();
   };
 

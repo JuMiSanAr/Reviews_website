@@ -146,7 +146,7 @@ const HomePage = () => {
                 history.push("/search");
             })
     }
-
+    // check the restaurant at restaurant page
     const checkRestaurantHandler = (data) => {
         console.log(data); 
     }

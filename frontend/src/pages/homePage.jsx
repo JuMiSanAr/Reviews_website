@@ -18,8 +18,7 @@ const MainContainer = styled.div`
 const HomeBanner = styled.div `
     height: 351px;
     width: 100vw;
-    background-image: url('
-    https://res.cloudinary.com/tennam/image/upload/v1617228872/Propulsion/c2c64b930af48a341c3adef7c659d36e.png');
+    background-image: url('https://res.cloudinary.com/tennam/image/upload/v1617228872/Propulsion/c2c64b930af48a341c3adef7c659d36e.png');
     background-size: cover;
     display: flex;
     align-items: center;
@@ -153,7 +152,7 @@ const HomePage = () => {
         <HomeBanner>
             <SearchBox>
             <input type="search" name=""  placeholder='Search..' onChange={handleSearchInputChanges}/>
-            <button type="submit" onClick={handleSearchRestaurant}>Search</button>
+            <button type="submit" onClick={handleSearchRestaurant} onKeyUp={ event => event.key === 'Enter' ? handleSearchRestaurant() : ''}>Search</button>
             </SearchBox>
         </HomeBanner>
         <ContentWrapper>

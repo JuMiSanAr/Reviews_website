@@ -22,7 +22,6 @@ export const restaurantsReducer = (state = initialState, action) => {
         }
     }
     else if (action.type === PASS_RESTAURANT_DATA) {
-
         return {
             ...state,
             restaurant_data: action.payload,

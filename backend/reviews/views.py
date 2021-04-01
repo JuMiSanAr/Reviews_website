@@ -1,5 +1,6 @@
 # Create your views here.
 from django.contrib.auth import get_user_model
+from rest_framework import status
 from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveUpdateDestroyAPIView, UpdateAPIView
 from rest_framework.response import Response
 
@@ -23,20 +24,15 @@ class CreateReviewView(CreateAPIView):
     lookup_url_kwarg = 'restaurant_id'
     lookup_field = 'id'
 
-    def create(self, request, *args, **kwargs):
-        restaurant = Restaurant.objects.get(id=kwargs['restaurant_id'])
+    def perform_create(self, serializer):
+
+        restaurant = Restaurant.objects.get(id=self.kwargs['restaurant_id'])
         rating = self.request.data['rating']
 
-        if rating in ['1', '2', '3', '4', '5']:
-            review = Review(author=self.request.user,
-                            restaurant=restaurant,
-                            text_content=request.data['review'],
-                            rating=rating)
-            review.save()
-            return Response(self.get_serializer(review).data)
-
-        else:
-            return Response("Please introduce a valid rating (1-5)", status=400)
+        serializer.save(author=self.request.user,
+                        rating=rating,
+                        restaurant=restaurant,
+                        text_content=self.request.data['review'])
 
 
 class ListRestaurantReviewsView(ListAPIView):

@@ -4,7 +4,26 @@ import styled from 'styled-components';
 
 
 const Button = styled.button`
+    background-color: #E47D31;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    padding: 15px 30px;
+    width: 259px;
+    height: 56px;
+    align-self: center;
+    border-radius: 28px;
+    color: #fff;
+    border: none;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s;
 
+    :hover {
+        box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.4);
+        transform: scale(1.05) translateY(-5px);
 `;
 
 const FileUploader = props => {  
@@ -12,14 +31,11 @@ const FileUploader = props => {
 
   const handleClick = event => {
     hiddenFileInput.current.click();
-  };  // Call a function (passed as a prop from the parent component)
-  // to handle the user-selected file 
-
-
+  };
 
   const handleChange = event => {
     const fileUploaded = event.target.files[0];
-    props.handleFile(fileUploaded);
+    props.setImage(fileUploaded);
   };  
   
     return (

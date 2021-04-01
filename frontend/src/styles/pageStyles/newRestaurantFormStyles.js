@@ -19,7 +19,7 @@ export const NewRestaurantWrapper = styled.div`
             display: flex;
         }
 
-        button {
+        .button_save {
             background-color: #E47D31;
             margin-top: 20px;
             margin-bottom: 20px;
@@ -156,6 +156,30 @@ export const LabelCenterFourthRow = styled(LabelField)`
     margin-left: 255px;
 `
 
+export const InputOpeningHours = styled.div`
+    display: block;
+    justify-content: space-evenly;
+
+    input, select {
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 23px;
+            letter-spacing: 0px;
+            text-align: left;
+            padding-left: 5px;
+            margin: 10px;
+            width: 70px;
+            height: 52px;
+            border: none;
+            outline: none;
+
+            ::placeholder {
+                font-size: 1rem;
+            }
+        }
+
+`
 
 
 export const InputFields = styled.div`
@@ -198,6 +222,12 @@ export const RequiredCenter = styled(RequiredField)`
     margin-right: 252px;
 
 `
+
+export const RequiredPhone = styled(RequiredField)`
+    margin-left: 375px;
+
+`
+
 export const RequiredRight = styled(RequiredField)`
 
 `

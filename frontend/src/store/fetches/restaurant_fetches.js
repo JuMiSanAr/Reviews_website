@@ -1,5 +1,5 @@
 import {fetchAPI} from "../fetchAPI";
-import {headers, headersWithToken} from "../constants";
+import {headers, headersWithToken, headersWithTokenAndImage} from "../constants";
 
 
 export const allRestaurantsFetch = () => {
@@ -18,7 +18,7 @@ export const newRestaurantFetch = (formData) => {
         `restaurants/new/`,
         formData,
         'POST',
-        headersWithToken,
+        headersWithTokenAndImage,
         true,
         true,
     )

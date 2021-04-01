@@ -25,6 +25,7 @@ import categoriesFetch from "../store/fetches/categories_fetches";
 import {useDispatch, useSelector} from "react-redux";
 import {allCategoriesAction} from "../store/actions/categoriesActions";
 import {countriesList, hours, weekDays, weekDaysValues} from "../store/constants";
+import {newRestaurantFetch} from "../store/fetches/restaurant_fetches";
 
 // THE RELATED CSS YOU'LL FIND IN "newRestaurantStyles.js"
 
@@ -36,19 +37,19 @@ const NewRestaurantFormPage = () => {
     const dispatch = useDispatch();
 
     const [name, setName] = useState('');
-    const [categories, setCategories] = useState('');
-    const [country, setCountry] = useState('');
+    const [categories, setCategories] = useState('1');
+    const [country, setCountry] = useState('Undefined');
     const [street, setStreet] = useState('');
     const [city, setCity] = useState('');
     const [zip, setZip] = useState('');
     const [website, setWebsite] = useState('');
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
-    const [firstDay, setFirstDay] = useState('');
-    const [lastDay, setLastDay] = useState('');
-    const [openingHour, setOpeningHour] = useState('');
-    const [closingHour, setClosingHour] = useState('');
-    const [priceLevel, setPriceLevel] = useState('');
+    const [firstDay, setFirstDay] = useState('Monday');
+    const [lastDay, setLastDay] = useState('Monday');
+    const [openingHour, setOpeningHour] = useState('1am');
+    const [closingHour, setClosingHour] = useState('1am');
+    const [priceLevel, setPriceLevel] = useState('1');
     const [image, setImage] = useState('');
 
     const allCategories = useSelector(state => state.categoriesReducer.categories.data);
@@ -61,7 +62,7 @@ const NewRestaurantFormPage = () => {
     const [errorPhone, setErrorPhone] = useState(false);
     const [errorHours, setErrorHours] = useState(false);
 
-    console.log(firstDay)
+    const [success, setSuccess] = useState(false);
 
     useEffect(() => {
         categoriesFetch()
@@ -74,26 +75,38 @@ const NewRestaurantFormPage = () => {
 
     const createRestaurant = () => {
         const formData = new FormData();
+
         formData.append('name', name);
         formData.append('categories', categories);
         formData.append('country', country);
         formData.append('street', street);
         formData.append('city', city);
-        formData.append('zip', zip);
+        formData.append('zip_code', zip);
         formData.append('website', website);
         formData.append('email', email);
-        formData.append('priceLevel', priceLevel);
-        formData.append('image', image);
+        formData.append('price_level', priceLevel);
+
+        if (image) {
+            formData.append('avatar', image);
+        }
 
         // Make sure phone matches the requirements
         formData.append('phone', phone);
+        console.log('phone', phone)
 
-        formData.append('firstDay', firstDay);
-        formData.append('lastDay', lastDay);
-        formData.append('openingHour', openingHour);
-        formData.append('closingHour', closingHour);
+        const openingHours = `${firstDay}-${lastDay}, ${openingHour}-${closingHour}`
+        formData.append('opening_hours', openingHours);
+        console.log('opening_hours', openingHours)
 
-        console.log(formData)
+        newRestaurantFetch(formData)
+            .then(data => {
+                console.log('data', data)
+                setSuccess(true)
+            })
+            .catch(error => {
+                console.log('error', error)
+            })
+
 
     }
 
@@ -102,7 +115,7 @@ const NewRestaurantFormPage = () => {
             <HeaderNavi/>
                 <NewRestaurantWrapper>
                     <CreatNewRestaurantTitle>Create New Restaurant<span> </span></CreatNewRestaurantTitle>
-                        <form>
+
                             <FieldsetTitle className='p'>Basic</FieldsetTitle>
                             <FormRows>
                                 <LabelLeft>Name: *</LabelLeft>
@@ -112,13 +125,13 @@ const NewRestaurantFormPage = () => {
                             <FormRows>
                                 <InputFields>
                                     <input
-                                        required="required"
+                                        required
                                         onChange={event => setName(event.target.value)}
                                     />
                                 </InputFields>
                                 <InputFields>
-                                    <select name="category" id="category-select" onChange={event => setCategories(event.target.value)}>
-                                        <option selected disabled>Select a value..</option>
+                                    <select required defaultValue='1' name="category" id="category-select" onChange={event => setCategories(event.target.value)}>
+                                        <option disabled>Select a category</option>
                                         {allCategories ? allCategories.map((category, index) => {
                                             return (
                                                 <option key={index} value={category.id}>{category.name}</option>
@@ -128,8 +141,8 @@ const NewRestaurantFormPage = () => {
                                     </select>
                                 </InputFields>
                                 <InputFields>
-                                    <select name="country" id="country-select" onChange={event => setCountry(event.target.value)}>
-                                        <option selected disabled>Select a value..</option>
+                                    <select required defaultValue='Undefined' name="country" id="country-select" onChange={event => setCountry(event.target.value)}>
+                                        <option disabled>Select a country</option>
                                         {countriesList.map((country, index) => {
                                             return (
                                                 <option key={index} value={country}>{country}</option>
@@ -138,12 +151,6 @@ const NewRestaurantFormPage = () => {
                                     </select>
                                 </InputFields>
                             </FormRows>
-                            <FormRows>
-                                <RequiredLeft>This field is required</RequiredLeft>
-                                <RequiredCenter>This field is required</RequiredCenter>
-                                <RequiredRight>This field is required</RequiredRight>
-                            </FormRows>
-
                             <FieldsetTitle className='p'>Address</FieldsetTitle>
                             <FormRows>
                                 <LabelLeft>Street: *</LabelLeft>
@@ -165,16 +172,10 @@ const NewRestaurantFormPage = () => {
                                 </InputFields>
                                 <InputFields>
                                     <input
-                                        required
                                         onChange={event => setZip(event.target.value)}
                                     />
                                 </InputFields>
                             </FormRows>
-                            <FormRows>
-                                {errorStreet ? <RequiredLeft>This field is required</RequiredLeft> : ''}
-                                {errorCity ? <RequiredCenter>This field is required</RequiredCenter> : ''}
-                            </FormRows>
-
                             <FieldsetTitle className='p'>Contact</FieldsetTitle>
                             <FormRows>
                                 <LabelLeft>Website:</LabelLeft>
@@ -184,7 +185,6 @@ const NewRestaurantFormPage = () => {
                             <FormRows>
                                 <InputFields>
                                     <input
-                                        required
                                         onChange={event => setWebsite(event.target.value)}
                                     />
                                 </InputFields>
@@ -196,13 +196,9 @@ const NewRestaurantFormPage = () => {
                                 </InputFields>
                                 <InputFields>
                                     <input
-                                        required
                                         onChange={event => setEmail(event.target.value)}
                                     />
                                 </InputFields>
-                            </FormRows>
-                            <FormRows>
-                                <RequiredPhone>This field is required</RequiredPhone>
                             </FormRows>
 
                             <FieldsetTitle className='p'>Details</FieldsetTitle>
@@ -213,8 +209,8 @@ const NewRestaurantFormPage = () => {
                             </FormRows>
                             <FormRows>
                                 <InputOpeningHours>
-                                    <select required onChange={event => setFirstDay(event.target.value)}>
-                                        <option selected disabled>Day</option>
+                                    <select defaultValue='Monday' required onChange={event => setFirstDay(event.target.value)}>
+                                        <option disabled>First day in the week</option>
                                         {weekDays.map((day, index) => {
                                             return (
                                                 <option key={index} value={weekDaysValues[index]}>{day}</option>
@@ -222,8 +218,8 @@ const NewRestaurantFormPage = () => {
                                         })}
                                     </select>
 
-                                    <select required onChange={event => setLastDay(event.target.value)}>
-                                        <option selected disabled>Day</option>
+                                    <select defaultValue='Monday' required onChange={event => setLastDay(event.target.value)}>
+                                        <option disabled>Last day in the week</option>
                                         {weekDays.map((day, index) => {
                                             return (
                                                 <option key={index} value={weekDaysValues[index]}>{day}</option>
@@ -231,8 +227,8 @@ const NewRestaurantFormPage = () => {
                                         })}
                                     </select>
 
-                                    <select required onChange={event => setOpeningHour(event.target.value)}>
-                                        <option selected disabled>Hour</option>
+                                    <select defaultValue='1am' required onChange={event => setOpeningHour(event.target.value)}>
+                                        <option disabled>Opening time</option>
                                         {hours.map((hour, index) => {
                                             return (
                                                 <option key={index} value={hour}>{hour}</option>
@@ -240,8 +236,8 @@ const NewRestaurantFormPage = () => {
                                         })}
                                     </select>
 
-                                    <select required onChange={event => setClosingHour(event.target.value)}>
-                                        <option selected disabled>Hour</option>
+                                    <select defaultValue='1am' required onChange={event => setClosingHour(event.target.value)}>
+                                        <option disabled>Closing time</option>
                                         {hours.map((hour, index) => {
                                             return (
                                                 <option key={index} value={hour}>{hour}</option>
@@ -250,8 +246,8 @@ const NewRestaurantFormPage = () => {
                                     </select>
                                 </InputOpeningHours>
                                 <InputFields>
-                                    <select name="priceLevel" id="priceLevel-select" onChange={event => setPriceLevel(event.target.value)}>
-                                        <option selected disabled>Select a value..</option>
+                                    <select defaultValue='1' name="priceLevel" id="priceLevel-select" onChange={event => setPriceLevel(event.target.value)}>
+                                        <option disabled>Select a value..</option>
                                         <option value="1">$ - cheap</option>
                                         <option value="2">$ $ - mid-range</option>
                                         <option value="3">$ $ $ - upper-class</option>
@@ -261,11 +257,9 @@ const NewRestaurantFormPage = () => {
                                     <FileUploader setImage={setImage}/>
                                 </InputFields>
                             </FormRows>
-                            <FormRows>
-                                <RequiredLeft>This field is required</RequiredLeft>
-                            </FormRows>
-                        </form>
-                    <button className='button_save'>Save</button>
+
+                    {success ? <h1>Your restaurant has been created!</h1> : ''}
+                    <button className='button_save' onClick={createRestaurant}>Save</button>
                 </NewRestaurantWrapper>
             <Footer/>
         </MainContainer>

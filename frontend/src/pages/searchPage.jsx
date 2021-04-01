@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react'
 import HeaderNavi from '../components/headerNavi/index'
-import styled from 'styled-components'
 import CardReview from '../components/cards/cardReview';
 // import arrow from '../assets/arrow.svg'
 import CardRestaurant from '../components/cards/cardRestaurant/index';
@@ -10,139 +9,40 @@ import { useState } from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {filterRestaurantData, getAllRestaurants} from "../store/actions/restaurantActions";
 import {allRestaurantsFetch} from "../store/fetches/restaurant_fetches";
+import {
+    MainContainer,
+    ContentWrapper, ResCardContainer,
+    SearchBox,
+    SearchSelectContainer,
+    SelectCategory,
+    TabsContainer
+} from "../styles/pageStyles/searchStyle";
+import { allUserAction } from '../store/actions/usersActions';
+import { allUsersFetch } from '../store/fetches/users_fetches';
 
 
-const MainContainer = styled.div `
-    min-height: 90vh;
-`;
 
-const SearchSelectContainer = styled.div `
-    height: 50px;
-    min-width:100vw;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    margin-bottom: 10px;
-    box-sizing: content-box;
-    border: 1px solid #EBEBEB;
-    background-color: white;
-`;
-
-const SelectCategory = styled.div `
-    margin-right: 10px;
-    display: flex;
-    justify-content:center;
-    align-items: center;
-
-  
-    span{
-        border-left: 1px solid #D8D8D8;
-        height: 50px;
-        
-    }
-    select{
-        margin-right: 10px;
-        border-style: none;
-        color: #D8D8D8;
-        outline:none;
-    }
-
-`;
-const SearchBox = styled.div`
-    margin-left: 10px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    input{
-        width: 50vw;
-        background: #FFFFFF;
-        border-radius: 5px;
-        border-style:none;
-        outline: none;
-        padding-left: 10px;
-        font-family: Helvetica;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 20px;
-        line-height: 20px;
-    } 
-     @media (max-width: 768px) {
-        input{
-        width: 20vw;
-        }
-  }  
-`;
-const TabsContainer = styled.div`
-/*    width: 80vw; */
-    display:flex;
-    flex-wrap: wrap;
-    align-items: center;
-    flex-direction: column;
-    margin: 20px 0 40px 0;
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 23px;
-    text-align: center;
-    text-transform: uppercase;
-    color: #4C4C4C;
-    span{
-        width: 500px;
-        border-bottom: 1px solid #EBEBEB;
-    }
-    .reviewtitle{
-        display: flex;
-        flex-wrap:wrap;
-        cursor: pointer;
-        div{
-        margin: 0 80px 0 0;
-            :hover {
-                padding-bottom: 10px;
-                border-bottom: 3px solid #E47D31;
-            }
-        } 
-    }       
-`;
-
-const ResCardContainer = styled.div `
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    flex-wrap: wrap;    
-    .content {
-            display: none;
-        }
-    .active-content {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-evenly;
-            flex-wrap: wrap;
-        }
-
-`;
-
-const ContentWrapper = styled.div`
-    margin: auto;
-    max-width: 80vw; 
-`;
 
 const SearchPage = () => {
-    const dispatch = useDispatch();
-/*
-    const searchedRestaurants = useSelector(state => state.searchReducer.restaurants.data);*/
+
+
     // Get list of all restaurants
     const allRestaurants = useSelector(state => state.restaurantsReducer.all_restaurants.data);
-      const filteredRestaurant = useSelector(state => state.restaurantsReducer.filtered_restaurant);
 
-    // console.log("from use selector", allRestaurants)
+    // Get list of filtered restaurants
+    // const filteredRestaurant = useSelector(state => state.restaurantsReducer.filtered_restaurant);
+
+    // Get list of all users
+    const allUsersList = useSelector(state => state.usersReducer.users.data)
+
 
     const [toggleState, setToggleState] = useState(1);
-   const [searchTerm, setSearchTerm] = useState("");
-/*   const [filteredRestaurant, setFilteredRestaurant] = useState([])*/
+    const [searchTerm, setSearchTerm] = useState("");
+    const dispatch = useDispatch();
+
 
     const handleChange = event => {
-    setSearchTerm(event.target.value);
-    console.log(event.target.value)
+    setSearchTerm(event.target.value)
   };
 
     const toggleTab = (index) => {
@@ -151,29 +51,28 @@ const SearchPage = () => {
 
   // Search filter
 
-   useEffect(() => {
-               const results = !searchTerm ? allRestaurants : allRestaurants.filter(restaurant =>
-                           restaurant.name.toLowerCase().includes(searchTerm.toLowerCase()))
-               const action = filterRestaurantData(results)
-               dispatch(action)
-    }, [searchTerm]);
+   // useEffect(() => {
+   //             const results = !searchTerm ? allRestaurants : allRestaurants.filter(restaurant =>
+   //                         restaurant.name.toLowerCase().includes(searchTerm.toLowerCase()))
+   //             const action = filterRestaurantData(results)
+   //             dispatch(action)
+   //  }, [searchTerm]);
+
 
     // Get all restaurant
 
-    useEffect(() => {
+    useEffect( () => {
          allRestaurantsFetch()
             .then(data => {
                 const action = getAllRestaurants(data.results);
                 dispatch(action);
-                /*console.log(data.results[0].categories.map(one => one.name))
-                 console.log(data.results)*/
             });
-            // allUsersFetch()
-            //  .then(data => {
-            //      const action = allUserAction(data)
-            //      dispatch(action)
-            //      console.log("all user data", data)
-            //  });
+
+         allUsersFetch()
+             .then(data => {
+                 const action = allUserAction(data)
+                 dispatch(action)
+             });
     }, []);
 
 
@@ -211,12 +110,7 @@ const SearchPage = () => {
             <ResCardContainer> 
                 <div className={toggleState === 1 ? " active-content" : "content"}>
                     {
-                        allRestaurants.length > 0 && filteredRestaurant.length ?
-                            filteredRestaurant.map((restaurant, index) => {
-                             return (
-                                 <CardRestaurant key={index} restaurant_data={restaurant}/>
-                             )
-                                 }) : allRestaurants.map((data, index)=> {
+                        allRestaurants.map((data, index)=> {
 
                                 return (
 
@@ -224,7 +118,7 @@ const SearchPage = () => {
 
                                             );
                                  })
-                      }
+                    }
 
                 </div>
                 <div className={toggleState === 2 ? "active-content" : "content"}>
@@ -234,11 +128,14 @@ const SearchPage = () => {
                     <CardReview/>
                 </div>
                 <div className={toggleState === 3 ? "active-content" : "content"}>
-                    <CardUser/>
-                    <CardUser/>
-                    <CardUser/>
-                    <CardUser/>
-                </div> 
+                    {
+                        allUsersList.map((users, index)=> {
+                            return (
+                                  <CardUser all_user={users}/>
+                            )
+                        })
+                    }
+                </div>
             </ResCardContainer>  
             </ContentWrapper>
         </MainContainer>

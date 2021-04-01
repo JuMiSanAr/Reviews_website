@@ -61,8 +61,6 @@ const ReviewCard = (props) => {
         const showAllCommentHandler = () => {
             setShowAllComments(!showAllComments);
         };
-
-    console.log(comments)
     return(
         <ReviewCardContainer>
             <ReviewCardHeader>
@@ -114,7 +112,6 @@ const ReviewCard = (props) => {
                     </ReviewFooter>
                         {
                             !showAllComments ? '' : comments.map((comment, index) => 
-                                <>
                                 <ReviewCommentContainer key={index}>
                                     <ReviewCommentRow>
                                         <CommentHeader>{comment.commenterName}</CommentHeader>
@@ -123,9 +120,7 @@ const ReviewCard = (props) => {
                                     <ReviewCommentRow>
                                         <CommentContent>{comment.commentContent}</CommentContent>
                                     </ReviewCommentRow>
-                                </ReviewCommentContainer>
-                                </>
-                                )
+                                </ReviewCommentContainer>)
                         }
                 </ReviewBody>
 

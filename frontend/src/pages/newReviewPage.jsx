@@ -9,6 +9,9 @@ import HeaderNavi from '../components/headerNavi';
 // ================ styled components ================
 import RestaurantTitle from '../components/restaurantPageComponents/bannerTitle';
 import { RestaurantInfoBanner } from '../styles/pageStyles/restaurantStyles';
+import {BtnReview, InputReviewField, MainContainer, P, RatingField} from "../styles/pageStyles/newReviewStyles";
+import {FaStar} from "react-icons/all";
+
 
 
 
@@ -35,107 +38,6 @@ export const ReviewBanner = styled.div `
 
 // `
 
-export const InputReviewField = styled.div`
-display: flex;
-justify-content: center;
-align-items: left;
-flex-direction: column;
-margin: 60px 10px 20px 250px;
-border: 1px solid #E3E3E3;
-box-sizing: border-box;
-border-radius: 3px;
-width: 832px;
-height: 264.5px;
-background: #FFFFFF;
-
-  
-    input {
-        font-style: normal;
-        letter-spacing: 0px;
-        padding: 10px;
-        margin-left: 0px;
-        width: 431px;
-        height: 192px;
-        border: none;
-        outline: none;
-        font-family: Helvetica, sans-serif;
-        font-size: 20px;
-        line-height: 23px;
-        font-weight: 400;
-    }
-
-    p {
-        margin-top: 8px;
-        margin-left: 20px;
-        font-family: Helvetica;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 15px;
-        line-height: 23px;
-
-        color: #BBB7B7;
-    }
-`
-
-export const P = styled.p`
-position: absolute;
-height: 18px;
-left: 0%;
-right: 82.69%;
-top: calc(50% - 18px/2 + 162.5px);
-
-font-family: Helvetica;
-font-style: normal;
-font-weight: normal;
-font-size: 16px;
-line-height: 18px;
-
-
-color: #B00000;
-`
-
-export const BtnReview = styled.button`
-        width: 200px;
-        height: 57px;
-        background: #E47D31;
-        border-radius: 28px;
-        border-style:none;
-        margin-left: 880px;
-        font-family: Helvetica; // needs to be changed to Roboto!!
-        font-style: normal;
-        font-weight: normal;
-        font-size: 20px;
-        line-height: 23px;
-        text-align: center;
-        color: #000000;
-        outline:none;
-`
-export const RatingField = styled.div `
-    position: relative;
-    background-color: transparent;
-    border: transparent;
-    margin: 0 2px;
-    padding: 0;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    flex-direction: row-reverse;
-    font-size: 32px;
-
-    h5 {
-        height: 23px;
-        left: 38.58%;
-        right: 42.55%;
-        top: calc(50% - 23px/2 - 128.5px);
-
-        font-family: Helvetica;
-        font-style: normal;
-        font-weight: 300;
-        font-size: 20px;
-        line-height: 23px;
-        color: #7E7E7E;
-    }
-`
 
 
 const restaurant = {
@@ -220,6 +122,18 @@ const ReviewPage = () => {
     //     console.log(event);
     // }
 
+    // const [rating1, serRating1] = useState('');
+    // const [reviewInput, setReviewInput] = useState('');
+    //
+    // const setReviewInput = (e) => {
+    //     console.log(reviewInput)
+    // };
+    //
+    //
+    // const submitReview = () => {
+    //
+    // }
+
     return(
         <>
             <HeaderNavi/> 
@@ -227,34 +141,35 @@ const ReviewPage = () => {
             <RestaurantInfoBanner>
                     <RestaurantTitle restaurant={restaurant}/>
                 </RestaurantInfoBanner>
-              
             </ReviewBanner>
+            <MainContainer>
             <RatingField>
-                <button>☆</button>
-                <button>☆</button>
-                <button>☆</button>
-                <button>☆</button>
-                <button>★</button>
+                {/*<button onClick={saveRating1}><FaStar /></button>*/}
+                <button><FaStar /></button>
+                <button><FaStar /></button>
+                <button><FaStar /></button>
+                <button><FaStar /></button>
             <h5>Select your rating</h5>
             </RatingField>
-            <InputReviewField> 
-
+            <InputReviewField>
                 <p>Your review helps others learn about great local businesses.</p>
                 <p style={{color:"white"}}>.</p>
                 <p>Please don't review this business if you received a freebie for writing this review, <br />or if you're connected in any way to the owner or employees.</p>
-                    <input
+
+                <input
+                    //value={reviewInput}
+                    //onChange= {e => setReviewInput(e.target.value)}
                     type='text'
-                    // value = { review }
-                    // onChange= {event => setReview(event.target.value)}
-                    label='review'
                     required/>
 
                 </InputReviewField>
                 <BtnReview>SUBMIT</BtnReview>
+                {/*<BtnReview onClick={submitReview}>SUBMIT</BtnReview>*/}
                 {/* onClick to do for Submit btn! if condition if inpout fulfiled or not maybe make display this field is required only when submitting empty field  */}
                 <P>This field is required *to be displayed when clicking button with empty input field</P>
                 
-            <Footer/>
+            <Footer />
+            </MainContainer>
         </>
     );
 };

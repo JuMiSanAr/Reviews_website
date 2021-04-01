@@ -8,6 +8,7 @@ export const SEARCH_REVIEWS = 'SEARCH_REVIEWS';
 export const SEARCH_USERS = 'SEARCH_USERS';
 
 export const ALL_RESTAURANTS = 'ALL_RESTAURANTS';
+export const PASS_RESTAURANT_DATA = 'PASS_RESTAURANT_DATA'
 
 export const HOME_CARD = 'HOME_CARD';
 

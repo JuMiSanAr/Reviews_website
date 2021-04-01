@@ -1,4 +1,4 @@
-import {ALL_RESTAURANTS, HOME_CARD} from "../constants";
+import { ALL_RESTAURANTS, HOME_CARD, PASS_RESTAURANT_DATA } from "../constants";
 
 
 
@@ -20,7 +20,15 @@ export const restaurantsReducer = (state = initialState, action) => {
             all_restaurants: action.payload,
         }
     }
+    else if (action.type === PASS_RESTAURANT_DATA) {
+        console.log(action.payload);
+        return {
+            ...state,
+            restaurant_data: action.payload,
+        }
+    }
     else{
         return state;
     }
 };
+

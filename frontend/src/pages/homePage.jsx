@@ -149,6 +149,9 @@ const HomePage = () => {
             })
     }
 
+    const checkRestaurantHandler = (data) => {
+        console.log(data); 
+    }
 
     return(
         <>
@@ -170,13 +173,12 @@ const HomePage = () => {
         </FilterTitle>
         <FeaturedRestaurant>
             {
-               bestFourRes ? bestFourRes.map((data, index)=> {
+               bestFourRes ? bestFourRes.map((data, index) => {
                    return (
 
-                        <CardRestaurant key={index} restaurant_data={data}/>
-
+                        <CardRestaurant key={ index } restaurant_data={ data } onClick={ checkRestaurantHandler(data) }/>
                        );
-               }) : <img src={spinner} alt="...loading"/>
+               }) : <img src={ spinner } alt="...loading"/>
             }
 
         </FeaturedRestaurant>

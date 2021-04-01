@@ -1,8 +1,9 @@
-import {SEARCH } from "../constants";
+import {SEARCH_RESTAURANTS} from "../constants";
+
 
 export const searchResAction = (data) => {
     return {
-        type: SEARCH,
+        type: SEARCH_RESTAURANTS,
         payload: {
             data
         }

@@ -23,10 +23,13 @@ const apiKey = 'pk.90118e3bf831e84aa39b925394cce279&q'
 
 
 const LittleMap = (props) => {
-    const { street, streetNumber, city, zipCode, country, phoneNumbner, website, latLan} = props.restaurant
-    const [ position ] = useState(latLan);
+    // const { street, streetNumber, city, zipCode, country, phoneNumbner, website, latLan} = props.restaurant
+    const { city, country, latitude, longitude, phone, street, website, zip_code} = props.restaurant_data.data;
+    let lonLan = !latitude ? '' : [ Number(longitude), Number(latitude) ];
+    const tempLonLan = [47.372, 8.539];
+    const [ position ] = useState(lonLan.length === 0 ? tempLonLan : lonLan)
+    // const [ position ] = useState(latLan);
     let zoom = 15;
-
 
     const markerIcon = new L.Icon({
         iconUrl: marker,
@@ -62,15 +65,15 @@ const LittleMap = (props) => {
         <DetailsContainer>
             <DetailsRow>
             <RestaurantDetailsIcon src={pin}/>
-            <RestaurantDetails>{street} {streetNumber}</RestaurantDetails>
+            <RestaurantDetails>{street}, {city}</RestaurantDetails>
             </DetailsRow>
             <DetailsRow>
             <RestaurantDetailsIcon src={phone}/>
-            <RestaurantDetails>{phoneNumbner}</RestaurantDetails>
+            <RestaurantDetails>{phone}</RestaurantDetails>
             </DetailsRow>
             <DetailsRow>
             <RestaurantDetailsIcon src={web}/>
-            <RestaurantDetails>{website}</RestaurantDetails>
+            <RestaurantDetails>{website ? website : 'goodfood.com'}</RestaurantDetails>
             </DetailsRow>
         </DetailsContainer>
         </LittleMapContainer>

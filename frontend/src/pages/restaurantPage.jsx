@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector, useStore } from 'react-redux';
 
 // ================ components ================
 import Footer from '../components/footer';
@@ -92,20 +93,22 @@ const restaurant = {
 
 
 const RestaurantPage = () => {
-    
+    const restaurant_data = useSelector(state => state.restaurantsReducer.restaurant_data);
+    console.log(restaurant_data);
+
     return(
         <>
             <HeaderNavi/>
             <RestaurantBanner>
                 <RestaurantInfoBanner>
-                    <RestaurantTitle restaurant={restaurant}/>
-                        <LittleMap restaurant={restaurant}/>
+                    <RestaurantTitle restaurant={restaurant} restaurant_data={restaurant_data}/>
+                        <LittleMap restaurant_data={restaurant_data}/>
                 </RestaurantInfoBanner>
             </RestaurantBanner>
             <LowerSection>
-                <LeftSection reviews={restaurant.reviews}/>
+                <LeftSection reviews={restaurant.reviews} restaurant_reviews={restaurant_data.data.restaurant_reviews}/>
 
-                <RightSection restaurant={restaurant}/>
+                <RightSection restaurant={restaurant} restaurant_data={restaurant_data}/>
             </LowerSection>
             <Footer/>
         </>

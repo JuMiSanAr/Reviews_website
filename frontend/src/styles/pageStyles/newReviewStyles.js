@@ -62,6 +62,7 @@ background: #FFFFFF;
 export const P = styled.p`
   position: absolute;
   height: 18px;
+  width: 300px;
   left: 0%;
   right: 82.69%;
   top: calc(50% - 18px / 2 + 162.5px);
@@ -72,6 +73,8 @@ export const P = styled.p`
   font-size: 16px;
   line-height: 18px;
   color: #b00000;
+  margin-top: 1px;
+  margin-left: 150px;
 `
 
 

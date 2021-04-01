@@ -19,15 +19,13 @@ import { useSelector } from 'react-redux';
 
 
 
-
-
-
 const ReviewPage = () => {
     const restaurant_data = useSelector(state => state.restaurantsReducer.restaurant_data);
 
 
     // const [rating1, serRating1] = useState('');
     const [reviewInput, setReviewInput] = useState('');
+    const [noInput, setNoInputMessage] = useState(false);
 
     // const ratingInput = (ratingButton) => {
     //     if (ratingButton === rating1){
@@ -50,6 +48,11 @@ const ReviewPage = () => {
 // }
 
         const submitReviewAndRating = () => {
+        if (reviewInput === ''){
+            setNoInputMessage(true);
+            return 0;
+        }else
+            setNoInputMessage(false);
 
         newReviewFetch(reviewInput)
         .then(data => {
@@ -96,14 +99,12 @@ const ReviewPage = () => {
                     onChange= {e => setReviewInput(e.target.value)}
                     // onChange={e => onChangeReview(e)}
                     type='text'
+                    // name='reviewInput'
                     required/>
 
                 </InputReviewField>
-                {/*<BtnReview>SUBMIT</BtnReview>*/}
-                {/*<BtnReview onClick={submitReview}>SUBMIT</BtnReview>*/}
                 <BtnReview onClick={submitReviewAndRating}>SUBMIT</BtnReview>
-                {/* onClick to do for Submit btn! if condition if inpout fulfiled or not maybe make display this field is required only when submitting empty field  */}
-                <P>This field is required *to be displayed when clicking button with empty input field</P>
+                {noInput? <P>This field is required</P> : ''}
             </MainContainer>
                 
             <Footer />

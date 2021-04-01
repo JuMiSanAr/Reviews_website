@@ -90,12 +90,6 @@ const NewRestaurantFormPage = () => {
             formData.append('avatar', image);
         }
 
-        console.log('country', country);
-        console.log('categories', categories)
-        console.log('email', email)
-        console.log('priceLevel', priceLevel)
-        console.log('avatar', image)
-
         // Make sure phone matches the requirements
         formData.append('phone', phone);
         console.log('phone', phone)

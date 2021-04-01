@@ -2,10 +2,8 @@ import {baseUrlLocal, baseUrlServer} from "./constants";
 
 
 export const fetchAPI = (url, body, method, headers = true, expectData = true, fileExpected = false) => {
-console.log(headers)
     const thisUrl = `${baseUrlServer}${url}`;
     let config = {};
-
     if (headers && body && !fileExpected) {
         console.log('polkpol')
         config = {
@@ -33,6 +31,7 @@ console.log(headers)
 
     return fetch(thisUrl, config)
             .then(response => {
+                console.log(response)
                 if (response.status >= 200 && response.status < 300) {
                   console.log('200 ok')
                   if(expectData){

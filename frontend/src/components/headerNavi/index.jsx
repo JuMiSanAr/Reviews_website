@@ -40,7 +40,7 @@ const HeaderNavi = () => {
 
     return(
         <HeaderNaviStyle>
-            <LunaLogo src={logo}/>
+            <LunaLogo src={logo} onClick={homeHandler}/>
 
             <RightHeaderSection>
                 <StyledTab title='home' onClick={homeHandler}>Home</StyledTab>

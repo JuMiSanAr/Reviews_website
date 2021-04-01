@@ -47,6 +47,8 @@ const RegistrationFieldComponent = (props) => {
                         name='email'
                         type='text'
                         placeholder='E-Mail address'
+                        onKeyUp={ event => event.key === 'Enter' ? sendEmail() : ''}
+
                     />
                     {errorEmptyEmail ?
                         <h1>Email field cannot be empty</h1>

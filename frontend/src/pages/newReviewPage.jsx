@@ -11,6 +11,7 @@ import RestaurantTitle from '../components/restaurantPageComponents/bannerTitle'
 import { RestaurantInfoBanner } from '../styles/pageStyles/restaurantStyles';
 import {BtnReview, InputReviewField, MainContainer, P, RatingField} from "../styles/pageStyles/newReviewStyles";
 import {FaStar} from "react-icons/all";
+import { useSelector } from 'react-redux';
 
 
 
@@ -115,6 +116,8 @@ const restaurant = {
 
 
 const ReviewPage = () => {
+    const restaurant_data = useSelector(state => state.restaurantsReducer.restaurant_data);
+
     // const writeReviewHandler = (event) => {
     //     console.log(event);
     // }
@@ -139,7 +142,7 @@ const ReviewPage = () => {
             <HeaderNavi/> 
             <ReviewBanner>
             <RestaurantInfoBanner>
-                    <RestaurantTitle restaurant={restaurant}/>
+                    <RestaurantTitle restaurant_data={restaurant_data}/>
                 </RestaurantInfoBanner>
             </ReviewBanner>
             <MainContainer>
@@ -167,9 +170,9 @@ const ReviewPage = () => {
                 {/*<BtnReview onClick={submitReview}>SUBMIT</BtnReview>*/}
                 {/* onClick to do for Submit btn! if condition if inpout fulfiled or not maybe make display this field is required only when submitting empty field  */}
                 <P>This field is required *to be displayed when clicking button with empty input field</P>
+            </MainContainer>
                 
             <Footer />
-            </MainContainer>
         </>
     );
 };

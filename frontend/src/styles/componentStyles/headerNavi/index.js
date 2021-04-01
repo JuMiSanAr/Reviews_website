@@ -14,6 +14,7 @@ padding: 22px 15px 22px 15px;
 `;
 
 export const LunaLogo = styled.img`
+cursor: pointer;
 justify-self: start;
 object-fit: contain;
 width: 3em;

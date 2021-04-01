@@ -6,15 +6,9 @@ import {searchReducer} from "./searchReducer";
 
 const rootReducer = combineReducers({
     logInReducer,
-<<<<<<< HEAD
-    signUpReducer,
-    homeCardReducer,
-    searchResReducer,
-
-=======
-    restaurantsReducer,
     searchReducer,
->>>>>>> dev
+    restaurantsReducer,
+
 });
 
 export default rootReducer;

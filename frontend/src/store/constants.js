@@ -8,7 +8,7 @@ export const SEARCH_REVIEWS = 'SEARCH_REVIEWS';
 export const SEARCH_USERS = 'SEARCH_USERS';
 
 export const ALL_RESTAURANTS = 'ALL_RESTAURANTS';
-// export const NEW_RESTAURANT = 'NEW_RESTAURANT';
+export const NEW_RESTAURANT = 'NEW_RESTAURANT';
 
 export const ALL_CATEGORIES = 'ALL_CATEGORIES';
 export const PASS_RESTAURANT_DATA = 'PASS_RESTAURANT_DATA'
@@ -16,6 +16,7 @@ export const PASS_RESTAURANT_DATA = 'PASS_RESTAURANT_DATA'
 export const HOME_CARD = 'HOME_CARD';
 
 export const ALL_USERS = 'ALL_USERS';
+export const GET_USER_INFO = 'GET_USER_INFO';
 
 export const FILTER_RESTAURANT_DATA = 'FILTER_RESTAURANT_DATA';
 
@@ -33,6 +34,10 @@ export const headers = new Headers({
 
 export const headersWithToken = new Headers({
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+})
+
+export const headersWithTokenAndImage = new Headers({
         Authorization: `Bearer ${token}`
 })
 

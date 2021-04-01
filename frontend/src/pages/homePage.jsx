@@ -11,7 +11,7 @@ import searchResFetch from "../store/fetches/search_fetches";
 import {searchResAction} from "../store/actions/searchActions";
 import {useHistory} from "react-router-dom";
 import {getAllRestaurants} from "../store/actions/restaurantActions";
-import {getLoggedInUserInfoFetch} from "../store/fetches/all_users_fetches";
+import {getLoggedInUserInfoFetch} from "../store/fetches/users_fetches";
 import {allRestaurantsFetch} from "../store/fetches/restaurant_fetches";
 
 const MainContainer = styled.div`
@@ -125,12 +125,6 @@ const HomePage = () => {
                 const action = getAllRestaurants(data.results);
                 dispatch(action);
             });
-
-            // Fetch user info and send it to redux store
-        getLoggedInUserInfoFetch()
-            .then(data => {
-            // const action =
-        })
     }, []);
 
 

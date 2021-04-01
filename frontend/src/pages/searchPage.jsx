@@ -17,8 +17,9 @@ import {
     SelectCategory,
     TabsContainer
 } from "../styles/pageStyles/searchStyle";
-import {allUsersFetch} from "../store/fetches/all_users_fetches";
-import {allUserAction} from "../store/actions/getAllUserActions";
+import { allUserAction } from '../store/actions/usersActions';
+import { allUsersFetch } from '../store/fetches/users_fetches';
+
 
 
 

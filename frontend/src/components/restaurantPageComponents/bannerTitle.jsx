@@ -10,7 +10,7 @@ import { BannerLeftSection, ReviewsInBanner, ScoreAndReviewsInBanner,
 
 const RestaurantTitle = props => {
     // const { name, type, score, reviewsNumber} = props.restaurant
-    const { categories, name, average_rating, restaurant_reviews } = props.restaurant_data.data
+    const { categories, name, average_rating, restaurant_reviews } = props.restaurant_data
 
     const restaurantCategories = categories => {
         let resCat = '';

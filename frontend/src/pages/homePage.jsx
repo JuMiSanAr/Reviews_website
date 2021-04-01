@@ -1,25 +1,31 @@
 import React, {useEffect, useState} from 'react';
-import CardRestaurant from '../components/cards/cardRestaurant';
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+// =================== components ====================
 import HeaderNavi from '../components/headerNavi/index'
 import Footer from '../components/footer/index'
-import {homeCardAction} from "../store/actions/homeCardActions";
-import {useDispatch, useSelector} from "react-redux";
-import homeCardFetch from "../store/fetches/home_card_fetches";
+import CardRestaurant from '../components/cards/cardRestaurant';
 import loading from "../assets/loading.gif"
+// ===================================================
+// ================ styled components ================
+import { FeaturedRestaurant, FilterTitle, HomeBanner, MainContainer, SearchBox } from "../styles/pageStyles/homeStyles";
+import { ContentWrapper } from "../styles/pageStyles/searchStyle";
+// ===================================================
+// ==================== fetches ======================
+import { allUsersFetch } from '../store/fetches/users_fetches';
+import { allRestaurantsFetch } from "../store/fetches/restaurant_fetches";
 import searchResFetch from "../store/fetches/search_fetches";
-import {searchResAction} from "../store/actions/searchActions";
-import {useHistory} from "react-router-dom";
+import homeCardFetch from "../store/fetches/home_card_fetches";
+// ===================================================
+// =================== actions =======================
+import { searchResAction } from "../store/actions/searchActions";
 import { passRestaurantData } from '../store/actions/restaurantActions';
-import {getAllRestaurants} from "../store/actions/restaurantActions";
-<<<<<<< HEAD
-import {allUsersFetch, getLoggedInUserInfoFetch} from "../store/fetches/all_users_fetches";
-=======
-import {getLoggedInUserInfoFetch} from "../store/fetches/users_fetches";
->>>>>>> dev
-import {allRestaurantsFetch} from "../store/fetches/restaurant_fetches";
-import {FeaturedRestaurant, FilterTitle, HomeBanner, MainContainer, SearchBox} from "../styles/pageStyles/homeStyles";
-import {ContentWrapper} from "../styles/pageStyles/searchStyle";
-import {allUserAction} from "../store/actions/getAllUserActions";
+import { getAllRestaurants } from "../store/actions/restaurantActions";
+import { homeCardAction } from "../store/actions/homeCardActions";
+import { allUserAction } from '../store/actions/usersActions';
+// ===================================================
+
+
 
 
 const HomePage = () => {
@@ -40,7 +46,6 @@ const HomePage = () => {
                 const action = getAllRestaurants(data.results);
                 dispatch(action);
             });
-<<<<<<< HEAD
 
        allUsersFetch()
              .then(data => {
@@ -53,8 +58,6 @@ const HomePage = () => {
         //     .then(data => {
         //     // const action =
         // })
-=======
->>>>>>> dev
     }, []);
 
 
@@ -81,6 +84,7 @@ const HomePage = () => {
     const checkRestaurantHandler = (data) => {
         const action = passRestaurantData(data);
         dispatch(action);
+        localStorage.setItem('restaurant', JSON.stringify(data));
         history.push("/restaurant");
     };
 

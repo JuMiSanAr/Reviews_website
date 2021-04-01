@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db.models import Q
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework.generics import ListAPIView, RetrieveUpdateAPIView, RetrieveAPIView
 
@@ -74,6 +75,7 @@ class SearchView(ListAPIView):
 
     .
     '''
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get_serializer_class(self):
         type = self.request.query_params.get('type')

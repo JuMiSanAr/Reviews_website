@@ -94,11 +94,12 @@ const TabsContainer = styled.div`
         cursor: pointer;
         div{
         margin: 0 80px 0 0;
-        :hover {
-            padding-bottom: 10px;
-            border-bottom: 3px solid #E47D31;
-        }
-    }        
+            :hover {
+                padding-bottom: 10px;
+                border-bottom: 3px solid #E47D31;
+            }
+        } 
+    }       
 `;
 
 const ResCardContainer = styled.div `
@@ -125,7 +126,7 @@ const ContentWrapper = styled.div`
 
 const SearchPage = () => {
 
-    const best_four_res = useSelector(state => state.homeCardReducer.restaurant.data);
+    const searchedRestaurants = useSelector(state => state.searchReducer.restaurants.data.results);
     
     const [toggleState, setToggleState] = useState(1);
 
@@ -168,8 +169,9 @@ const SearchPage = () => {
                     <CardRestaurant/>
                     <CardRestaurant/>
                     <CardRestaurant/>*/}
+
                         {
-               best_four_res ? best_four_res.map((data, index)=> {
+               searchedRestaurants ? searchedRestaurants.map((data, index)=> {
                    return (
 
                         <CardRestaurant key={index} restaurant_data={data}/>

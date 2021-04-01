@@ -1,16 +1,20 @@
 import { combineReducers } from "redux";
 import { logInReducer } from './loginReducer';
-import { signUpReducer } from './signupReducer';
-import {  homeCardReducer } from './homeCardReducer';
-import {searchResReducer} from "./searchResReducer";
+import {  restaurantsReducer } from './restaurantsReducer';
+import {searchReducer} from "./searchReducer";
 
 
 const rootReducer = combineReducers({
     logInReducer,
+<<<<<<< HEAD
     signUpReducer,
     homeCardReducer,
     searchResReducer,
 
+=======
+    restaurantsReducer,
+    searchReducer,
+>>>>>>> dev
 });
 
 export default rootReducer;

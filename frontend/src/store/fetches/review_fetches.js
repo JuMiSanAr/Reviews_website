@@ -2,14 +2,17 @@ import {fetchAPI} from "../fetchAPI";
 import {headersWithToken} from "../constants";
 
 
-const newReviewFetch = (text_content) => {
-
+const newReviewFetch = (addValueHere, rating= '3') => {
+console.log(headersWithToken)
     return fetchAPI(
-        'reviews/new/{restaurant_id}/',
-        //{text_content: reviewInput},
+        'reviews/new/1/',
+        {review: addValueHere, rating: rating},
         'POST',
         headersWithToken
     )
 };
 
 export default newReviewFetch;
+
+
+// rating: to be added to the body content

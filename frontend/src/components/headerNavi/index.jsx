@@ -16,11 +16,11 @@ const HeaderNavi = () => {
       };
 
     const searchHandler = () => {
-        history.push("search");
+        history.push("/search");
       };
      
       const profileHandler = (event) => {
-        history.push("userProfile");
+        history.push("/userProfile");
       };
 
     const singupHandler = (event) => {
@@ -40,7 +40,7 @@ const HeaderNavi = () => {
 
     return(
         <HeaderNaviStyle>
-            <LunaLogo src={logo}/>
+            <LunaLogo src={logo} onClick={homeHandler}/>
 
             <RightHeaderSection>
                 <StyledTab title='home' onClick={homeHandler}>Home</StyledTab>

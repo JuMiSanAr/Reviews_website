@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {RegistrationField, RegistrationTitle} from "../../styles/pageStyles/registrationStyles";
+import { RegistrationTitle } from "../../styles/pageStyles/registrationStyles";
 import { VerificationFields } from "../../styles/pageStyles/regisValidStyles";
 import {Redirect} from "react-router-dom";
 import React, {useState} from "react";
@@ -155,6 +155,8 @@ const RegistrationValidation = (props) => {
                         name='password repeat'
                         type='password'
                         placeholder='Password repeat'
+                        onKeyUp={ event => event.key === 'Enter' ? activateAccount() : ''}
+
                     />
 
                     </VerificationInputField>

@@ -29,7 +29,6 @@ class Review(models.Model):
     restaurant = models.ForeignKey(to=Restaurant,
                                    related_name='restaurant_reviews',
                                    on_delete=models.CASCADE,
-                                   blank=True,
                                    null=True)
 
     liked_by = models.ManyToManyField(to=User, blank=True, related_name='liked_reviews')

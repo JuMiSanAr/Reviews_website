@@ -125,7 +125,7 @@ const ContentWrapper = styled.div`
 
 const SearchPage = () => {
 
-    const best_four_res = useSelector(state => state.homeCardReducer.restaurant.data);
+    const searchedRestaurants = useSelector(state => state.searchReducer.restaurants.data.results);
     
     const [toggleState, setToggleState] = useState(1);
 
@@ -168,8 +168,9 @@ const SearchPage = () => {
                     <CardRestaurant/>
                     <CardRestaurant/>
                     <CardRestaurant/>*/}
+
                         {
-               best_four_res ? best_four_res.map((data, index)=> {
+               searchedRestaurants ? searchedRestaurants.map((data, index)=> {
                    return (
 
                         <CardRestaurant key={index} restaurant_data={data}/>

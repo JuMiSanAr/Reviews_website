@@ -7,8 +7,11 @@ import {homeCardAction} from "../store/actions/homeCardActions";
 import {useDispatch, useSelector} from "react-redux";
 import homeCardFetch from "../store/fetches/home_card_fetches";
 import spinner from "../assets/spinner.gif"
-import searchResFetch from "../store/fetches/search_res_fetches";
-import {searchResAction} from "../store/actions/searchResActions";
+import searchResFetch from "../store/fetches/search_fetches";
+import {searchResAction} from "../store/actions/searchActions";
+import {useHistory} from "react-router-dom";
+import allRestaurantsFetch from "../store/fetches/restaurant_fetches";
+import {getAllRestaurants} from "../store/actions/restaurantActions";
 
 
 const MainContainer = styled.div`
@@ -107,40 +110,44 @@ const ContentWrapper = styled.div`
 const HomePage = () => {
 
     const dispatch = useDispatch();
-    const best_four_res = useSelector(state => state.homeCardReducer.restaurant.data);
-/*    console.log("Hello, World from use selector data", best_four_res )*/
+    const history = useHistory();
 
+    // Fetch all restaurants and best four restaurants
+    useEffect( () => {
+        homeCardFetch()
+            .then(data => {
+                const action = homeCardAction(data.results[0].best_four);
+                dispatch(action);
+            });
+
+        allRestaurantsFetch()
+            .then(data => {
+                const action = getAllRestaurants(data.results);
+                dispatch(action);
+            });
+    }, []);
+
+
+    // Get list of all restaurants
+    const allRestaurants = useSelector(state => state.restaurantsReducer.all_restaurants.data);
+
+
+    // Show best four restaurants
+    const bestFourRes = useSelector(state => state.restaurantsReducer.bestFour.data);
+
+
+    // Search
     const [searchValue, setSearchValue] = useState("");
-    console.log(searchValue)
-
-    const handleSearchInputChanges = (e) => {
-        setSearchValue(e.target.value);
-    }
-
-    const resetInputField = () => {
-    setSearchValue("")
-  }
 
    const handleSearchRestaurant = (e) => {
         e.preventDefault();
         searchResFetch(searchValue)
             .then(data=>{
-                const action = searchResAction(data)
-                dispatch(action)
-            })
-        resetInputField();
-    }
-
-
-    useEffect( () => {
-        homeCardFetch()
-            .then(data => {
-                console.log("homepage", data.results[0].best_four)
-                const action = homeCardAction(data.results[0].best_four);
+                const action = searchResAction(data);
                 dispatch(action);
-                console.log("from use effect", data.results[0]);
+                history.push("/search");
             })
-  }, []);
+    }
 
 
     return(
@@ -149,7 +156,7 @@ const HomePage = () => {
         <HeaderNavi/>
         <HomeBanner>
             <SearchBox>
-            <input type="search" name=""  placeholder='Search..' onChange={handleSearchInputChanges}/>
+            <input type="search" name=""  placeholder='Search..' onChange={(event) => setSearchValue(event.target.value)}/>
             <button type="submit" onClick={handleSearchRestaurant} onKeyUp={ event => event.key === 'Enter' ? handleSearchRestaurant() : ''}>Search</button>
             </SearchBox>
         </HomeBanner>
@@ -160,7 +167,7 @@ const HomePage = () => {
         </FilterTitle>
         <FeaturedRestaurant>
             {
-               best_four_res ? best_four_res.map((data, index)=> {
+               bestFourRes ? bestFourRes.map((data, index)=> {
                    return (
 
                         <CardRestaurant key={index} restaurant_data={data}/>

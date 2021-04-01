@@ -10,7 +10,6 @@ import {useEffect} from "react";
 
 const NewRestaurantFormPage = () => {
 
-    useEffect()
 
     return (
         <MainContainer>

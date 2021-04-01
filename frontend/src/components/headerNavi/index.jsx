@@ -16,11 +16,11 @@ const HeaderNavi = () => {
       };
 
     const searchHandler = () => {
-        history.push("search");
+        history.push("/search");
       };
      
       const profileHandler = (event) => {
-        history.push("userProfile");
+        history.push("/userProfile");
       };
 
     const singupHandler = (event) => {

@@ -2,7 +2,13 @@
 // Action types
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
-export const SEARCH = 'SEARCH';
+
+export const SEARCH_RESTAURANTS = 'SEARCH_RESTAURANTS';
+export const SEARCH_REVIEWS = 'SEARCH_REVIEWS';
+export const SEARCH_USERS = 'SEARCH_USERS';
+
+export const ALL_RESTAURANTS = 'ALL_RESTAURANTS';
+
 export const HOME_CARD = 'HOME_CARD';
 
 // Base URLs to use for fetching

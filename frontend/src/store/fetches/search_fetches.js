@@ -2,10 +2,10 @@ import {fetchAPI} from "../fetchAPI";
 import {headers} from "../constants";
 
 
-const searchResFetch = (type,query) => {
+const searchResFetch = (search) => {
 
     return fetchAPI(
-        'search/'`${query}`,
+        `search/?type=restaurants&search=${search}`,
         false,
         'GET',
         headers

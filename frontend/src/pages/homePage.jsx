@@ -10,9 +10,12 @@ import searchResFetch from "../store/fetches/search_fetches";
 import {searchResAction} from "../store/actions/searchActions";
 import {useHistory} from "react-router-dom";
 import { passRestaurantData } from '../store/actions/restaurantActions';
-
 import {getAllRestaurants} from "../store/actions/restaurantActions";
+<<<<<<< HEAD
 import {allUsersFetch, getLoggedInUserInfoFetch} from "../store/fetches/all_users_fetches";
+=======
+import {getLoggedInUserInfoFetch} from "../store/fetches/users_fetches";
+>>>>>>> dev
 import {allRestaurantsFetch} from "../store/fetches/restaurant_fetches";
 import {FeaturedRestaurant, FilterTitle, HomeBanner, MainContainer, SearchBox} from "../styles/pageStyles/homeStyles";
 import {ContentWrapper} from "../styles/pageStyles/searchStyle";
@@ -37,6 +40,7 @@ const HomePage = () => {
                 const action = getAllRestaurants(data.results);
                 dispatch(action);
             });
+<<<<<<< HEAD
 
        allUsersFetch()
              .then(data => {
@@ -49,6 +53,8 @@ const HomePage = () => {
         //     .then(data => {
         //     // const action =
         // })
+=======
+>>>>>>> dev
     }, []);
 
 

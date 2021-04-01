@@ -5,6 +5,8 @@ import { loginAction } from '../store/actions/loginActions';
 import { InputField, LoginTitle, LoginWrapper, MainContainer } from '../styles/pageStyles/loginStyles';
 import loginFetch from "../store/fetches/login_fetches";
 import {Redirect, useHistory} from 'react-router-dom';
+import {getLoggedInUserInfoFetch} from "../store/fetches/users_fetches";
+import {getUserInfoAction} from "../store/actions/usersActions";
 
 //############################# Component ################################
 
@@ -18,20 +20,28 @@ const LoginPage = () => {
     const history = useHistory()
 
 
-    const loginHandler = () => {
+    const loginHandler = async () => {
 
-        loginFetch(email, password)
-            .then(data => {
-                const action = loginAction(data.access);
-                dispatch(action);
-                localStorage.setItem('token', data.access);
-                history.push('/')
+        const response = await loginFetch(email, password)
+                .then(data => {
+            const action = loginAction(data.access);
+            dispatch(action);
+            localStorage.setItem('token', data.access);
+            return data;
+        })
+        .catch(() => {
+                setErrorMessage(true);
             })
-            .catch(() => {
-                    setErrorMessage(true);
-                })
-    }
 
+        const data = await response.access
+
+        getLoggedInUserInfoFetch(data)
+            .then(data => {
+                const action = getUserInfoAction(data);
+                dispatch(action);
+                history.push('/');
+        })
+    }
 
     return (
         <>
@@ -60,6 +70,7 @@ const LoginPage = () => {
                         />
                     </InputField>
                     <h1>{errorMessage ? 'Invalid username or password' : ''}</h1>
+                    <h1> </h1>
                     <button onClick={loginHandler}>Login</button>
                 </LoginWrapper>
             </MainContainer>

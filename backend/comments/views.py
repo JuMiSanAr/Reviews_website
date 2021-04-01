@@ -1,5 +1,6 @@
 
 # Create your views here.
+from rest_framework import status
 from rest_framework.generics import CreateAPIView, ListAPIView, get_object_or_404, UpdateAPIView, DestroyAPIView
 from rest_framework.response import Response
 from comments.models import Comment
@@ -76,11 +77,17 @@ class CreateComment(CreateAPIView):
     lookup_field = 'review_id'
 
     def create(self, request, *args, **kwargs):
-        post = get_object_or_404(self.get_queryset(), id=kwargs['review_id'])
-        comment = Comment(comment_content=request.data['comment_content'], commented_by=request.user,
-                          review=post)
-        comment.save()
-        return Response(self.get_serializer(instance=comment).data)
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+    def perform_create(self, serializer):
+        review = Review.objects.get(id=self.kwargs['review_id'])
+        serializer.save(comment_content=self.request.data['comment_content'],
+                        commented_by=self.request.user,
+                        review=review)
 
 
 # spec. says there should be 1 url for both get & delete, this apparently might be done by creating custom mixin

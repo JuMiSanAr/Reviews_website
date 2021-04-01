@@ -3,54 +3,28 @@ import React, { useState } from 'react';
 import { stars } from '../../styles';
 import like from '../../assets/like.svg';
 
-import { CancelButton, CommentButton, CommentInput, CommentInputRow, FooterLeft, FooterRight, 
-    LikeIcon, LikesButton, NumOfReviews, PostButton, ReviewBody, ReviewCardContainer, 
-    ReviewCardHeader, ReviewContent, ReviewDate, ReviewDateSection, ReviewerDetails, ReviewerImage, 
-    ReviewerName, ReviewFooter, Score, ViewCommentsButton
-} from '../../styles/componentStyles/restaurant/reviewCard';
+import { CancelButton, CommentButton, CommentContent, CommentDate, CommentHeader, CommentInput, 
+    CommentInputRow, FooterLeft, FooterRight, LikeIcon, LikesButton, NumOfReviews, PostButton, 
+    ReviewBody, ReviewCardContainer, ReviewCardHeader, ReviewCommentContainer, ReviewCommentRow, 
+    ReviewContent, ReviewDate, ReviewDateSection, ReviewerDetails, ReviewerImage, ReviewerName, 
+    ReviewFooter, Score, ViewCommentsButton } from '../../styles/componentStyles/restaurant/reviewCard';
 
 
-import styled from 'styled-components';
+
+const avatarIfAuthorDoesNotHaveOne = 'https://res.cloudinary.com/tennam/image/upload/v1613260389/Propulsion/Tenzin.png';
 
 
-const ReviewCommentContainer = styled.div `
-    display: flex;
-    flex-direction: column;
-`
-const ReviewCommentRow = styled.div `
-    padding: 0.25em;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-`
-const CommentHeader = styled.p `
-    font-weight: bolder;
-    color: #E47D31;
-    font-size:18px;
-`
-const CommentDate = styled.p `
-    font-size: 12px;
-`
-
-const CommentContent = styled.p `
-    font-size: 14px;
-`
 
 const ReviewCard = (props) => {
-    const { reviewerName, reviewerImage, numberOfReviewsOfReviewer, score, date,
-        content, numberOfReviewLikes, comments } = props.review;
-        
-  
-
+        const { author, comments, liked_by, modified, rating, text_content } = props.review;
+    
         const likeHandler = () => {
             console.log('liked');
         };
 
         const [ showCommentInput, setShowCommentInput ] = useState(false);
         
-        const showCommentInputHandler = () => {
-            setShowCommentInput(!showCommentInput);
-        };
+        const showCommentInputHandler = () => { setShowCommentInput(!showCommentInput) };
 
         const [ newComment, setNewComment ] = useState('');
         const postCommentHandler = () => {
@@ -58,33 +32,32 @@ const ReviewCard = (props) => {
         }
 
         const [ showAllComments, setShowAllComments ] = useState(false);
-        const showAllCommentHandler = () => {
-            setShowAllComments(!showAllComments);
-        };
+        const showAllCommentHandler = () => { setShowAllComments(!showAllComments) };
     return(
         <ReviewCardContainer>
             <ReviewCardHeader>
-                <ReviewerImage src={reviewerImage} />
+                <ReviewerImage src={ author.avatar ? author.avatar : avatarIfAuthorDoesNotHaveOne} />
                 <ReviewerDetails>
-                    <ReviewerName>{reviewerName}</ReviewerName>
-                    {
+                    <ReviewerName>{!author ?  'Loading..' : author.username}</ReviewerName>
+                    <NumOfReviews>4 Reviews in total</NumOfReviews>
+                    {/* {
                         numberOfReviewsOfReviewer === 1 ? <NumOfReviews> 1 Review in total</NumOfReviews>
                         : <NumOfReviews>{numberOfReviewsOfReviewer} Reviews in total</NumOfReviews>
-                    }
+                    } */}
                 </ReviewerDetails>
-                <Score>{stars(score)}</Score>
+                <Score>{stars(rating)}</Score>
                 <ReviewDateSection>
-                    <ReviewDate>{date}</ReviewDate>
+                    <ReviewDate>{modified}</ReviewDate>
                 </ReviewDateSection>
             </ReviewCardHeader>
                 <ReviewBody>
-                    <ReviewContent>{ content }</ReviewContent>
+                    <ReviewContent>{ text_content }</ReviewContent>
                     <ReviewFooter>
                         <FooterLeft>
                             {
                                 !showCommentInput ? 
                                     <>
-                                    <LikesButton onClick={ likeHandler }><LikeIcon src={ like }/>Like { numberOfReviewLikes }</LikesButton>
+                                    <LikesButton onClick={ likeHandler }><LikeIcon src={ like }/>Like { liked_by.length }</LikesButton>
                                     <CommentButton onClick={ showCommentInputHandler }>Comment { comments.length }</CommentButton>
                                     </>
                                     :   <>
@@ -114,11 +87,11 @@ const ReviewCard = (props) => {
                             !showAllComments ? '' : comments.map((comment, index) => 
                                 <ReviewCommentContainer key={index}>
                                     <ReviewCommentRow>
-                                        <CommentHeader>{comment.commenterName}</CommentHeader>
-                                        <CommentDate>{comment.commentDate}</CommentDate>
+                                        <CommentHeader>{comment.commented_by.username}</CommentHeader>
+                                        <CommentDate>Yesterday</CommentDate>
                                     </ReviewCommentRow>
                                     <ReviewCommentRow>
-                                        <CommentContent>{comment.commentContent}</CommentContent>
+                                        <CommentContent>{comment.comment_content}</CommentContent>
                                     </ReviewCommentRow>
                                 </ReviewCommentContainer>)
                         }

@@ -13,7 +13,7 @@ export const ReviewBanner = styled.div `
 `;
 
 export const MainContainer = styled.div `
-min-height: 100vh;
+min-height: 60vh;
 width: 100%;
 `;
 

@@ -7,12 +7,12 @@ export const LowerRightSection = styled.div `
     padding: 1em;
     width: 45vw;
 `
-export const LowerLeftSection = styled.div `
-    display: flex;
-    flex-direction:column;
-    padding: 0.75em;
-    width: 50vw;
-`
+// export const LowerLeftSection = styled.div `
+//     display: flex;
+//     flex-direction:column;
+//     padding: 0.75em;
+//     width: 50vw;
+// `
 export const LowerRightRow = styled.div `
     height: 2.5em;
     padding: 0.5em;

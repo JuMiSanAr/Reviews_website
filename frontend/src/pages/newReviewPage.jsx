@@ -15,87 +15,16 @@ import {
 } from "../styles/pageStyles/newReviewStyles";
 import {FaStar} from "react-icons/all";
 import newReviewFetch from "../store/fetches/review_fetches";
+import { useSelector } from 'react-redux';
 
 
 
 
-
-
-const restaurant = {
-    name: 'Läderach Chocoloatier Suisee',
-    type: 'Chocolatiers & Shops',
-    score: '3.5',
-    reviewsNumber: '68',
-    street: 'Bahnhofstrasse',
-    streetNumber: '106',
-    city: 'Zurich',
-    zipCode: '8000',
-    country: 'switzerland',
-    phoneNumbner: '+41 44 211 53 72',
-    website: 'laederach.com',
-    latLan: [47.372, 8.539],
-    priceLevel: '$$$',
-    openingHours: 'Monday-Friady 9:00 am - 8:00 pm',
-    reviews:[
-        { 
-            reviewerName: 'Laurent H.',
-            numberOfReviewsOfReviewer: '6',
-            score: '3.5',
-            date: '01.01.2018 15:22',
-            content: 'this location at the Bahnhofstrasse is quite friendly and easily located across the street from the train station. The people there seem to be quite good and helpful in their service.',
-            numberOfReviewLikes: '63',
-            comment: [
-                {
-                    commenterName: 'Colin Wirz',
-                    commentDate: '01.01.2018 15:22',
-                    commentContent: 'Actually you have no taste!'
-                },
-                {
-                    commenterName: 'Laurent Meyer',
-                    commentDate: '01.01.2018 15:22',
-                    commentContent: 'Sorry bro!'
-                },
-                {
-                    commenterName: 'Laurent Meyer',
-                    commentDate: '01.01.2018 15:22',
-                    commentContent: 'I cant imagine!'
-                },
-            ]
-    
-        },
-        { 
-            reviewerName: 'Laurent H.',
-            numberOfReviewsOfReviewer: '6',
-            score: '3.5',
-            date: '01.01.2018 15:22',
-            content: 'this location at the Bahnhofstrasse is quite friendly and easily located across the street from the train station. The people there seem to be quite good and helpful in their service.',
-            numberOfReviewLikes: '63',
-            comment: [
-                {
-                    commenterName: 'Colin Wirz',
-                    commentDate: '01.01.2018 15:22',
-                    commentContent: 'Actually you have no taste!'
-                },
-                {
-                    commenterName: 'Laurent Meyer',
-                    commentDate: '01.01.2018 15:22',
-                    commentContent: 'Sorry bro!'
-                },
-                {
-                    commenterName: 'Laurent Meyer',
-                    commentDate: '01.01.2018 15:22',
-                    commentContent: 'I cant imagine!'
-                },
-            ]
-    
-        },
-
-    ]
-
-}
 
 
 const ReviewPage = () => {
+    const restaurant_data = useSelector(state => state.restaurantsReducer.restaurant_data);
+
 
     // const [rating1, serRating1] = useState('');
     const [reviewInput, setReviewInput] = useState('');
@@ -143,7 +72,7 @@ const ReviewPage = () => {
             <HeaderNavi/> 
             <ReviewBanner>
             <RestaurantInfoBanner>
-                    <RestaurantTitle restaurant={restaurant}/>
+                    <RestaurantTitle restaurant_data={restaurant_data}/>
                 </RestaurantInfoBanner>
             </ReviewBanner>
             <MainContainer>
@@ -175,9 +104,9 @@ const ReviewPage = () => {
                 <BtnReview onClick={submitReviewAndRating}>SUBMIT</BtnReview>
                 {/* onClick to do for Submit btn! if condition if inpout fulfiled or not maybe make display this field is required only when submitting empty field  */}
                 <P>This field is required *to be displayed when clicking button with empty input field</P>
+            </MainContainer>
                 
             <Footer />
-            </MainContainer>
         </>
     );
 };

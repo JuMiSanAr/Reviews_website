@@ -2,8 +2,9 @@ import styled from 'styled-components';
 
 
 export const ReviewCardContainer = styled.div `
-    margin-top: 1.75em;
+    margin-top: 1.25em;
     width: 100%;
+    min-height: 15vh;
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -158,4 +159,27 @@ export const ViewCommentsButton = styled.button `
     :hover{
         font-Weight: bolder;
     }
+`
+
+export const ReviewCommentContainer = styled.div `
+    display: flex;
+    flex-direction: column;
+`
+export const ReviewCommentRow = styled.div `
+    padding: 0.25em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+`
+export const CommentHeader = styled.p `
+    font-weight: bolder;
+    color: #E47D31;
+    font-size:16px;
+`
+export const CommentDate = styled.p `
+    font-size: 12px;
+`
+
+export const CommentContent = styled.p `
+    font-size: 14px;
 `

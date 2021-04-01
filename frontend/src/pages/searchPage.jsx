@@ -97,11 +97,12 @@ const TabsContainer = styled.div`
         cursor: pointer;
         div{
         margin: 0 80px 0 0;
-        :hover {
-            padding-bottom: 10px;
-            border-bottom: 3px solid #E47D31;
-        }
-    }        
+            :hover {
+                padding-bottom: 10px;
+                border-bottom: 3px solid #E47D31;
+            }
+        } 
+    }       
 `;
 
 const ResCardContainer = styled.div `

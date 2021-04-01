@@ -154,8 +154,11 @@ const HomePage = () => {
         <HeaderNavi/>
         <HomeBanner>
             <SearchBox>
-            <input type="search" name=""  placeholder='Search..' onChange={(event) => setSearchValue(event.target.value)}/>
-            <button type="submit" onClick={handleSearchRestaurant} onKeyUp={ event => event.key === 'Enter' ? handleSearchRestaurant() : ''}>Search</button>
+            <input type="search" name=""  placeholder='Search..' 
+                onChange={(event) => setSearchValue(event.target.value)} 
+                onKeyUp={ event => event.key === 'Enter' ? handleSearchRestaurant() : ''}
+            />
+            <button type="submit" onClick={handleSearchRestaurant} >Search</button>
             </SearchBox>
         </HomeBanner>
         <ContentWrapper>

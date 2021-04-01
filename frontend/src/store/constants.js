@@ -11,6 +11,7 @@ export const ALL_RESTAURANTS = 'ALL_RESTAURANTS';
 
 export const HOME_CARD = 'HOME_CARD';
 
+
 // Base URLs to use for fetching
 export const baseUrlLocal = 'http://localhost:8000/api/';
 export const baseUrlServer = 'https://luna.propulsion-learn.ch/api/';
@@ -23,8 +24,18 @@ export const headers = new Headers({
 });
 
 export const headersWithToken = new Headers({
-    headers: {
+
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
+<<<<<<< HEAD
+
+});
+
+
+
+
+
+=======
       },
 })
+>>>>>>> dev

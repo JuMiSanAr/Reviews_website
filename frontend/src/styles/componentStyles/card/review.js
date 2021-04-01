@@ -79,6 +79,9 @@ export const SocialButton = styled.div `
         border: none;
         cursor:pointer;
         background: rgba(145, 145, 145, 0.6);
+        :hover {
+          box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.4);
+        }
       
         img{
             width:12px;
@@ -88,6 +91,10 @@ export const SocialButton = styled.div `
     .likebutton{
         border-radius: 28px 0px 0px 28px;
         margin-right: 1px;
+        img{
+            width: 15px;
+            height: 15px;
+        }
     }
     .commentbutton {
         border-radius: 0px 28px 28px 0px;

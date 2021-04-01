@@ -12,10 +12,11 @@ import {useHistory} from "react-router-dom";
 import { passRestaurantData } from '../store/actions/restaurantActions';
 
 import {getAllRestaurants} from "../store/actions/restaurantActions";
-import {getLoggedInUserInfoFetch} from "../store/fetches/all_users_fetches";
+import {allUsersFetch, getLoggedInUserInfoFetch} from "../store/fetches/all_users_fetches";
 import {allRestaurantsFetch} from "../store/fetches/restaurant_fetches";
 import {FeaturedRestaurant, FilterTitle, HomeBanner, MainContainer, SearchBox} from "../styles/pageStyles/homeStyles";
 import {ContentWrapper} from "../styles/pageStyles/searchStyle";
+import {allUserAction} from "../store/actions/getAllUserActions";
 
 
 const HomePage = () => {
@@ -36,6 +37,12 @@ const HomePage = () => {
                 const action = getAllRestaurants(data.results);
                 dispatch(action);
             });
+
+       allUsersFetch()
+             .then(data => {
+                 const action = allUserAction(data)
+                 dispatch(action)
+             });
 
             // Fetch user info and send it to redux store
         // getLoggedInUserInfoFetch()

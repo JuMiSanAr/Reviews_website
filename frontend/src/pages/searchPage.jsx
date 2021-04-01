@@ -108,24 +108,6 @@ const SearchPage = () => {
             </TabsContainer>
             <ResCardContainer> 
                 <div className={toggleState === 1 ? " active-content" : "content"}>
-                    {/*{*/}
-
-                    {/*   allRestaurants.length && filteredRestaurant.length ?*/}
-                    {/*        filteredRestaurant.map((restaurant, index) => {*/}
-                    {/*         return (*/}
-                    {/*             console.log("map", restaurant)*/}
-                    {/*             // <CardRestaurant key={index} restaurant_data={restaurant}/>*/}
-                    {/*         )*/}
-                    {/*             }) : allRestaurants.map((data, index)=> {*/}
-
-                    {/*            return (*/}
-
-                    {/*                 <CardRestaurant key={index} restaurant_data={data}/>*/}
-
-                    {/*                        );*/}
-                    {/*             })*/}
-                    {/*  }*/}
-
                     {
                         allRestaurants.map((data, index)=> {
 

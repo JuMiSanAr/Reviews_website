@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import {stars} from "../../../styles";
 
 const Container = styled.div `
-    cursor: pointer;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;

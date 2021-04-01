@@ -8,23 +8,32 @@ import { BannerLeftSection, ReviewsInBanner, ScoreAndReviewsInBanner,
 
 
 
-const RestaurantTitle = (props) => {
-    const { name, type, score, reviewsNumber} = props.restaurant
+const RestaurantTitle = props => {
+    // const { name, type, score, reviewsNumber} = props.restaurant
+    const { categories, name, average_rating, restaurant_reviews } = props.restaurant_data.data
+
+    const restaurantCategories = categories => {
+        let resCat = '';
+        if (categories.length > 1) return 'Restaurant';
+        else categories.forEach((category, index) => {
+                index === categories.length-1 ? resCat += category.name : resCat += `${ category.name } & `})
+        return resCat
+    }
     return(
         <BannerLeftSection>
-                <TitleInBanner>{name}</TitleInBanner>
-                <TypeInBanner>{type}</TypeInBanner>
+                <TitleInBanner>{ name }</TitleInBanner>
+                <TypeInBanner>{ restaurantCategories(categories) }</TypeInBanner>
             <ScoreAndReviewsInBanner>
                 {
-                    stars(score)
+                    stars(average_rating)
                 }
                 {
-                    reviewsNumber === 1 ?
+                    restaurant_reviews.length === 1 ?
                     <ReviewsInBanner>
                         1 Review
                     </ReviewsInBanner>
                         : <ReviewsInBanner>
-                            {reviewsNumber} Reviews
+                            { restaurant_reviews.length } Reviews
                         </ReviewsInBanner>
                 }
             </ScoreAndReviewsInBanner>

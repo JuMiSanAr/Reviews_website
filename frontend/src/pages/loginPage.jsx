@@ -4,7 +4,7 @@ import HeaderNavi from '../components/headerNavi/index';
 import { loginAction } from '../store/actions/loginActions';
 import { InputField, LoginTitle, LoginWrapper, MainContainer } from '../styles/pageStyles/loginStyles';
 import loginFetch from "../store/fetches/login_fetches";
-import { Redirect } from 'react-router-dom';
+import {Redirect, useHistory} from 'react-router-dom';
 
 //############################# Component ################################
 
@@ -13,9 +13,9 @@ const LoginPage = () => {
     const [ password, setPassword ] = useState('');
 
     const [errorMessage, setErrorMessage] = useState(false);
-    const [redirect, setRedirect] = useState(false);
 
     const dispatch = useDispatch();
+    const history = useHistory()
 
 
     const loginHandler = () => {
@@ -25,7 +25,7 @@ const LoginPage = () => {
                 const action = loginAction(data.access);
                 dispatch(action);
                 localStorage.setItem('token', data.access);
-                setRedirect(true);
+                history.push('/')
             })
             .catch(() => {
                     setErrorMessage(true);
@@ -35,7 +35,6 @@ const LoginPage = () => {
 
     return (
         <>
-            {redirect ? <Redirect to='/' /> : ''}
             <MainContainer>
                 <HeaderNavi/>
                 <LoginWrapper>

@@ -101,12 +101,12 @@ const RestaurantPage = () => {
             <HeaderNavi/>
             <RestaurantBanner>
                 <RestaurantInfoBanner>
-                    <RestaurantTitle restaurant={restaurant}/>
-                        <LittleMap restaurant={restaurant}/>
+                    <RestaurantTitle restaurant={restaurant} restaurant_data={restaurant_data}/>
+                        <LittleMap restaurant_data={restaurant_data}/>
                 </RestaurantInfoBanner>
             </RestaurantBanner>
             <LowerSection>
-                <LeftSection reviews={restaurant.reviews} restaurant_reviews={restaurant_data.restaurant_reviews}/>
+                <LeftSection reviews={restaurant.reviews} restaurant_reviews={restaurant_data.data.restaurant_reviews}/>
 
                 <RightSection restaurant={restaurant} restaurant_data={restaurant_data}/>
             </LowerSection>

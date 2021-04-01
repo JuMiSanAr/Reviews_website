@@ -24,6 +24,7 @@ class GetAllUsersList(ListAPIView):
     serializer_class = UserSerializer
     lookup_url_kwarg = 'id'
     lookup_field = 'id'
+    permission_classes = []
 
     def get(self, request, *args, **kwargs):
         queryset = self.get_queryset()

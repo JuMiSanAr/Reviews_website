@@ -1,17 +1,5 @@
 import styled from "styled-components";
 
-
-export const ReviewBanner = styled.div `
-    height: 150px;
-    width: 100vw;
-    background-image: url('https://source.unsplash.com/random');
-    background-size: cover;
-    display: flex;
-    align-items: start;
-    margin-top:0.5em;
-    z-index: 0;
-`;
-
 export const MainContainer = styled.div `
 min-height: 100vh;
 width: 100%;

@@ -61,6 +61,7 @@ const ReviewPage = () => {
                 <button><FaStar /></button>
                 <button><FaStar /></button>
                 <button><FaStar /></button>
+                <button><FaStar /></button>
             <h5>Select your rating</h5>
             </RatingField>
             <InputReviewField>

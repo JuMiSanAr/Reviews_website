@@ -10,6 +10,8 @@ import loading from "../assets/loading.gif"
 import searchResFetch from "../store/fetches/search_fetches";
 import {searchResAction} from "../store/actions/searchActions";
 import {useHistory} from "react-router-dom";
+import allRestaurantsFetch from "../store/fetches/restaurant_fetches";
+import {getAllRestaurants} from "../store/actions/restaurantActions";
 
 
 const MainContainer = styled.div`
@@ -118,11 +120,11 @@ const HomePage = () => {
                 dispatch(action);
             });
 
-       /* allRestaurantsFetch()
+        allRestaurantsFetch()
             .then(data => {
                 const action = getAllRestaurants(data.results);
                 dispatch(action);
-            });*/
+            });
     }, []);
 
 

@@ -3,9 +3,10 @@ import {stars} from "../../../styles";
 import {CardImage, CardWrapper, RestaurantContainer, StarRatings} from "../../../styles/componentStyles/card/restaurant";
 
 
-const CardRestaurant = ({restaurant_data}) => {
+const CardRestaurant = ({restaurant_data, onClickHandler}) => {
+
     return (
-        <RestaurantContainer>
+        <RestaurantContainer onClick={() => onClickHandler(restaurant_data)}>
             <CardWrapper>
                 <div className='cardTitle'>
                     <p>{restaurant_data.name}</p>

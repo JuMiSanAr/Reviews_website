@@ -1,5 +1,17 @@
 import styled from "styled-components";
 
+
+export const ReviewBanner = styled.div `
+    height: 150px;
+    width: 100vw;
+    background-image: url('https://source.unsplash.com/random');
+    background-size: cover;
+    display: flex;
+    align-items: start;
+    margin-top:0.5em;
+    z-index: 0;
+`;
+
 export const MainContainer = styled.div `
 min-height: 100vh;
 width: 100%;
@@ -48,18 +60,18 @@ background: #FFFFFF;
 `
 
 export const P = styled.p`
-        position: absolute;
-        height: 18px;
-        left: 0%;
-        right: 82.69%;
-        top: calc(50% - 18px/2 + 162.5px);
-        
-        font-family: Helvetica;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 16px;
-        line-height: 18px;
-        color: #B00000;
+  position: absolute;
+  height: 18px;
+  left: 0%;
+  right: 82.69%;
+  top: calc(50% - 18px / 2 + 162.5px);
+
+  font-family: Helvetica;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 18px;
+  color: #b00000;
 `
 
 

@@ -14,5 +14,3 @@ console.log(headersWithToken)
 
 export default newReviewFetch;
 
-
-// rating: to be added to the body content

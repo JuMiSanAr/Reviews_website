@@ -1,42 +1,23 @@
 import React, { useState } from 'react';
 
-import styled from 'styled-components';
-
-// ================ components ================
 import Footer from '../components/footer';
 import HeaderNavi from '../components/headerNavi';
 
-// ================ styled components ================
 import RestaurantTitle from '../components/restaurantPageComponents/bannerTitle';
 import { RestaurantInfoBanner } from '../styles/pageStyles/restaurantStyles';
-import {BtnReview, InputReviewField, MainContainer, P, RatingField} from "../styles/pageStyles/newReviewStyles";
+import {
+    BtnReview,
+    InputReviewField,
+    MainContainer,
+    P,
+    RatingField,
+    ReviewBanner
+} from "../styles/pageStyles/newReviewStyles";
 import {FaStar} from "react-icons/all";
+import newReviewFetch from "../store/fetches/review_fetches";
 
 
 
-
-// two below to adjust 
-export const ReviewBanner = styled.div `
-    height: 150px;
-    width: 100vw;
-    background-image: url('https://source.unsplash.com/random');
-    background-size: cover;
-    display: flex;
-    align-items: start;
-    margin-top:0.5em;
-    z-index: 0;
-`;
-
-
-// export const InputField = styled.input `
-// display: flex;
-// justify-content: center;
-// align-items: center;
-// flex-direction: column;
-// height: 40px;
-// width: 40px;
-
-// `
 
 
 
@@ -115,24 +96,47 @@ const restaurant = {
 
 
 const ReviewPage = () => {
-    // const writeReviewHandler = (event) => {
-    //     console.log(event);
-    // }
-    // const editDataHandler = (event) => {
-    //     console.log(event);
-    // }
 
     // const [rating1, serRating1] = useState('');
-    // const [reviewInput, setReviewInput] = useState('');
-    //
+    const [reviewInput, setReviewInput] = useState('');
+
+    // const ratingInput = (ratingButton) => {
+    //     if (ratingButton === rating1){
+    //         return '1'
+    //     }else if (ratingButton === rating2){
+    //         return '2'
+    //     }else if (ratingButton === rating3){
+    //         return '3'
+    //     }else{
+    //         return '0'
+    //     }};
+
+
     // const setReviewInput = (e) => {
     //     console.log(reviewInput)
     // };
+// const onChangeReview = e =>{
+//     console.log(reviewInput)
+//     setReviewInput(e.target.value);
+// }
+
+        const submitReviewAndRating = () => {
+
+        newReviewFetch(reviewInput)
+        .then(data => {
+            console.log(data);
+
+    });
+    };
+
+    //     const submitReviewAndRating = () => {
     //
+    //     newReviewFetch(reviewInput)
+    //     .then(data => {
+    //         console.log(data);
     //
-    // const submitReview = () => {
-    //
-    // }
+    // });
+    // };
 
     return(
         <>
@@ -145,6 +149,8 @@ const ReviewPage = () => {
             <MainContainer>
             <RatingField>
                 {/*<button onClick={saveRating1}><FaStar /></button>*/}
+                                {/*<button onClick={saveRating2}><FaStar /></button>*/}
+                {/*<button onClick={saveRating3}><FaStar /></button>*/}
                 <button><FaStar /></button>
                 <button><FaStar /></button>
                 <button><FaStar /></button>
@@ -157,14 +163,16 @@ const ReviewPage = () => {
                 <p>Please don't review this business if you received a freebie for writing this review, <br />or if you're connected in any way to the owner or employees.</p>
 
                 <input
-                    //value={reviewInput}
-                    //onChange= {e => setReviewInput(e.target.value)}
+                    value={reviewInput}
+                    onChange= {e => setReviewInput(e.target.value)}
+                    // onChange={e => onChangeReview(e)}
                     type='text'
                     required/>
 
                 </InputReviewField>
-                <BtnReview>SUBMIT</BtnReview>
+                {/*<BtnReview>SUBMIT</BtnReview>*/}
                 {/*<BtnReview onClick={submitReview}>SUBMIT</BtnReview>*/}
+                <BtnReview onClick={submitReviewAndRating}>SUBMIT</BtnReview>
                 {/* onClick to do for Submit btn! if condition if inpout fulfiled or not maybe make display this field is required only when submitting empty field  */}
                 <P>This field is required *to be displayed when clicking button with empty input field</P>
                 

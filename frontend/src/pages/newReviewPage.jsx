@@ -15,8 +15,7 @@ import {
 } from "../styles/pageStyles/newReviewStyles";
 import {FaStar} from "react-icons/all";
 import newReviewFetch from "../store/fetches/review_fetches";
-import {newReviewAction} from "../store/actions/newReviewActions";
-import {useDispatch} from "react-redux";
+
 
 
 
@@ -95,14 +94,9 @@ const restaurant = {
 
 
 const ReviewPage = () => {
-    // const writeReviewHandler = (event) => {
-    //     console.log(event);
-    // }
-    // const editDataHandler = (event) => {
-    //     console.log(event);
-    // }
 
-    // const [rating1, serRating1] = useState('');
+
+   // const [rating1, serRating1] = useState('');
     const [reviewInput, setReviewInput] = useState('');
 
 
@@ -118,7 +112,7 @@ const ReviewPage = () => {
             console.log(data);
 
     });
-    }
+    };
 
     return(
         <>

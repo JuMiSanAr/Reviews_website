@@ -113,9 +113,7 @@ const HomePage = () => {
                 const action = homeCardAction(data.results[0].best_four);
                 dispatch(action);
                 console.log("from use effect", data.results[0]);
-
             })
-
   }, []);
 
 

@@ -1,9 +1,7 @@
-import {store} from "./index";
 
 // Action types
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
-export const SIGNUP = 'SIGNUP';
 export const SEARCH = 'SEARCH';
 export const HOME_CARD = 'HOME_CARD';
 
@@ -24,5 +22,3 @@ export const headersWithToken = new Headers({
         Authorization: `Bearer ${token}`
       },
 })
-
-

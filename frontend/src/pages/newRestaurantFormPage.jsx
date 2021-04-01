@@ -1,21 +1,23 @@
-import styled from "styled-components"
 import Footer from "../components/footer"
 import HeaderNavi from "../components/headerNavi"
 import FileUploader from "../components/helper/fileUpLoader"
 import { CreatNewRestaurantTitle, FieldsetTitle, FormRows, InputFields, LabelCenter, LabelLeft, LabelRight, 
     MainContainer, NewRestaurantWrapper, RequiredLeft, RequiredCenter, RequiredRight, LabelCenterSecondRow, LabelCenterThirdRow, LabelCenterFourthRow, InputButtonStyle } from "../styles/pageStyles/newRestaurantFormStyles"
+import {useEffect} from "react";
 
 // THE RELATED CSS YOU'LL FIND IN "newRestaurantStyles.js"
 
 
 const NewRestaurantFormPage = () => {
+
+    useEffect()
+
     return (
         <MainContainer>
             <HeaderNavi/>
                 <NewRestaurantWrapper>
                     <CreatNewRestaurantTitle>Create New Restaurant<span></span></CreatNewRestaurantTitle>
                         <form>
-
                             <FieldsetTitle className='p'>Basic</FieldsetTitle>
                             <FormRows>
                                 <LabelLeft>Name:</LabelLeft>

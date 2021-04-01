@@ -9,8 +9,8 @@ import Footer from '../components/footer/index';
 import { useState } from "react";
 import {useDispatch, useSelector} from "react-redux";
 import loading  from '../assets/loading.gif'
-import {allRestaurantsFetch} from "../store/fetches/restaurant_fetches";
-import {getAllRestaurantsAction} from "../store/actions/restaurantActions";
+import allRestaurantsFetch from "../store/fetches/restaurant_fetches";
+import {getAllRestaurants} from "../store/actions/restaurantActions";
 
 
 const MainContainer = styled.div `
@@ -117,7 +117,7 @@ const ResCardContainer = styled.div `
             display: flex;
             flex-direction: row;
             justify-content: space-evenly;
-            flex-wrap: wrap;asg
+            flex-wrap: wrap;
         }
 
 `;
@@ -133,32 +133,58 @@ const SearchPage = () => {
     const searchedRestaurants = useSelector(state => state.searchReducer.restaurants.data);*/
     // Get list of all restaurants
     const allRestaurants = useSelector(state => state.restaurantsReducer.all_restaurants.data);
+      const filteredRestaurant = useSelector(state => state.restaurantsReducer.filtered_restaurant);
+
+    // console.log("from use selector", allRestaurants)
 
     const [toggleState, setToggleState] = useState(1);
-/*    const [filterSearchState, setfilterSearchState] = useState(null);*/
+   const [searchTerm, setSearchTerm] = useState("");
+/*   const [filteredRestaurant, setFilteredRestaurant] = useState([])*/
 
+    const handleChange = event => {
+    setSearchTerm(event.target.value);
+    console.log(event.target.value)
+  };
 
     const toggleTab = (index) => {
       setToggleState(index);
-    // console.log(index)
     };
+
+  // Search filter
+
+   useEffect(() => {
+               const results = !searchTerm ? allRestaurants : allRestaurants.filter(restaurant =>
+                           restaurant.name.toLowerCase().includes(searchTerm.toLowerCase()))
+               const action = filterRestaurantData(results)
+               dispatch(action)
+    }, [searchTerm]);
+
+    // Get all restaurant
 
     useEffect(() => {
          allRestaurantsFetch()
             .then(data => {
-                const action = getAllRestaurantsAction(data.results);
+                const action = getAllRestaurants(data.results);
                 dispatch(action);
                 /*console.log(data.results[0].categories.map(one => one.name))
                  console.log(data.results)*/
             });
-    }, [])
+            // allUsersFetch()
+            //  .then(data => {
+            //      const action = allUserAction(data)
+            //      dispatch(action)
+            //      console.log("all user data", data)
+            //  });
+    }, []);
+
 
     return (
         <>
         <MainContainer>
             <HeaderNavi/>
             <SearchSelectContainer>
-                <SearchBox><input type="search" name=""  placeholder='Search..'/></SearchBox>
+                <SearchBox><input type="search" name=""  placeholder='Search..' value={searchTerm}
+                  onChange={handleChange}/></SearchBox>
                 <SelectCategory>
                 <span></span>
                 <select>
@@ -171,7 +197,6 @@ const SearchPage = () => {
                                 }) : "...loading"
                     }
                 </select>
-                {/* <img src={arrow} alt="select arrow"/> */}
                 </SelectCategory>
             </SearchSelectContainer>
             <ContentWrapper>
@@ -186,26 +211,21 @@ const SearchPage = () => {
             </TabsContainer>
             <ResCardContainer> 
                 <div className={toggleState === 1 ? " active-content" : "content"}>
+                    {
+                        allRestaurants.length > 0 && filteredRestaurant.length ?
+                            filteredRestaurant.map((restaurant, index) => {
+                             return (
+                                 <CardRestaurant key={index} restaurant_data={restaurant}/>
+                             )
+                                 }) : allRestaurants.map((data, index)=> {
 
-                   {/*     {
-               searchedRestaurants ? searchedRestaurants.map((data, index)=> {
-                   return (
+                                return (
 
-                        <CardRestaurant key={index} restaurant_data={data}/>
+                                     <CardRestaurant key={index} restaurant_data={data}/>
 
-                       );
-               }) : "...Loading"
-            }*/}
-
-                 {
-               allRestaurants ? allRestaurants.map((data, index)=> {
-                   return (
-
-                        <CardRestaurant key={index} restaurant_data={data}/>
-
-                       );
-               }) : <img src={loading} alt="...loading"/>
-            }
+                                            );
+                                 })
+                      }
 
                 </div>
                 <div className={toggleState === 2 ? "active-content" : "content"}>

@@ -10,10 +10,8 @@ import loading from "../assets/loading.gif"
 import searchResFetch from "../store/fetches/search_fetches";
 import {searchResAction} from "../store/actions/searchActions";
 import {useHistory} from "react-router-dom";
-import {allRestaurantsFetch} from "../store/fetches/restaurant_fetches";
-import {getAllRestaurantsAction} from "../store/actions/restaurantActions";
-import getLoggedInUserInfoFetch from "../store/fetches/all_users_fetches";
-
+import allRestaurantsFetch from "../store/fetches/restaurant_fetches";
+import {getAllRestaurants} from "../store/actions/restaurantActions";
 
 const MainContainer = styled.div`
     min-height: 100vh;
@@ -121,13 +119,13 @@ const HomePage = () => {
                 dispatch(action);
             });
 
-        // allRestaurantsFetch()
-        //     .then(data => {
-        //         const action = getAllRestaurantsAction(data.results);
-        //         dispatch(action);
-        //     });
+       allRestaurantsFetch()
+            .then(data => {
+                const action = getAllRestaurants(data.results);
+                dispatch(action);
+            });
 
-    // Fetch user info and send it to redux store
+            // Fetch user info and send it to redux store
         getLoggedInUserInfoFetch()
             .then(data => {
             // const action =

@@ -2,7 +2,7 @@ import {fetchAPI} from "../fetchAPI";
 import {headers, headersWithToken} from "../constants";
 
 
-const getLoggedInUserInfoFetch = () => {
+export const getLoggedInUserInfoFetch = () => {
     return fetchAPI(
         'me/',
         false,
@@ -11,4 +11,14 @@ const getLoggedInUserInfoFetch = () => {
     )
 }
 
-export default getLoggedInUserInfoFetch;
+
+
+export const allUsersFetch = () => {
+
+    return fetchAPI(
+        'users/list/',
+         false,
+        'GET',
+        headers
+    )
+}

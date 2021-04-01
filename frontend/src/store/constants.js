@@ -28,7 +28,6 @@ export const headersWithToken = new Headers({
 
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
-<<<<<<< HEAD
 
 });
 
@@ -36,7 +35,3 @@ export const headersWithToken = new Headers({
 
 
 
-=======
-      },
-})
->>>>>>> dev

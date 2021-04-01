@@ -197,7 +197,7 @@ const SearchPage = () => {
                             return (
                                 <option key={index} >{data.categories.map(category => category.name)}</option>
                                      );
-                                }) : "...loading"
+                                }) : ".loading"
                     }
                 </select>
                 </SelectCategory>

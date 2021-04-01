@@ -160,6 +160,7 @@ const HomePage = () => {
     const checkRestaurantHandler = (data) => {
         const action = passRestaurantData(data);
         dispatch(action);
+        localStorage.setItem('restaurant', JSON.stringify(data));
         history.push("/restaurant");
     };
 

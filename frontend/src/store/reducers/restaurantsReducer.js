@@ -3,7 +3,7 @@ import { ALL_RESTAURANTS, HOME_CARD, PASS_RESTAURANT_DATA } from "../constants";
 
 
 const initialState = {
-   bestFour: [],
+    bestFour: [],
     all_restaurants: []
 };
 

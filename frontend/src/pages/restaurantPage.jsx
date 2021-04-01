@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-
-import styled from 'styled-components';
+import React from 'react';
 
 // ================ components ================
 import Footer from '../components/footer';
@@ -94,13 +92,6 @@ const restaurant = {
 
 
 const RestaurantPage = () => {
-    const writeReviewHandler = (event) => {
-        console.log(event);
-    }
-    const editDataHandler = (event) => {
-        console.log(event);
-    }
-
     
     return(
         <>

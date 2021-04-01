@@ -14,9 +14,27 @@ import styled from 'styled-components';
 
 
 const ReviewCommentContainer = styled.div `
-
+    display: flex;
+    flex-direction: column;
+`
+const ReviewCommentRow = styled.div `
+    padding: 0.25em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+`
+const CommentHeader = styled.p `
+    font-weight: bolder;
+    color: #E47D31;
+    font-size:18px;
+`
+const CommentDate = styled.p `
+    font-size: 12px;
 `
 
+const CommentContent = styled.p `
+    font-size: 14px;
+`
 
 const ReviewCard = (props) => {
     const { reviewerName, reviewerImage, numberOfReviewsOfReviewer, score, date,
@@ -43,8 +61,6 @@ const ReviewCard = (props) => {
         const showAllCommentHandler = () => {
             setShowAllComments(!showAllComments);
         };
-
-    
     return(
         <ReviewCardContainer>
             <ReviewCardHeader>
@@ -94,9 +110,18 @@ const ReviewCard = (props) => {
                             }
                         </FooterRight>
                     </ReviewFooter>
-                            {
-                                // !showAllComments ? '' : comments.map((comment, index) =>  <ReviewCommentContainerkey={index}> </ReviewCommentContainer>)
-                            }
+                        {
+                            !showAllComments ? '' : comments.map((comment, index) => 
+                                <ReviewCommentContainer key={index}>
+                                    <ReviewCommentRow>
+                                        <CommentHeader>{comment.commenterName}</CommentHeader>
+                                        <CommentDate>{comment.commentDate}</CommentDate>
+                                    </ReviewCommentRow>
+                                    <ReviewCommentRow>
+                                        <CommentContent>{comment.commentContent}</CommentContent>
+                                    </ReviewCommentRow>
+                                </ReviewCommentContainer>)
+                        }
                 </ReviewBody>
 
 

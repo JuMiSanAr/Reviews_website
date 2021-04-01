@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import CardRestaurant from '../components/cards/cardRestaurant';
 import styled from 'styled-components'
 import HeaderNavi from '../components/headerNavi/index'
@@ -6,6 +6,9 @@ import Footer from '../components/footer/index'
 import {homeCardAction} from "../store/actions/homeCardActions";
 import {useDispatch, useSelector} from "react-redux";
 import homeCardFetch from "../store/fetches/home_card_fetches";
+import spinner from "../assets/spinner.gif"
+import searchResFetch from "../store/fetches/search_res_fetches";
+import {searchResAction} from "../store/actions/searchResActions";
 
 
 const MainContainer = styled.div`
@@ -15,7 +18,7 @@ const MainContainer = styled.div`
 const HomeBanner = styled.div `
     height: 351px;
     width: 100vw;
-    background-image: url('https://source.unsplash.com/featured/?open restaurant');
+    background-image: url('https://res.cloudinary.com/tennam/image/upload/v1617228872/Propulsion/c2c64b930af48a341c3adef7c659d36e.png');
     background-size: cover;
     display: flex;
     align-items: center;
@@ -60,6 +63,11 @@ const SearchBox = styled.div `
         outline:none;
         cursor: pointer;
     }
+    @media (max-width: 768px) {
+        input{
+        width: 300px;
+        }
+  }
 `;
 const FilterTitle = styled.div `
     display: flex;
@@ -100,11 +108,29 @@ const HomePage = () => {
 
     const dispatch = useDispatch();
     const best_four_res = useSelector(state => state.homeCardReducer.restaurant.data);
-    console.log("Hello, World from use selector data", best_four_res )
+/*    console.log("Hello, World from use selector data", best_four_res )*/
 
-    const handleSearchRestaurant = (e) => {
-        e.preventDefault();
+    const [searchValue, setSearchValue] = useState("");
+    console.log(searchValue)
+
+    const handleSearchInputChanges = (e) => {
+        setSearchValue(e.target.value);
     }
+
+    const resetInputField = () => {
+    setSearchValue("")
+  }
+
+   const handleSearchRestaurant = (e) => {
+        e.preventDefault();
+        searchResFetch(searchValue)
+            .then(data=>{
+                const action = searchResAction(data)
+                dispatch(action)
+            })
+        resetInputField();
+    }
+
 
     useEffect( () => {
         homeCardFetch()
@@ -123,8 +149,8 @@ const HomePage = () => {
         <HeaderNavi/>
         <HomeBanner>
             <SearchBox>
-            <input type="search" name=""  placeholder='Search..'/>
-            <button type="submit" onClick={handleSearchRestaurant}>Search</button>
+            <input type="search" name=""  placeholder='Search..' onChange={handleSearchInputChanges}/>
+            <button type="submit" onClick={handleSearchRestaurant} onKeyUp={ event => event.key === 'Enter' ? handleSearchRestaurant() : ''}>Search</button>
             </SearchBox>
         </HomeBanner>
         <ContentWrapper>
@@ -140,7 +166,7 @@ const HomePage = () => {
                         <CardRestaurant key={index} restaurant_data={data}/>
 
                        );
-               }) : "...Loading"
+               }) : <img src={spinner} alt="...loading"/>
             }
 
         </FeaturedRestaurant>

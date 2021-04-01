@@ -64,10 +64,15 @@ const SearchBox = styled.div`
         font-weight: normal;
         font-size: 20px;
         line-height: 20px;
-    }   
+    } 
+     @media (max-width: 768px) {
+        input{
+        width: 20vw;
+        }
+  }  
 `;
 const TabsContainer = styled.div`
-    /* width: 80vw; */
+/*    width: 80vw; */
     display:flex;
     flex-wrap: wrap;
     align-items: center;
@@ -85,6 +90,7 @@ const TabsContainer = styled.div`
     }
     .reviewtitle{
         display: flex;
+        flex-wrap:wrap;
         cursor: pointer;
         div{
         margin: 0 80px 0 0;
@@ -92,10 +98,7 @@ const TabsContainer = styled.div`
             padding-bottom: 10px;
             border-bottom: 3px solid #E47D31;
         }
-       
-    }
-    }
-   
+    }        
 `;
 
 const ResCardContainer = styled.div `
@@ -117,7 +120,7 @@ const ResCardContainer = styled.div `
 
 const ContentWrapper = styled.div`
     margin: auto;
-    max-width: 80vw;
+    max-width: 80vw; 
 `;
 
 const SearchPage = () => {
@@ -166,10 +169,10 @@ const SearchPage = () => {
                     <CardRestaurant/>
                     <CardRestaurant/>*/}
                         {
-               best_four_res ? best_four_res.map((data )=> {
+               best_four_res ? best_four_res.map((data, index)=> {
                    return (
 
-                        <CardRestaurant restaurant_data={data}/>
+                        <CardRestaurant key={index} restaurant_data={data}/>
 
                        );
                }) : "...Loading"

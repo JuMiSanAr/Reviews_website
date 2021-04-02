@@ -83,7 +83,7 @@ const SearchPage = () => {
 
     }, []);
 
-  // Search filter
+  // Search filters
    useEffect(() => {
        if (searchTerm !== '') {
            const filteredRestaurants = allRestaurants.filter(restaurant => restaurant.name.toLowerCase().includes(searchTerm) ||
@@ -103,12 +103,12 @@ const SearchPage = () => {
             }))
            setShowingReviews(filteredReviews.map((review, index) => {
                 return (
-                    <CardReview key={ index } review_data={ review }/>
+                    <CardReview key={ index } review_data={ review } all_reviews={allReviews}/>
                 )
             }))
            setShowingUsers(filteredUsers.map((user, index) => {
                 return (
-                    <CardUser key={ index } all_user={ user }/>
+                    <CardUser key={ index } all_user={ user } all_reviews={allReviews}/>
                 )
             }))
        }
@@ -120,12 +120,12 @@ const SearchPage = () => {
             }))
            setShowingReviews(allReviews.results.map((review, index) => {
                 return (
-                    <CardReview key={ index } review_data={ review }/>
+                    <CardReview key={ index } review_data={ review } all_reviews={allReviews}/>
                 )
             }))
            setShowingUsers(allUsers.map((user, index) => {
                 return (
-                    <CardUser key={ index } all_user={ user }/>
+                    <CardUser key={ index } all_user={ user } all_reviews={allReviews}/>
                 )
             }))
        }
@@ -152,12 +152,12 @@ const SearchPage = () => {
         }
    }, [fetchedRestaurants])
 
-    //Inherited reviews cards
+    //Inherited review cards
     useEffect(() => {
         if (!fetchedReviews && allReviews) {
             setShowingReviews(allReviews.results.map((review, index) => {
                 return (
-                    <CardReview key={ index } review_data={ review }/>
+                    <CardReview key={ index } review_data={ review } all_reviews={allReviews}/>
                 )
             }))
         }
@@ -167,19 +167,19 @@ const SearchPage = () => {
         if (fetchedReviews) {
             setShowingReviews(fetchedReviews.map((review, index) => {
                 return (
-                    <CardReview key={ index } review_data={ review }/>
+                    <CardReview key={ index } review_data={ review } all_reviews={allReviews}/>
                 )
             }))
         }
    }, [fetchedReviews])
 
 
-    //Inherited reviews users
+    //Inherited user cards
     useEffect(() => {
         if (!fetchedUsers && allUsers) {
             setShowingUsers(allUsers.map((user, index) => {
                 return (
-                    <CardUser key={ index } all_user={ user }/>
+                    <CardUser key={ index } all_user={ user } all_reviews={allReviews}/>
                 )
             }))
         }
@@ -189,7 +189,7 @@ const SearchPage = () => {
         if (fetchedUsers) {
             setShowingUsers(fetchedUsers.map((user, index) => {
                 return (
-                    <CardUser key={ index } all_user={ user }/>
+                    <CardUser key={ index } all_user={ user } all_reviews={allReviews}/>
                 )
             }))
         }

@@ -1,11 +1,11 @@
 
 # Create your views here.
 from rest_framework import status
-from rest_framework.generics import CreateAPIView, ListAPIView, get_object_or_404, UpdateAPIView, DestroyAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView, DestroyAPIView
 from rest_framework.response import Response
 from comments.models import Comment
 from comments.permissions import CommentPermission
-from comments.serializers import CommentSerializer, CommentSerializerBasic
+from comments.serializers import CommentSerializerBasic, CommentSerializer
 from reviews.models import Review
 
 

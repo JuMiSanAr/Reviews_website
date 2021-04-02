@@ -1,11 +1,11 @@
 import {fetchAPI} from "../fetchAPI";
-import {headers} from "../constants";
+import {headersWithToken} from "../constants";
 
 
 export const userProfilePatch = (username, first_name, last_name, email,
                     location, phone, things_i_like,  description ) => {
     return fetchAPI(
-        'auth/token/',
+        'me/',
         {username: username,
             first_name: first_name,
             last_name:last_name,
@@ -15,7 +15,15 @@ export const userProfilePatch = (username, first_name, last_name, email,
             things_i_like:things_i_like,
             description: description},
         'PATCH',
-        headers
+        headersWithToken
     )
 }
 
+export const userProfileDelete = () => {
+    return fetchAPI(
+        'me/',
+        false,
+        'DELETE',
+        headersWithToken
+    )
+}

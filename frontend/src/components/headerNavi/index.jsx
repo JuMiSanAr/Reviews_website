@@ -31,13 +31,12 @@ const HeaderNavi = () => {
         history.push("/registration");
     };
 
-
     const loginHandler = (event) => {
         history.push("/login");
     };
 
     const logoutHandler = () => {
-        localStorage.clear();
+        localStorage.removeItem('token');
         const action = loginAction(null,false);
         dispatch(action);
         history.push("/");

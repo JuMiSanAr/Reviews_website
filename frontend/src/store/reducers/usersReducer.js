@@ -4,7 +4,8 @@ import { ALL_USERS, GET_USER_INFO, USER_REVIEW, USER_REVIEW_COMMENT } from "../c
 const initialState = {
     users: [],
     loggedInUser: {},
-    userReview: []
+    userReview: [],
+    userReviewComment: [],
 };
 
 export const usersReducer = (state = initialState, action) => {
@@ -27,6 +28,7 @@ export const usersReducer = (state = initialState, action) => {
         }
     }
     else if (action.type === USER_REVIEW_COMMENT) {
+        console.log(action, 'action')
         return {
             ...state,
             userReviewComment : action.payload

@@ -4,16 +4,20 @@ import {ContentWrapper, Profile} from "../../../styles/componentStyles/card/revi
 import {AboutMe} from "../../../styles/componentStyles/card/user";
 
 
-const CardUser = ({all_user}) => {
-    // console.log(all_user)
+const CardUser = ({all_user, all_reviews}) => {
+    console.log(all_user, 'user')
+    console.log(all_reviews, 'reviews')
+
+    const reviewsByThisAuthor = all_reviews ? all_reviews.results.filter(review => review.author.id === all_user.id).length : 0; // Find out why this crashes on refresh (with no ?: condition)
+
     return (
         <RestaurantContainer>
         <CardWrapper>
             <Profile>
                 <img src="https://res.cloudinary.com/tennam/image/upload/v1613260389/Propulsion/Tenzin.png" alt=""/>
                 <div>
-                <h1>{all_user.username}</h1>
-                <span>7 Reviews in total</span>
+                <h1>{all_user.username ? all_user.username : 'User'}</h1>
+                <span>{reviewsByThisAuthor} Reviews in total</span>
                 </div> 
             </Profile>
             <ContentWrapper>

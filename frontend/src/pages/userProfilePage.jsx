@@ -7,12 +7,10 @@ import restaurant from '../assets/restaurant.svg'
 import edit from '../assets/edit.svg'
 import { useState } from "react";
 import EditProfileForm from '../components/editProfileForm'
-import homeCardFetch from "../store/fetches/home_card_fetches";
-import {homeCardAction} from "../store/actions/homeCardActions";
-import {allRestaurantsFetch} from "../store/fetches/restaurant_fetches";
-import {getAllRestaurants} from "../store/actions/restaurantActions";
-import {getLoggedInUserInfoFetch, getLoggedInUserReviews} from "../store/fetches/users_fetches";
-import {getUserInfoAction, getUserReviews} from "../store/actions/usersActions";
+import {usersRestaurantsFetch} from "../store/fetches/restaurant_fetches";
+import {getLoggedInUserInfoFetch, getLoggedInUserReviewComments, getLoggedInUserReviews} from "../store/fetches/users_fetches";
+import {getCommentReview, getUserInfoAction, getUserReviews} from "../store/actions/usersActions";
+import { getUserRestaurants } from "../store/actions/usersActions";
 
 import {
     AboutWrapper,
@@ -26,18 +24,27 @@ import {
 } from "../styles/pageStyles/profileStyles";
 import { useDispatch, useSelector } from 'react-redux';
 import { stars } from '../styles';
+import {Redirect, useHistory} from "react-router-dom";
 
 
 const UserProfile = () => {
+
+    const history = useHistory()
+
     const [toggleState, setToggleState] = useState(1);
     const dispatch = useDispatch ();
     const toggleTab = (index) => {
       setToggleState(index);
-    // console.log(index)
     };
+
+    const isUserLoggedIn = useSelector(state => state.logInReducer.authenticated);
 
     const loggedInUser = useSelector(state => state.usersReducer.loggedInUser);
     const reviewsFromUser = useSelector(state => state.usersReducer.userReview.data);
+    const commentsFromUser = useSelector(state => state.usersReducer.userReviewComment.data);
+
+    const [auth, setAuth] = useState(false)
+
 
     useEffect(() => {
         if (loggedInUser.data) {
@@ -46,18 +53,35 @@ const UserProfile = () => {
                 const action = getUserReviews(data.results);
                 dispatch(action);
             });
+            getLoggedInUserReviewComments(loggedInUser.data.id)
+            .then(data => {
+                const action = getCommentReview(data.results);
+                dispatch(action);
+            });
+            usersRestaurantsFetch(loggedInUser.data.id)
+            .then(data => {
+                const action = getUserRestaurants(data.results);
+                dispatch(action);
+            });
+
             
         }        
     }, [loggedInUser])
 
     useEffect( () => {
        // Fetch the user's comments, reviews and restaurants
-       
-       getLoggedInUserInfoFetch()
-            .then(data => {
-                const action = getUserInfoAction(data);
-                dispatch(action);
-        });
+
+        if (!localStorage.getItem('token')) {
+            history.push('/login');
+        }
+        else {
+            getLoggedInUserInfoFetch()
+                .then(data => {
+                    const action = getUserInfoAction(data);
+                    dispatch(action);
+                    setAuth(true)
+                })
+        }
 
         
         
@@ -81,24 +105,24 @@ const UserProfile = () => {
        //      });
     }, []);
 
-    console.log(reviewsFromUser);
+
     return(
         <>
         <MainContainer>
         <HeaderNavi />
         <ProfileBanner>
            <div className="userdetails">
-               <h2>Laurant H.</h2>
-               <span>Zurich</span>
-               <p><span>6</span>reviews</p>
-               <p><span>210</span>comments</p>
+               <h2>{auth ? loggedInUser.data['username'] : ''}</h2>
+               <span>{auth ? loggedInUser.data['location'] : ''}</span>
+               <p><span>{reviewsFromUser ? reviewsFromUser.length : '0'}</span>reviews</p>
+               <p><span>5</span>comments</p>
            </div>
         </ProfileBanner>
         <ProfileWrapper>
             <ProfileInnerWrapper>
                 <UserProfileWrapper>
                 <img src="https://res.cloudinary.com/tennam/image/upload/v1613260389/Propulsion/Tenzin.png" alt="" srcSet=""/>
-                <h2>Lauren's Profile</h2>
+                <h2>{auth ? loggedInUser.data['username'] : ''}'s Profile</h2>
                 <div className="clickelement" onClick={() => toggleTab(1)}>
                     <img src={star} alt="" srcSet=""/>
                     <span>Reviews</span>
@@ -137,19 +161,28 @@ const UserProfile = () => {
                     }
                     
                     </ReviewsWrapper>
+                
                     <CommentWrapper className={toggleState === 2 ? " active-content" : "content"}>
                         <h1>Comment</h1>
-                        <div className="usercomment">
-                        <span>Review 1</span>
-                        <p>This location at the Bahnhofstrasse.</p>
-                        </div>
-                        <div className="usercomment">
-                        <span>Review 2</span>
-                        <p>This location at the Bahnhofstrasse.</p>
-                        </div>
+                        {
+                            commentsFromUser ? commentsFromUser.map((comment, index) => {
+                            return (
+                                <div className="usercomment">
+                                <span>restaurant</span>
+                                <p>{ comment.comment_content }</p>
+                                </div>
+                            )
+                            }
+                            ) : 
+                        <p>this user has no comments</p>
+                        }
+
                     </CommentWrapper>
                     <RestaurantWrapper className={toggleState === 3 ? " active-content" : "content"}>
                     <h1>Restaurants</h1>
+
+
+
                     <div className="aboutrestaurant">
                         <span>Läderach Chocolatier</span>
                         <div className="ratingstar">
@@ -174,23 +207,22 @@ const UserProfile = () => {
                     </EditProfileWrapper>
                     </ContentWrapper>
                     <AboutWrapper>
-                     <h2>About Laurent</h2>
+                     <h2>About {auth ? loggedInUser.data['username'] : ''}</h2>
                      <span className="detailelement">
                         <h3>Location</h3>
-                        <p>Zurich, CH</p>
+                        <p>{auth ? loggedInUser.data['location'] : ''}</p>
                      </span>
                      <span className="detailelement">
-                        <h3>Luna memeber since</h3>
-                        <p>April, 2018</p>
+                        <h3>Luna member since</h3>
+                        <p>March, 2021</p>
                      </span>
                      <span className="detailelement">
                         <h3>Things I love</h3>
-                        <p>Everything</p>
+                        <p>Booming!</p>
                      </span>
                      <span className="detailelement">
                         <h3>Description</h3>
-                        <p>m professional photographer with an eye for details in every thing I do in my live. 
-                            Every time a pass by a nice restaurant i have to stop and take notes</p>
+                        <p>{auth ? loggedInUser.data['description'] : ''}</p>
                      </span>
                     
                 </AboutWrapper>

@@ -2,6 +2,14 @@ import styled from "styled-components";
 
 export const FormWrapper = styled.div`
     min-height: 100vh;
+    // display: flex;
+    // flex-direction: column;
+    // align-items: center;
+    // .errormessage{
+    //    padding: 5px;
+    //    margin-top: 5px;
+    //    color: red;
+    // }
     .form-group{
         display: flex;
         flex-direction: column;

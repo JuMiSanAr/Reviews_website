@@ -27,12 +27,12 @@ const ReviewCard = (props) => {
 
     const likeHandler = (event) => {
         // event.preventDefault();
-        likeOrUnlikeReviewFetch(props.review.id)
-        .then(data => {
-            const action = passRestaurantData(data)
-            dispatch(action)
-        }) 
-        history.push("/restaurant");
+        // likeOrUnlikeReviewFetch(props.review.id)
+        // .then(data => {
+        //     const action = passRestaurantData(data)
+        //     dispatch(action)
+        // }) 
+
     };
 
     const [ showCommentInput, setShowCommentInput ] = useState(false);

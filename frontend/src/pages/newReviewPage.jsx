@@ -12,8 +12,8 @@ import {
     RatingField,
     ReviewBanner
 } from "../styles/pageStyles/newReviewStyles";
-import { FaStar } from "react-icons/all";
-import { newReviewFetch } from "../store/fetches/review_fetches";
+import {FaStar} from "react-icons/all";
+import {newReviewFetch} from "../store/fetches/review_fetches";
 import { useDispatch, useSelector } from 'react-redux';
 import { passRestaurantData } from '../store/actions/restaurantActions';
 
@@ -28,17 +28,17 @@ const ReviewPage = () => {
 
     const dispatch = useDispatch();
 
-    let restaurant = JSON.parse(localStorage.getItem('restaurant'));
-    const action = passRestaurantData(restaurant);
-    dispatch(action);
-    const restaurant_data = useSelector(state => state.restaurantsReducer.restaurant_data.data);
-    // const restaurantID = restaurant_data.id
+            let restaurant = JSON.parse(localStorage.getItem('restaurant'));
+            const action = passRestaurantData(restaurant);
+            dispatch(action);
+            const restaurant_data = useSelector(state => state.restaurantsReducer.restaurant_data.data);
 
-    const submitReviewAndRating = () => {
-
-        // if (!reviewInput.length) return setNoInputMessage(true) 
-        //     else
-        //     setNoInputMessage(false);
+                const submitReviewAndRating = () => {
+                if (reviewInput === ''){
+                    setNoInputMessage(true);
+                    return 0;
+                }else
+                    setNoInputMessage(false);
 
         newReviewFetch(reviewInput)
         .then(data => {

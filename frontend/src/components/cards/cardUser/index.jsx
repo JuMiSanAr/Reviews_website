@@ -5,7 +5,7 @@ import {AboutMe} from "../../../styles/componentStyles/card/user";
 
 
 const CardUser = ({all_user}) => {
-    console.log(all_user)
+    // console.log(all_user)
     return (
         <RestaurantContainer>
         <CardWrapper>

@@ -7,7 +7,7 @@ import CardUser from '../components/cards/cardUser/index'
 import Footer from '../components/footer/index';
 import { useState } from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {filterRestaurantData, getAllRestaurants} from "../store/actions/restaurantActions";
+import {filterRestaurantData, getAllRestaurants, passRestaurantData} from "../store/actions/restaurantActions";
 import {allRestaurantsFetch} from "../store/fetches/restaurant_fetches";
 import {
     MainContainer,
@@ -19,56 +19,190 @@ import {
 } from "../styles/pageStyles/searchStyle";
 import { allUserAction } from '../store/actions/usersActions';
 import { allUsersFetch } from '../store/fetches/users_fetches';
+import {useHistory} from "react-router-dom";
+import loading from "../assets/loading.gif";
+import homeCardFetch from "../store/fetches/home_card_fetches";
+import {homeCardAction} from "../store/actions/homeCardActions";
+import {getAllReviewsFetch} from "../store/fetches/review_fetches";
+import {getAllReviewsAction} from "../store/actions/reviewsActions";
 
 
 
 
 const SearchPage = () => {
 
+    const history = useHistory();
+    const dispatch = useDispatch();
 
     // Get list of all restaurants
     const allRestaurants = useSelector(state => state.restaurantsReducer.all_restaurants.data);
 
-    // Get list of filtered restaurants
-    // const filteredRestaurant = useSelector(state => state.restaurantsReducer.filtered_restaurant);
-
     // Get list of all users
-    const allUsersList = useSelector(state => state.usersReducer.users.data)
+    const allUsers = useSelector(state => state.usersReducer.users.data);
 
+    // Get list of all reviews
+    const allReviews = useSelector(state => state.reviewsReducer.all_reviews.data);
+
+    // Results fetched from homePage
+    const fetchedRestaurants = useSelector(state => state.searchReducer.restaurants.data);
+    const fetchedReviews = useSelector(state => state.searchReducer.reviews.data);
+    const fetchedUsers = useSelector(state => state.searchReducer.users.data);
+
+    // Local state
     const [toggleState, setToggleState] = useState(1);
     const [searchTerm, setSearchTerm] = useState("");
-    const dispatch = useDispatch();
 
+    // Content being rendered
+    const [showingRestaurants, setShowingRestaurants] = useState(<img src={loading} alt="...loading"/>);
+    const [showingReviews, setShowingReviews] = useState(<img src={loading} alt="...loading"/>);
+    const [showingUsers, setShowingUsers] = useState(<img src={loading} alt="...loading"/>);
 
     const toggleTab = (index) => {
       setToggleState(index);
     };
 
-  // Search filter
-
-   // useEffect(() => {
-   //             const results = !searchTerm ? allRestaurants : allRestaurants.filter(restaurant =>
-   //                         restaurant.name.toLowerCase().includes(searchTerm.toLowerCase()))
-   //             const action = filterRestaurantData(results)
-   //             dispatch(action)
-   //  }, [searchTerm]);
-
-
-    // Get all restaurant
-
+    // Fetch all restaurants, all users, all reviews on page refresh
     useEffect( () => {
-         allRestaurantsFetch()
+       allRestaurantsFetch()
             .then(data => {
                 const action = getAllRestaurants(data.results);
                 dispatch(action);
             });
 
-         allUsersFetch()
+       allUsersFetch()
              .then(data => {
-                 const action = allUserAction(data)
-                 dispatch(action)
+                 const action = allUserAction(data);
+                 dispatch(action);
              });
+
+       getAllReviewsFetch()
+           .then(data => {
+               const action = getAllReviewsAction(data);
+               dispatch(action);
+           });
+
     }, []);
+
+  // Search filter
+   useEffect(() => {
+       if (searchTerm !== '') {
+           const filteredRestaurants = allRestaurants.filter(restaurant => restaurant.name.toLowerCase().includes(searchTerm) ||
+                                                                            restaurant.city.toLowerCase().includes(searchTerm) ||
+                                                                            restaurant.owner['username'].toLowerCase().includes(searchTerm)
+                                                                            );
+           const filteredReviews = allReviews.results.filter(review => review.text_content.toLowerCase().includes(searchTerm) ||
+                                                                       review.restaurant.name.toLowerCase().includes(searchTerm) ||
+                                                                        review.author['username'].toLowerCase().includes(searchTerm));
+           const filteredUsers = allUsers.filter(user => user.username.toLowerCase().includes(searchTerm) ||
+                                                         user.email.toLowerCase().includes(searchTerm));
+
+           setShowingRestaurants(filteredRestaurants.map((restaurant, index) => {
+                return (
+                    <CardRestaurant key={ index } restaurant_data={ restaurant } onClickHandler={ checkRestaurantHandler }/>
+                )
+            }))
+           setShowingReviews(filteredReviews.map((review, index) => {
+                return (
+                    <CardReview key={ index } review_data={ review }/>
+                )
+            }))
+           setShowingUsers(filteredUsers.map((user, index) => {
+                return (
+                    <CardUser key={ index } all_user={ user }/>
+                )
+            }))
+       }
+       else if (allRestaurants && allReviews && allUsers) {
+            setShowingRestaurants(allRestaurants.map((restaurant, index) => {
+                return (
+                    <CardRestaurant key={ index } restaurant_data={ restaurant } onClickHandler={ checkRestaurantHandler }/>
+                )
+            }))
+           setShowingReviews(allReviews.results.map((review, index) => {
+                return (
+                    <CardReview key={ index } review_data={ review }/>
+                )
+            }))
+           setShowingUsers(allUsers.map((user, index) => {
+                return (
+                    <CardUser key={ index } all_user={ user }/>
+                )
+            }))
+       }
+    }, [searchTerm]);
+
+   //Inherited restaurant cards
+   useEffect(() => {
+        if (!fetchedRestaurants && allRestaurants) {
+            setShowingRestaurants(allRestaurants.map((restaurant, index) => {
+                return (
+                    <CardRestaurant key={ index } restaurant_data={ restaurant } onClickHandler={ checkRestaurantHandler }/>
+                )
+            }))
+        }
+   }, [allRestaurants])
+
+    useEffect(() => {
+        if (fetchedRestaurants) {
+            setShowingRestaurants(fetchedRestaurants.map((restaurant, index) => {
+                return (
+                    <CardRestaurant key={ index } restaurant_data={ restaurant } onClickHandler={ checkRestaurantHandler }/>
+                )
+            }))
+        }
+   }, [fetchedRestaurants])
+
+    //Inherited reviews cards
+    useEffect(() => {
+        if (!fetchedReviews && allReviews) {
+            setShowingReviews(allReviews.results.map((review, index) => {
+                return (
+                    <CardReview key={ index } review_data={ review }/>
+                )
+            }))
+        }
+   }, [allReviews])
+
+    useEffect(() => {
+        if (fetchedReviews) {
+            setShowingReviews(fetchedReviews.map((review, index) => {
+                return (
+                    <CardReview key={ index } review_data={ review }/>
+                )
+            }))
+        }
+   }, [fetchedReviews])
+
+
+    //Inherited reviews users
+    useEffect(() => {
+        if (!fetchedUsers && allUsers) {
+            setShowingUsers(allUsers.map((user, index) => {
+                return (
+                    <CardUser key={ index } all_user={ user }/>
+                )
+            }))
+        }
+   }, [allUsers])
+
+    useEffect(() => {
+        if (fetchedUsers) {
+            setShowingUsers(fetchedUsers.map((user, index) => {
+                return (
+                    <CardUser key={ index } all_user={ user }/>
+                )
+            }))
+        }
+   }, [fetchedUsers])
+
+
+      // See the restaurant at restaurant page
+    const checkRestaurantHandler = (data) => {
+        const action = passRestaurantData(data);
+        dispatch(action);
+        localStorage.setItem('restaurant', JSON.stringify(data));
+        history.push("/restaurant");
+    };
 
     return (
         <>
@@ -97,12 +231,13 @@ const SearchPage = () => {
             </TabsContainer>
             <ResCardContainer> 
                 <div className={toggleState === 1 ? " active-content" : "content"}>
-
+                    {showingRestaurants}
                 </div>
                 <div className={toggleState === 2 ? "active-content" : "content"}>
-
+                    {showingReviews}
                 </div>
                 <div className={toggleState === 3 ? "active-content" : "content"}>
+                    {showingUsers}
                 </div>
             </ResCardContainer>  
             </ContentWrapper>

@@ -1,4 +1,4 @@
-import { ALL_USERS, GET_USER_INFO, USER_REVIEW } from "../constants";
+import { ALL_USERS, GET_USER_INFO, USER_REVIEW, USER_REVIEW_COMMENT } from "../constants";
 
 
 const initialState = {
@@ -24,6 +24,12 @@ export const usersReducer = (state = initialState, action) => {
         return {
             ...state,
             userReview : action.payload
+        }
+    }
+    else if (action.type === USER_REVIEW_COMMENT) {
+        return {
+            ...state,
+            userReviewComment : action.payload
         }
     }
     return state;

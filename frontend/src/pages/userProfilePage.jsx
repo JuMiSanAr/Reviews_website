@@ -7,6 +7,13 @@ import restaurant from '../assets/restaurant.svg'
 import edit from '../assets/edit.svg'
 import { useState } from "react";
 import EditProfileForm from '../components/editProfileForm'
+import homeCardFetch from "../store/fetches/home_card_fetches";
+import {homeCardAction} from "../store/actions/homeCardActions";
+import {allRestaurantsFetch} from "../store/fetches/restaurant_fetches";
+import {getAllRestaurants} from "../store/actions/restaurantActions";
+import {getLoggedInUserInfoFetch, getLoggedInUserReviews} from "../store/fetches/users_fetches";
+import {getUserInfoAction, getUserReviews} from "../store/actions/usersActions";
+
 import {
     AboutWrapper,
     CommentWrapper,
@@ -17,26 +24,48 @@ import {
     ProfileWrapper, RestaurantWrapper, ReviewsWrapper,
     UserProfileWrapper
 } from "../styles/pageStyles/profileStyles";
+import { useDispatch, useSelector } from 'react-redux';
+import { stars } from '../styles';
 
 
 const UserProfile = () => {
     const [toggleState, setToggleState] = useState(1);
-
+    const dispatch = useDispatch ();
     const toggleTab = (index) => {
       setToggleState(index);
     // console.log(index)
     };
 
+    const loggedInUser = useSelector(state => state.usersReducer.loggedInUser);
+    const reviewsFromUser = useSelector(state => state.usersReducer.userReview.data);
+
+    useEffect(() => {
+        if (loggedInUser.data) {
+            getLoggedInUserReviews(loggedInUser.data.id)
+            .then(data => {
+                const action = getUserReviews(data.results);
+                dispatch(action);
+            });
+            
+        }        
+    }, [loggedInUser])
+
     useEffect( () => {
        // Fetch the user's comments, reviews and restaurants
        
-        // getLoggedInUserReviews()
+       getLoggedInUserInfoFetch()
+            .then(data => {
+                const action = getUserInfoAction(data);
+                dispatch(action);
+        });
+
+        
+        
+        // getLoggedInUserReviewComments()
         //     .then(data => {
-        //         const action = usersActions(data.results[0].best_four);
+        //         const action = usersActions(data.results[2]);
         //         dispatch(action);
         //     });
-        
-        
         
 
        //  homeCardFetch()
@@ -52,8 +81,7 @@ const UserProfile = () => {
        //      });
     }, []);
 
-    // useEffect()
-
+    console.log(reviewsFromUser);
     return(
         <>
         <MainContainer>
@@ -91,34 +119,23 @@ const UserProfile = () => {
                 <ContentWrapper>
                     <ReviewsWrapper className={toggleState === 1 ? " active-content" : "content"}>
                     <h1>Reviews</h1>
-                    <div className="userreviews">
-                        <span>Läderach Chocolatier Suisse</span>
-                        <div className="ratingstar">
-                            <img src={star} alt=""/>
-                            <img src={star} alt=""/>
-                            <img src={star} alt=""/>
-                            <img src={star} alt=""/>
-                            <img src={star} alt=""/>
-                        </div>
-                        <p>This location at the Bahnhofstrasse is quite friendly
-                            and easily located across the street from the train station. 
-                            The people there seem to be quite good and helpful in their 
-                            service.</p>
-                    </div>
-                    <div className="userreviews">
-                        <span>Läderach Chocolatier Suisse</span>
-                        <div className="ratingstar">
-                            <img src={star} alt=""/>
-                            <img src={star} alt=""/>
-                            <img src={star} alt=""/>
-                            <img src={star} alt=""/>
-                            <img src={star} alt=""/>
-                        </div>
-                        <p>This location at the Bahnhofstrasse is quite friendly
-                            and easily located across the street from the train station. 
-                            The people there seem to be quite good and helpful in their 
-                            service.</p>
-                    </div>
+                    { 
+                        reviewsFromUser ? reviewsFromUser.map((review, index) => {
+                            return (
+                            <div key={index} className="userreviews">
+                                <span>{review.restaurant.name} </span>
+                                <div className="ratingstar">
+                                    
+                                    {review.rating === 0 ? <p>No ratings</p> : stars(parseInt(review.rating))}
+                                                            
+                                
+                                </div>
+                            <p>{review.text_content} </p>
+                            </div>)
+                        } ) : 
+                        <p>this user has no reviews</p>
+                    }
+                    
                     </ReviewsWrapper>
                     <CommentWrapper className={toggleState === 2 ? " active-content" : "content"}>
                         <h1>Comment</h1>

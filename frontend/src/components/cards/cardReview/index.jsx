@@ -12,40 +12,37 @@ import {
 } from "../../../styles/componentStyles/card/review";
 
 
-const CardReview = () => {
+const CardReview = ({review_data, all_reviews}) => {
+
+    console.log(all_reviews, 'from reviews')
+
+    const reviewsByThisAuthor = all_reviews.results.filter(review => review.author.id === review_data.author.id);
+
     return (
         <RestaurantContainer>
             <CardWrapper>
                 <Profile>
                     <img src="https://res.cloudinary.com/tennam/image/upload/v1613260389/Propulsion/Tenzin.png" alt=""/>
                     <div>
-                    <h1>Lauren H.</h1>
-                    <span>6 Reviews in total</span>
+                    <h1>{review_data.author.username}</h1>
+                    <span>{reviewsByThisAuthor.length} Reviews in total</span>
                     </div> 
                 </Profile>
                 <ContentWrapper>
-                    <h2>Colinz Bar</h2>
+                    <h2>{review_data.restaurant.name}</h2>
                     <FeaturedComment>
-                        <p>
-                            React wouldn’t know what to return for the second useState Hook call. 
-                            React expected that the second Hook call.. <a href="http://">read more</a>
-                        </p>    
+                        <p>{review_data.text_content}</p>
                     </FeaturedComment>
                     <SocialButton>
-                        <button className="likebutton"> <img src={like} alt=""/> Like <span>63</span></button>
-                        <button className="commentbutton">Comment <span>23</span></button>  
+                        <button className="likebutton"> <img src={like} alt=""/> Like <span>{review_data.liked_by.length}</span></button>
+                        <button className="commentbutton">Comment <span>0</span></button> {/*TO BE UPDATED*/}
                     </SocialButton>
                     <LatestComments>
                     <span>
                         Latest comments
                     </span>
                     <CommentUpdates>
-                        <h5>Colin Wirz</h5>
-                        <p>Actually you have no taste!</p>
-                    </CommentUpdates>
-                    <CommentUpdates>
-                        <h5>Oded</h5>
-                        <p>Actually you have no taste!</p>
+                        <h5>No comments</h5> {/*TO BE UPDATED*/}
                     </CommentUpdates>
                     </LatestComments>
                 </ContentWrapper>
@@ -55,3 +52,4 @@ const CardReview = () => {
 }
 
 export default CardReview;
+

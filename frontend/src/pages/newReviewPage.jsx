@@ -16,6 +16,7 @@ import {FaStar} from "react-icons/all";
 import {newReviewFetch} from "../store/fetches/review_fetches";
 import { useDispatch, useSelector } from 'react-redux';
 import { passRestaurantData } from '../store/actions/restaurantActions';
+import SimpleRating from "../components/rating/rating";
 
 
 
@@ -59,14 +60,7 @@ const ReviewPage = () => {
             </ReviewBanner>
             <MainContainer>
             <RatingField>
-                {/*<button onClick={saveRating1}><FaStar /></button>*/}
-                                {/*<button onClick={saveRating2}><FaStar /></button>*/}
-                {/*<button onClick={saveRating3}><FaStar /></button>*/}
-                <button><FaStar /></button>
-                <button><FaStar /></button>
-                <button><FaStar /></button>
-                <button><FaStar /></button>
-                <button><FaStar /></button>
+            <SimpleRating/>
             <h5>Select your rating</h5>
             </RatingField>
             <InputReviewField>

@@ -13,22 +13,22 @@ export const ReviewBanner = styled.div `
 `;
 
 export const MainContainer = styled.div `
-min-height: 60vh;
-width: 100%;
+    min-height: 60vh;
+    width: 100%;
 `;
 
 export const InputReviewField = styled.div`
-display: flex;
-justify-content: center;
-align-items: left;
-flex-direction: column;
-margin: 20px 10px 10px 250px;
-border: 1px solid #E3E3E3;
-box-sizing: border-box;
-border-radius: 3px;
-width: 832px;
-height: 264.5px;
-background: #FFFFFF;
+        display: flex;
+        justify-content: center;
+        align-items: left;
+        flex-direction: column;
+        margin: 20px 10px 10px 250px;
+        border: 1px solid #E3E3E3;
+        box-sizing: border-box;
+        border-radius: 3px;
+        width: 832px;
+        height: 264.5px;
+        background: #FFFFFF;
 
     input {
         font-style: normal;

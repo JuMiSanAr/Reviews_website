@@ -7,6 +7,13 @@ import restaurant from '../assets/restaurant.svg'
 import edit from '../assets/edit.svg'
 import { useState } from "react";
 import EditProfileForm from '../components/editProfileForm'
+import homeCardFetch from "../store/fetches/home_card_fetches";
+import {homeCardAction} from "../store/actions/homeCardActions";
+import {allRestaurantsFetch} from "../store/fetches/restaurant_fetches";
+import {getAllRestaurants} from "../store/actions/restaurantActions";
+import {getLoggedInUserInfoFetch, getLoggedInUserReviews} from "../store/fetches/users_fetches";
+import {getUserInfoAction, getUserReviews} from "../store/actions/usersActions";
+
 import {
     AboutWrapper,
     CommentWrapper,
@@ -17,26 +24,62 @@ import {
     ProfileWrapper, RestaurantWrapper, ReviewsWrapper,
     UserProfileWrapper
 } from "../styles/pageStyles/profileStyles";
+import { useDispatch, useSelector } from 'react-redux';
+import { stars } from '../styles';
+import {Redirect, useHistory} from "react-router-dom";
 
 
 const UserProfile = () => {
-    const [toggleState, setToggleState] = useState(1);
 
+    const history = useHistory()
+
+    const [toggleState, setToggleState] = useState(1);
+    const dispatch = useDispatch ();
     const toggleTab = (index) => {
       setToggleState(index);
-    // console.log(index)
     };
+
+    const isUserLoggedIn = useSelector(state => state.logInReducer.authenticated);
+
+    const loggedInUser = useSelector(state => state.usersReducer.loggedInUser);
+    const reviewsFromUser = useSelector(state => state.usersReducer.userReview.data);
+
+    const [auth, setAuth] = useState(false)
+
+
+    useEffect(() => {
+        if (loggedInUser.data) {
+            getLoggedInUserReviews(loggedInUser.data.id)
+            .then(data => {
+                const action = getUserReviews(data.results);
+                dispatch(action);
+            });
+            
+        }        
+    }, [loggedInUser])
 
     useEffect( () => {
        // Fetch the user's comments, reviews and restaurants
-       
-        // getLoggedInUserReviews()
+
+        if (!localStorage.getItem('token')) {
+            history.push('/login');
+        }
+        else {
+            getLoggedInUserInfoFetch()
+                .then(data => {
+                    const action = getUserInfoAction(data);
+                    dispatch(action);
+                    setAuth(true)
+                })
+        }
+
+        
+        
+        // getLoggedInUserReviewComments()
         //     .then(data => {
-        //         const action = usersActions(data.results[0].best_four);
+        //         const action = usersActions(data.results[2]);
         //         dispatch(action);
         //     });
-        
-        
         
 
        //  homeCardFetch()
@@ -52,7 +95,6 @@ const UserProfile = () => {
        //      });
     }, []);
 
-    // useEffect()
 
     return(
         <>
@@ -60,17 +102,17 @@ const UserProfile = () => {
         <HeaderNavi />
         <ProfileBanner>
            <div className="userdetails">
-               <h2>Laurant H.</h2>
-               <span>Zurich</span>
-               <p><span>6</span>reviews</p>
-               <p><span>210</span>comments</p>
+               <h2>{auth ? loggedInUser.data['username'] : ''}</h2>
+               <span>{auth ? loggedInUser.data['location'] : ''}</span>
+               <p><span>{reviewsFromUser ? reviewsFromUser.length : '0'}</span>reviews</p>
+               <p><span>5</span>comments</p>
            </div>
         </ProfileBanner>
         <ProfileWrapper>
             <ProfileInnerWrapper>
                 <UserProfileWrapper>
                 <img src="https://res.cloudinary.com/tennam/image/upload/v1613260389/Propulsion/Tenzin.png" alt="" srcSet=""/>
-                <h2>Lauren's Profile</h2>
+                <h2>{auth ? loggedInUser.data['username'] : ''}'s Profile</h2>
                 <div className="clickelement" onClick={() => toggleTab(1)}>
                     <img src={star} alt="" srcSet=""/>
                     <span>Reviews</span>
@@ -91,34 +133,23 @@ const UserProfile = () => {
                 <ContentWrapper>
                     <ReviewsWrapper className={toggleState === 1 ? " active-content" : "content"}>
                     <h1>Reviews</h1>
-                    <div className="userreviews">
-                        <span>Läderach Chocolatier Suisse</span>
-                        <div className="ratingstar">
-                            <img src={star} alt=""/>
-                            <img src={star} alt=""/>
-                            <img src={star} alt=""/>
-                            <img src={star} alt=""/>
-                            <img src={star} alt=""/>
-                        </div>
-                        <p>This location at the Bahnhofstrasse is quite friendly
-                            and easily located across the street from the train station. 
-                            The people there seem to be quite good and helpful in their 
-                            service.</p>
-                    </div>
-                    <div className="userreviews">
-                        <span>Läderach Chocolatier Suisse</span>
-                        <div className="ratingstar">
-                            <img src={star} alt=""/>
-                            <img src={star} alt=""/>
-                            <img src={star} alt=""/>
-                            <img src={star} alt=""/>
-                            <img src={star} alt=""/>
-                        </div>
-                        <p>This location at the Bahnhofstrasse is quite friendly
-                            and easily located across the street from the train station. 
-                            The people there seem to be quite good and helpful in their 
-                            service.</p>
-                    </div>
+                    { 
+                        reviewsFromUser ? reviewsFromUser.map((review, index) => {
+                            return (
+                            <div key={index} className="userreviews">
+                                <span>{review.restaurant.name} </span>
+                                <div className="ratingstar">
+                                    
+                                    {review.rating === 0 ? <p>No ratings</p> : stars(parseInt(review.rating))}
+                                                            
+                                
+                                </div>
+                            <p>{review.text_content} </p>
+                            </div>)
+                        } ) : 
+                        <p>this user has no reviews</p>
+                    }
+                    
                     </ReviewsWrapper>
                     <CommentWrapper className={toggleState === 2 ? " active-content" : "content"}>
                         <h1>Comment</h1>
@@ -157,23 +188,22 @@ const UserProfile = () => {
                     </EditProfileWrapper>
                     </ContentWrapper>
                     <AboutWrapper>
-                     <h2>About Laurent</h2>
+                     <h2>About {auth ? loggedInUser.data['username'] : ''}</h2>
                      <span className="detailelement">
                         <h3>Location</h3>
-                        <p>Zurich, CH</p>
+                        <p>{auth ? loggedInUser.data['location'] : ''}</p>
                      </span>
                      <span className="detailelement">
-                        <h3>Luna memeber since</h3>
-                        <p>April, 2018</p>
+                        <h3>Luna member since</h3>
+                        <p>March, 2021</p>
                      </span>
                      <span className="detailelement">
                         <h3>Things I love</h3>
-                        <p>Everything</p>
+                        <p>Booming!</p>
                      </span>
                      <span className="detailelement">
                         <h3>Description</h3>
-                        <p>m professional photographer with an eye for details in every thing I do in my live. 
-                            Every time a pass by a nice restaurant i have to stop and take notes</p>
+                        <p>{auth ? loggedInUser.data['description'] : ''}</p>
                      </span>
                     
                 </AboutWrapper>

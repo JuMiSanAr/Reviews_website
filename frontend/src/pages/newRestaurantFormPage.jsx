@@ -26,6 +26,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {allCategoriesAction} from "../store/actions/categoriesActions";
 import {countriesList, hours, weekDays, weekDaysValues} from "../store/constants";
 import {newRestaurantFetch} from "../store/fetches/restaurant_fetches";
+import {useHistory} from "react-router-dom";
 
 // THE RELATED CSS YOU'LL FIND IN "newRestaurantStyles.js"
 
@@ -35,6 +36,7 @@ import {newRestaurantFetch} from "../store/fetches/restaurant_fetches";
 const NewRestaurantFormPage = () => {
 
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const [name, setName] = useState('');
     const [categories, setCategories] = useState('1');
@@ -92,16 +94,14 @@ const NewRestaurantFormPage = () => {
 
         // Make sure phone matches the requirements
         formData.append('phone', phone);
-        console.log('phone', phone)
 
         const openingHours = `${firstDay}-${lastDay}, ${openingHour}-${closingHour}`
         formData.append('opening_hours', openingHours);
-        console.log('opening_hours', openingHours)
 
         newRestaurantFetch(formData)
             .then(data => {
-                console.log('data', data)
                 setSuccess(true)
+                history.push('/userProfile')
             })
             .catch(error => {
                 console.log('error', error)

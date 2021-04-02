@@ -66,17 +66,6 @@ const HomePage = () => {
         // Fetch user info and send it to redux store
     // const isUserLoggedIn = useSelector(state => state.logInReducer.authenticated);
     //
-    // useEffect(() => {
-    //     console.log('changing user', isUserLoggedIn)
-    //     if (isUserLoggedIn) {
-    //         getLoggedInUserInfoFetch()
-    //             .then(data => {
-    //                 console.log('userInfo', data)
-    //                 const action = getUserInfoAction(data);
-    //                 dispatch(action);
-    //         });
-    //     }
-    // }, [isUserLoggedIn]);
 
     /*// Get list of all restaurants
     const allRestaurants = useSelector(state => state.restaurantsReducer.all_restaurants.data);*/

@@ -33,3 +33,12 @@ export const newRestaurantFetch = (formData) => {
         true,
     )
 }
+
+export const usersRestaurantsFetch = (id) => {
+    return fetchAPI(
+        `restaurants/user/${id}`,
+        false,
+        'GET',
+        headersWithToken,
+    )
+}

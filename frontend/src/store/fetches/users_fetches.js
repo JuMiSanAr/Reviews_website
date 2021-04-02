@@ -32,10 +32,10 @@ export const getLoggedInUserReviews = (id) => {
     )
 }
 
-export const getLoggedInUserReviewComments = () => {
+export const getLoggedInUserReviewComments = (id) => {
 
     return fetchAPI(
-        'comment/',
+        `review/comment/${id}`,
         false,
         'GET',
         headersWithToken

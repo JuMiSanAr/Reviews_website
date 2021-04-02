@@ -116,7 +116,7 @@ export const BtnReview = styled.button`
         border-style:none;
         margin-left: 880px;
         margin-bottom: 100px;
-        font-family: Helvetica; // needs to be changed to Roboto!!
+        font-family: Roboto, sans-serif;
         font-style: normal;
         font-weight: normal;
         font-size: 20px;

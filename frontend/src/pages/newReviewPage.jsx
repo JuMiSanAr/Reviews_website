@@ -23,32 +23,29 @@ const ReviewPage = () => {
 
 
     const [reviewInput, setReviewInput] = useState('');
-    const [noInput, setNoInputMessage] = useState(false);
+    // const [noInput, setNoInputMessage] = useState(false);
+
+     const dispatch = useDispatch();
+     let restaurant = JSON.parse(localStorage.getItem('restaurant'));
+     const action = passRestaurantData(restaurant);
+     dispatch(action);
+     const restaurant_data = useSelector(state => state.restaurantsReducer.restaurant_data.data);
+     const restaurantID = restaurant_data.id
 
 
-        const dispatch = useDispatch();
+    const submitReviewAndRating = (e) => {
+         //e.preventDefault();
+        // if (reviewInput === ''){
+        //     setNoInputMessage(true);
+        //     return 0;
+        // }else
+        //     setNoInputMessage(false);
 
-            let restaurant = JSON.parse(localStorage.getItem('restaurant'));
-            const action = passRestaurantData(restaurant);
-            dispatch(action);
-            const restaurant_data = useSelector(state => state.restaurantsReducer.restaurant_data.data);
-
-            const restaurantID = restaurant_data.id
-
-                const submitReviewAndRating = (e) => {
-                //e.preventDefault();
-                if (reviewInput === ''){
-                    setNoInputMessage(true);
-                    return 0;
-                }else
-                    setNoInputMessage(false);
-
-                newReviewFetch(reviewInput, restaurantID)
-                .then(data => {
-                    console.log(data);
-
+        newReviewFetch(reviewInput, restaurantID)
+            .then(data => {
+                console.log(data);
             });
-            };
+     };
 
 
 
@@ -85,7 +82,7 @@ const ReviewPage = () => {
 
                 </InputReviewField>
                 <BtnReview onClick={submitReviewAndRating}>SUBMIT</BtnReview>
-                {noInput? <P>This field is required</P> : ''}
+                {/*{noInput ? <P>This field is required</P> : ''}*/}
             </MainContainer>
                 
             <Footer />

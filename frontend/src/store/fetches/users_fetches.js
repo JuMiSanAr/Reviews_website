@@ -21,3 +21,13 @@ export const allUsersFetch = () => {
         headers
     )
 }
+
+export const getLoggedInUserReviews = () => {
+
+    return fetchAPI(
+        'me/',
+        false,
+        'GET',
+        headersWithToken
+    )
+}

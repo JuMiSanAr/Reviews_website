@@ -1,58 +1,28 @@
-import React from 'react'
-import styled from 'styled-components'
-
-const FormWrapper = styled.div`
-    min-height: 100vh;
-    .form-group{
-        display: flex;
-        flex-direction: column;
-    input{
-        width: 300px;
-        height: 52px;
-        border-radius: 5px;
-        border: 1px solid #EBEBEB;
-        outline: none;
-        margin: 10px 0 20px 0;
-        padding: 10px;
-        /* margin-bottom: 50px; */
-    }
-    textarea{
-        width: 300px;
-        height: 52px;
-        border-radius: 5px;
-        border: 1px solid #EBEBEB;
-        outline: none;
-        margin: 10px 0 20px 0;
-        padding: 10px;
-    }
-    }
-`;
-
-const ButtonWrapper = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    button{
-        width: 200px;
-        height: 56px;
-        background: #E47D31;
-        border-radius: 28px;
-        border-style:none;
-        margin-left: 10px;
-        margin-right: 10px;
-        font-size: 20px;
-        line-height: 23px;
-        text-align: center;
-        color: #FFFFFF;
-        outline:none;
-    }
-    span{
-        color:#BA0000;
-    }
-`;
+import React, {useState} from 'react'
+import {ButtonWrapper, FormWrapper} from "../../styles/componentStyles/editProfile/profile";
+import loginFetch from "../../store/fetches/login_fetches";
+import {loginAction} from "../../store/actions/loginActions";
+import {getLoggedInUserInfoFetch} from "../../store/fetches/users_fetches";
+import {getUserInfoAction} from "../../store/actions/usersActions";
+import {userProfilePatch} from "../../store/fetches/profile_edit_fetches";
 
 
 const EditProfileForm = () => {
+	 const [ username, setUsername ] = useState('');
+	 const [ first_name, setFirst_name ] = useState('');
+	 const [ last_name, setLast_name ] = useState('');
+	 const [ email, setEmail ] = useState('');
+	 const [ location, setLocation ] = useState('');
+	  const [ phone, setPhone ] = useState('');
+	 const [ things_i_like, setThings_i_like ] = useState('');
+	 const [ description, setDescription ] = useState('');
+
+	 const editHandler = () => {
+		userProfilePatch(username,first_name,
+			last_name, email, location, phone,
+			things_i_like, description)
+			.then()
+    }
 
 
     return (
@@ -60,46 +30,46 @@ const EditProfileForm = () => {
 
         <div className="form-group">
 			<label>username</label>
-			<input name="user_name" type="text"/>
+			<input name="user_name" type="text" value={username} onChange={event => setUsername(event.target.value)}/>
 		</div>
 
 		<div className="form-group">
 			<label>First name</label>
-			<input name="first_name" type="text"/>
+			<input name="first_name" type="text" value={first_name} onChange={event => setFirst_name(event.target.value)}/>
 		</div>
 
 		<div className="form-group">
 			<label>Last name</label>
-			<input name="last_name" type="text"/>
+			<input name="last_name" type="text" value={last_name} onChange={event => setLast_name(event.target.value)}/>
 		</div>
 
 		<div className="form-group">
 			<label>Email</label>
-			<input name="email" type="text"/>
+			<input name="email" type="text" value={email} onChange={event => setEmail(event.target.value)}/>
 		</div>
 
 		<div className="form-group">
 			<label>Location</label>
-            <input name="location" type="text"/>
+            <input name="location" type="text" value={location} onChange={event => setLocation(event.target.value)}/>
 			
 		</div>
 
 		<div className="form-group">
 			<label>Phone</label>
-			<input name="phone" type="text"/>
+			<input name="phone" type="text" value={phone} onChange={event => setPhone(event.target.value)}/>
 		</div>
 
 		<div className="form-group">
 			<label>Things i love</label>
-            <textarea></textarea>
+            <textarea value={things_i_like} onChange={event => setThings_i_like(event.target.value)}/>
 		</div>
 
 		<div className="form-group">
 			<label>Description</label>
-            <textarea></textarea>	
+            <textarea value={description} onChange={event => setDescription(event.target.value)}/>
 		</div> 
         <ButtonWrapper>
-            <button type="submit">Save</button>
+            <button type="submit"  onClick={editHandler}>Save</button>
             <span>Delete account</span>
         </ButtonWrapper>
         </FormWrapper>

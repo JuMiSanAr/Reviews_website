@@ -35,15 +35,10 @@ const SearchPage = () => {
     // Get list of all users
     const allUsersList = useSelector(state => state.usersReducer.users.data)
 
-
     const [toggleState, setToggleState] = useState(1);
     const [searchTerm, setSearchTerm] = useState("");
     const dispatch = useDispatch();
 
-
-    const handleChange = event => {
-    setSearchTerm(event.target.value)
-  };
 
     const toggleTab = (index) => {
       setToggleState(index);
@@ -82,7 +77,7 @@ const SearchPage = () => {
             <HeaderNavi/>
             <SearchSelectContainer>
                 <SearchBox><input type="search" name=""  placeholder='Search..' value={searchTerm}
-                  onChange={handleChange}/></SearchBox>
+                  onChange={e => setSearchTerm(e.target.value)}/></SearchBox>
                 <SelectCategory>
                 <span></span>
                 <select>
@@ -131,7 +126,7 @@ const SearchPage = () => {
                     {
                         allUsersList.map((users, index)=> {
                             return (
-                                  <CardUser all_user={users}/>
+                                  <CardUser  key={index} all_user={users}/>
                             )
                         })
                     }

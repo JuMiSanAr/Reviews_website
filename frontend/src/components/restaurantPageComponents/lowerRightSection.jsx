@@ -13,7 +13,7 @@ import money from '../../assets/money.svg';
 const RightSection = (props) => {
     const history = useHistory();
     const { opening_hours, price_level, owner} = props.restaurant_data
-    console.log(owner)
+    // console.log(owner)
 
     const writeReviewHandler = () => {
         

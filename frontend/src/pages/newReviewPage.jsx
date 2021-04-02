@@ -11,7 +11,8 @@ import RestaurantTitle from '../components/restaurantPageComponents/bannerTitle'
 import { RestaurantInfoBanner } from '../styles/pageStyles/restaurantStyles';
 import {BtnReview, InputReviewField, MainContainer, P, RatingField} from "../styles/pageStyles/newReviewStyles";
 import {FaStar} from "react-icons/all";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { passRestaurantData } from '../store/actions/restaurantActions';
 
 
 
@@ -116,7 +117,12 @@ const restaurant = {
 
 
 const ReviewPage = () => {
-    const restaurant_data = useSelector(state => state.restaurantsReducer.restaurant_data);
+    const dispatch = useDispatch();
+
+    let restaurant = JSON.parse(localStorage.getItem('restaurant'));
+    const action = passRestaurantData(restaurant);
+    dispatch(action);
+    const restaurant_data = useSelector(state => state.restaurantsReducer.restaurant_data.data);
 
     // const writeReviewHandler = (event) => {
     //     console.log(event);

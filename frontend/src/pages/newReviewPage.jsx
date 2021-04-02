@@ -13,7 +13,7 @@ import {
     ReviewBanner
 } from "../styles/pageStyles/newReviewStyles";
 import {FaStar} from "react-icons/all";
-import newReviewFetch from "../store/fetches/review_fetches";
+import {newReviewFetch} from "../store/fetches/review_fetches";
 import { useDispatch, useSelector } from 'react-redux';
 import { passRestaurantData } from '../store/actions/restaurantActions';
 
@@ -33,14 +33,17 @@ const ReviewPage = () => {
             dispatch(action);
             const restaurant_data = useSelector(state => state.restaurantsReducer.restaurant_data.data);
 
-                const submitReviewAndRating = () => {
+            const restaurantID = restaurant_data.id
+
+                const submitReviewAndRating = (e) => {
+                //e.preventDefault();
                 if (reviewInput === ''){
                     setNoInputMessage(true);
                     return 0;
                 }else
                     setNoInputMessage(false);
 
-                newReviewFetch(reviewInput)
+                newReviewFetch(reviewInput, restaurantID)
                 .then(data => {
                     console.log(data);
 

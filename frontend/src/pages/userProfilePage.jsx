@@ -26,9 +26,13 @@ import {
 } from "../styles/pageStyles/profileStyles";
 import { useDispatch, useSelector } from 'react-redux';
 import { stars } from '../styles';
+import {Redirect, useHistory} from "react-router-dom";
 
 
 const UserProfile = () => {
+
+    const history = useHistory()
+
     const [toggleState, setToggleState] = useState(1);
     const dispatch = useDispatch ();
     const toggleTab = (index) => {
@@ -36,8 +40,11 @@ const UserProfile = () => {
     // console.log(index)
     };
 
+    const isUserLoggedIn = useSelector(state => state.logInReducer.authenticated);
+
     const loggedInUser = useSelector(state => state.usersReducer.loggedInUser);
     const reviewsFromUser = useSelector(state => state.usersReducer.userReview.data);
+
 
     useEffect(() => {
         if (loggedInUser.data) {
@@ -52,12 +59,17 @@ const UserProfile = () => {
 
     useEffect( () => {
        // Fetch the user's comments, reviews and restaurants
-       
-       getLoggedInUserInfoFetch()
-            .then(data => {
-                const action = getUserInfoAction(data);
-                dispatch(action);
-        });
+
+        if (!isUserLoggedIn) {
+            history.push('/login');
+        }
+        else {
+            getLoggedInUserInfoFetch()
+                .then(data => {
+                    const action = getUserInfoAction(data);
+                    dispatch(action);
+                })
+        }
 
         
         
@@ -81,14 +93,14 @@ const UserProfile = () => {
        //      });
     }, []);
 
-    console.log(reviewsFromUser);
+    console.log('loggedin', loggedInUser);
     return(
         <>
         <MainContainer>
         <HeaderNavi />
         <ProfileBanner>
            <div className="userdetails">
-               <h2>Laurant H.</h2>
+               <h2>Username</h2>
                <span>Zurich</span>
                <p><span>6</span>reviews</p>
                <p><span>210</span>comments</p>

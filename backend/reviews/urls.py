@@ -1,9 +1,10 @@
 from django.urls import path
 
 from reviews.views import CreateReviewView, ListRestaurantReviewsView, ListUserReviewsView, GetUpdateDeleteReviewView, \
-    GetReviewsCommentedByUser, ToggleReviewLikeView, ListOfLikedReviewsView
+    GetReviewsCommentedByUser, ToggleReviewLikeView, ListOfLikedReviewsView, ListAllReviewsView
 
 urlpatterns = [
+    path('', ListAllReviewsView.as_view()),
     path('new/<int:restaurant_id>/', CreateReviewView.as_view()),
     path('restaurant/<int:restaurant_id>/', ListRestaurantReviewsView.as_view()),
     path('user/<int:user_id>/', ListUserReviewsView.as_view()),

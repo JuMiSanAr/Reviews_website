@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 import Footer from '../components/footer';
 import HeaderNavi from '../components/headerNavi';
-
 import RestaurantTitle from '../components/restaurantPageComponents/bannerTitle';
 import { RestaurantInfoBanner } from '../styles/pageStyles/restaurantStyles';
 import {
@@ -15,32 +14,38 @@ import {
 } from "../styles/pageStyles/newReviewStyles";
 import {FaStar} from "react-icons/all";
 import newReviewFetch from "../store/fetches/review_fetches";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { passRestaurantData } from '../store/actions/restaurantActions';
 
 
 
 const ReviewPage = () => {
-    const restaurant_data = useSelector(state => state.restaurantsReducer.restaurant_data);
 
 
     const [reviewInput, setReviewInput] = useState('');
     const [noInput, setNoInputMessage] = useState(false);
 
 
+        const dispatch = useDispatch();
 
-        const submitReviewAndRating = () => {
-        if (reviewInput === ''){
-            setNoInputMessage(true);
-            return 0;
-        }else
-            setNoInputMessage(false);
+            let restaurant = JSON.parse(localStorage.getItem('restaurant'));
+            const action = passRestaurantData(restaurant);
+            dispatch(action);
+            const restaurant_data = useSelector(state => state.restaurantsReducer.restaurant_data.data);
 
-        newReviewFetch(reviewInput)
-        .then(data => {
-            console.log(data);
+                const submitReviewAndRating = () => {
+                if (reviewInput === ''){
+                    setNoInputMessage(true);
+                    return 0;
+                }else
+                    setNoInputMessage(false);
 
-    });
-    };
+                newReviewFetch(reviewInput)
+                .then(data => {
+                    console.log(data);
+
+            });
+            };
 
 
 
@@ -85,5 +90,4 @@ const ReviewPage = () => {
     );
 };
 export default ReviewPage;
-
 

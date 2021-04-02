@@ -20,27 +20,17 @@ const LoginPage = () => {
     const history = useHistory()
 
 
-    const loginHandler = async () => {
-
-             loginFetch(email, password)
-                .then(data => {
-            const action = loginAction(data.access);
-            dispatch(action);
+    const loginHandler = () => {
+        loginFetch(email, password)
+            .then(data => {
             localStorage.setItem('token', data.access);
-        history.push('/')
+            const action = loginAction(data.access, true);
+            dispatch(action);
+            history.push('/');
         })
         .catch(() => {
                 setErrorMessage(true);
             })
-
-        // const data = await response.access
-
-        // getLoggedInUserInfoFetch(data)
-        //     .then(data => {
-        //         const action = getUserInfoAction(data);
-        //         dispatch(action);
-        //         history.push('/');
-        // })
     }
 
     return (

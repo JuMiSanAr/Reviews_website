@@ -12,17 +12,19 @@ import { FeaturedRestaurant, FilterTitle, HomeBanner, MainContainer, SearchBox }
 import { ContentWrapper } from "../styles/pageStyles/searchStyle";
 // ===================================================
 // ==================== fetches ======================
-import { allUsersFetch } from '../store/fetches/users_fetches';
+import {allUsersFetch} from '../store/fetches/users_fetches';
 import { allRestaurantsFetch } from "../store/fetches/restaurant_fetches";
-import searchResFetch from "../store/fetches/search_fetches";
+import {searchResFetch, searchReviewsFetch, searchUsersFetch} from "../store/fetches/search_fetches";
 import homeCardFetch from "../store/fetches/home_card_fetches";
 // ===================================================
 // =================== actions =======================
-import { searchResAction } from "../store/actions/searchActions";
+import {searchResAction, searchReviewsAction, searchUsersAction} from "../store/actions/searchActions";
 import { passRestaurantData } from '../store/actions/restaurantActions';
 import { getAllRestaurants } from "../store/actions/restaurantActions";
 import { homeCardAction } from "../store/actions/homeCardActions";
-import { allUserAction } from '../store/actions/usersActions';
+import {allUserAction, getUserInfoAction} from '../store/actions/usersActions';
+import {getAllReviewsFetch} from "../store/fetches/review_fetches";
+import {getAllReviewsAction} from "../store/actions/reviewsActions";
 // ===================================================
 
 
@@ -33,7 +35,7 @@ const HomePage = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    // Fetch all restaurants and best four restaurants
+    // Fetch all restaurants, all users, all reviews and best four restaurants
     useEffect( () => {
         homeCardFetch()
             .then(data => {
@@ -49,17 +51,32 @@ const HomePage = () => {
 
        allUsersFetch()
              .then(data => {
-                 const action = allUserAction(data)
-                 dispatch(action)
+                 const action = allUserAction(data);
+                 dispatch(action);
              });
 
-            // Fetch user info and send it to redux store
-        // getLoggedInUserInfoFetch()
-        //     .then(data => {
-        //     // const action =
-        // })
+       getAllReviewsFetch()
+           .then(data => {
+               const action = getAllReviewsAction(data);
+               dispatch(action);
+           })
+
     }, []);
 
+        // Fetch user info and send it to redux store
+    // const isUserLoggedIn = useSelector(state => state.logInReducer.authenticated);
+    //
+    // useEffect(() => {
+    //     console.log('changing user', isUserLoggedIn)
+    //     if (isUserLoggedIn) {
+    //         getLoggedInUserInfoFetch()
+    //             .then(data => {
+    //                 console.log('userInfo', data)
+    //                 const action = getUserInfoAction(data);
+    //                 dispatch(action);
+    //         });
+    //     }
+    // }, [isUserLoggedIn]);
 
     /*// Get list of all restaurants
     const allRestaurants = useSelector(state => state.restaurantsReducer.all_restaurants.data);*/
@@ -71,13 +88,31 @@ const HomePage = () => {
     // Search
     const [searchValue, setSearchValue] = useState("");
 
-   const handleSearchRestaurant = (e) => {
+   const handleSearch = (e) => {
         e.preventDefault();
+
+        // Search for restaurants
         searchResFetch(searchValue)
             .then(data=>{
-                const action = searchResAction(data);
+
+                const action = searchResAction(data.results);
                 dispatch(action);
+
                 history.push("/search");
+            });
+
+        // Search for reviews
+        searchReviewsFetch(searchValue)
+            .then(data => {
+                const action = searchReviewsAction(data.results);
+                dispatch((action));
+            });
+
+        // Search for users
+        searchUsersFetch(searchValue)
+            .then(data => {
+                const action = searchUsersAction(data.results);
+                dispatch(action);
             })
     }
     // See the restaurant at restaurant page
@@ -94,11 +129,11 @@ const HomePage = () => {
         <HeaderNavi/>
         <HomeBanner>
             <SearchBox>
-            <input type="search" name=""  placeholder='Search..'
+            <input type="search" name="" placeholder='Search..'
                 onChange={(event) => setSearchValue(event.target.value)}
-                onKeyUp={ event => event.key === 'Enter' ? handleSearchRestaurant() : ''}
+                onKeyUp={ event => event.key === 'Enter' ? handleSearch() : ''}
             />
-            <button type="submit" onClick={handleSearchRestaurant} >Search</button>
+            <button type="submit" onClick={handleSearch} >Search</button>
             </SearchBox>
         </HomeBanner>
         <ContentWrapper>

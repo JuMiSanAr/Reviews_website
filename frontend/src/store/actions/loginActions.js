@@ -2,11 +2,12 @@
 import { LOGIN } from "../constants";
 
 
-export const loginAction = (token) => {
+export const loginAction = (token, status) => {
     return {
         type: LOGIN,
         payload: {
-            token
+            token: token,
+            status: status
         }
     }
 };

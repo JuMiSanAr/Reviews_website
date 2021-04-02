@@ -88,7 +88,7 @@ export const FeaturedRestaurant = styled.div `
     flex-wrap: wrap;
 `;
 
-const ContentWrapper = styled.div`
+export const ContentWrapper = styled.div`
     margin: auto;
     max-width: 80vw;
 `;

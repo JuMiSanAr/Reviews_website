@@ -62,7 +62,7 @@ const ReviewCard = (props) => {
                 </ReviewerDetails>
                 <Score>{stars(rating)}</Score>
                 <ReviewDateSection>
-                    <ReviewDate>{modified}</ReviewDate>
+                    {/*<ReviewDate>{modified}</ReviewDate>*/}
                 </ReviewDateSection>
             </ReviewCardHeader>
                 <ReviewBody>

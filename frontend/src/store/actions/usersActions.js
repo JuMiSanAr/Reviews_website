@@ -1,4 +1,4 @@
-import {ALL_USERS, GET_USER_INFO} from "../constants";
+import {ALL_USERS, GET_USER_INFO, USER_REVIEW} from "../constants";
 
 export const allUserAction = (data) => {
     return {
@@ -12,6 +12,15 @@ export const allUserAction = (data) => {
 export const getUserInfoAction = (data) => {
     return {
         type: GET_USER_INFO,
+        payload: {
+            data
+        }
+    }
+}
+
+export const getUserReviews = (data) => {
+    return {
+        type: USER_REVIEW,
         payload: {
             data
         }

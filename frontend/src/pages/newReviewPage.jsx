@@ -12,10 +12,12 @@ import {
     RatingField,
     ReviewBanner
 } from "../styles/pageStyles/newReviewStyles";
-import {FaStar} from "react-icons/all";
+
 import {newReviewFetch} from "../store/fetches/review_fetches";
 import { useDispatch, useSelector } from 'react-redux';
 import { passRestaurantData } from '../store/actions/restaurantActions';
+
+import {Rating} from "@material-ui/lab";
 
 
 
@@ -23,30 +25,33 @@ const ReviewPage = () => {
 
 
     const [reviewInput, setReviewInput] = useState('');
+     const [ratingValue, setValue] = React.useState(0);
     const [noInput, setNoInputMessage] = useState(false);
 
+     // const dispatch = useDispatch();
+     // let restaurant = JSON.parse(localStorage.getItem('restaurant'));
+     // const action = passRestaurantData(restaurant);
+     // dispatch(action);
+     // const restaurant_data = useSelector(state => state.restaurantsReducer.restaurant_data.data);
+     // const restaurantID = restaurant_data.id
 
-        const dispatch = useDispatch();
 
-            let restaurant = JSON.parse(localStorage.getItem('restaurant'));
-            const action = passRestaurantData(restaurant);
-            dispatch(action);
-            const restaurant_data = useSelector(state => state.restaurantsReducer.restaurant_data.data);
+    const submitReviewAndRating = (e) => {
+         e.preventDefault();
+        if (reviewInput === ''){
+            setNoInputMessage(true);
+            return 0;
+        }else
+            setNoInputMessage(false);
 
-                const submitReviewAndRating = () => {
-                if (reviewInput === ''){
-                    setNoInputMessage(true);
-                    return 0;
-                }else
-                    setNoInputMessage(false);
-
-                newReviewFetch(reviewInput)
-                .then(data => {
-                    console.log(data);
-
-            });
-            };
-
+        newReviewFetch(reviewInput, ratingValue)
+            .then(data => {
+                console.log(data);
+            })
+            .catch(() => {
+                setNoInputMessage(true)
+            })
+     };
 
 
     return(
@@ -54,21 +59,22 @@ const ReviewPage = () => {
             <HeaderNavi/> 
             <ReviewBanner>
             <RestaurantInfoBanner>
-                    <RestaurantTitle restaurant_data={restaurant_data}/>
+                    {/*<RestaurantTitle restaurant_data={restaurant_data}/>*/}
                 </RestaurantInfoBanner>
             </ReviewBanner>
             <MainContainer>
+
             <RatingField>
-                {/*<button onClick={saveRating1}><FaStar /></button>*/}
-                                {/*<button onClick={saveRating2}><FaStar /></button>*/}
-                {/*<button onClick={saveRating3}><FaStar /></button>*/}
-                <button><FaStar /></button>
-                <button><FaStar /></button>
-                <button><FaStar /></button>
-                <button><FaStar /></button>
-                <button><FaStar /></button>
-            <h5>Select your rating</h5>
+                   <div>
+                    <Rating size="large"
+                    name="five_stars"
+                    value={ratingValue}
+                    onChange={(event, newValue) => {
+                    setValue(newValue);}}/>
+                   </div>
+                    <h5>Select your rating</h5>
             </RatingField>
+
             <InputReviewField>
                 <p>Your review helps others learn about great local businesses.</p>
                 <p style={{color:"white"}}>.</p>
@@ -80,11 +86,12 @@ const ReviewPage = () => {
                     type='text'
                     required/>
 
-                </InputReviewField>
+            </InputReviewField>
+
                 <BtnReview onClick={submitReviewAndRating}>SUBMIT</BtnReview>
-                {noInput? <P>This field is required</P> : ''}
+                {noInput ? <P>This field is required</P> : ''}
+
             </MainContainer>
-                
             <Footer />
         </>
     );

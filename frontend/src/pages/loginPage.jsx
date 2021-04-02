@@ -22,25 +22,25 @@ const LoginPage = () => {
 
     const loginHandler = async () => {
 
-        const response = await loginFetch(email, password)
+             loginFetch(email, password)
                 .then(data => {
             const action = loginAction(data.access);
             dispatch(action);
             localStorage.setItem('token', data.access);
-            return data;
+        history.push('/')
         })
         .catch(() => {
                 setErrorMessage(true);
             })
 
-        const data = await response.access
+        // const data = await response.access
 
-        getLoggedInUserInfoFetch(data)
-            .then(data => {
-                const action = getUserInfoAction(data);
-                dispatch(action);
-                history.push('/');
-        })
+        // getLoggedInUserInfoFetch(data)
+        //     .then(data => {
+        //         const action = getUserInfoAction(data);
+        //         dispatch(action);
+        //         history.push('/');
+        // })
     }
 
     return (

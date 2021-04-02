@@ -20,6 +20,7 @@ export const GET_USER_INFO = 'GET_USER_INFO';
 
 export const FILTER_RESTAURANT_DATA = 'FILTER_RESTAURANT_DATA';
 
+export const USER_REVIEW = 'USER_REVIEW'
 
 // Base URLs to use for fetching
 export const baseUrlLocal = 'http://localhost:8000/api/';

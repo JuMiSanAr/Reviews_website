@@ -33,7 +33,15 @@ const UserProfile = () => {
 
     useEffect( () => {
        // Fetch the user's comments, reviews and restaurants
-
+       
+        getLoggedInUserReviews()
+            .then(data => {
+                const action = usersActions(data.results[0].best_four);
+                dispatch(action);
+            });
+        
+        
+        
 
        //  homeCardFetch()
        //      .then(data => {

@@ -5,7 +5,7 @@ import {AboutMe} from "../../../styles/componentStyles/card/user";
 
 
 const CardUser = ({all_user}) => {
-    console.log(all_user)
+    // console.log(all_user)
     return (
         <RestaurantContainer>
         <CardWrapper>
@@ -20,8 +20,7 @@ const CardUser = ({all_user}) => {
                 <h2>{all_user.first_name} {all_user.last_name}</h2>
                 <AboutMe>
                     <p>
-                        React wouldn’t know what to return for the second useState Hook call.
-                        React expected that the second Hook call.. <a href="http://">read more</a>
+                        {all_user.description} <a href="http://">read more</a>
                     </p>    
                     </AboutMe>
                 </ContentWrapper>

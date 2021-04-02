@@ -22,7 +22,7 @@ import {searchResAction, searchReviewsAction, searchUsersAction} from "../store/
 import { passRestaurantData } from '../store/actions/restaurantActions';
 import { getAllRestaurants } from "../store/actions/restaurantActions";
 import { homeCardAction } from "../store/actions/homeCardActions";
-import {allUserAction, getUserInfoAction} from '../store/actions/usersActions';
+import {allUserAction/*, getUserInfoAction*/} from '../store/actions/usersActions';
 import {getAllReviewsFetch} from "../store/fetches/review_fetches";
 import {getAllReviewsAction} from "../store/actions/reviewsActions";
 // ===================================================
@@ -61,7 +61,7 @@ const HomePage = () => {
                dispatch(action);
            })
 
-    }, []);
+    }, [dispatch]);
 
         // Fetch user info and send it to redux store
     // const isUserLoggedIn = useSelector(state => state.logInReducer.authenticated);
@@ -119,7 +119,7 @@ const HomePage = () => {
     const checkRestaurantHandler = (data) => {
         const action = passRestaurantData(data);
         dispatch(action);
-        localStorage.setItem('restaurant', JSON.stringify(data));
+        // localStorage.setItem('restaurant', JSON.stringify(data));
         history.push("/restaurant");
     };
 

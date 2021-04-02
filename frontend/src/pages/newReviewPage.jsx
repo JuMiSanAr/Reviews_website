@@ -26,28 +26,29 @@ const ReviewPage = () => {
     const [noInput, setNoInputMessage] = useState(false);
 
 
-        const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-            let restaurant = JSON.parse(localStorage.getItem('restaurant'));
-            const action = passRestaurantData(restaurant);
-            dispatch(action);
-            const restaurant_data = useSelector(state => state.restaurantsReducer.restaurant_data.data);
-            const restaurantID = restaurant_data.id
-                const submitReviewAndRating = () => {
-                if (reviewInput === ''){
-                    setNoInputMessage(true);
-                    return 0;
-                }else
-                    setNoInputMessage(false);
+    let restaurant = JSON.parse(localStorage.getItem('restaurant'));
+    const action = passRestaurantData(restaurant);
+    dispatch(action);
+    const restaurant_data = useSelector(state => state.restaurantsReducer.restaurant_data.data);
+    // const restaurantID = restaurant_data.id
 
-                newReviewFetch(reviewInput)
-                .then(data => {
-                    console.log(data);
+    const submitReviewAndRating = () => {
 
-            });
-            };
+        // if (!reviewInput.length) return setNoInputMessage(true) 
+        //     else
+        //     setNoInputMessage(false);
 
+        newReviewFetch(reviewInput)
+        .then(data => {
+            console.log(data);
+        });
+    };
 
+    const handleText = (e) => {
+        setReviewInput(e.target.value);
+    }
 
     return(
         <>
@@ -75,14 +76,18 @@ const ReviewPage = () => {
                 <p>Please don't review this business if you received a freebie for writing this review, <br />or if you're connected in any way to the owner or employees.</p>
 
                 <input
-                    value={reviewInput}
-                    onChange= {e => setReviewInput(e.target.value)}
+                    value={ reviewInput }
+                    onChange= { handleText }
                     type='text'
                     required/>
 
                 </InputReviewField>
-                <BtnReview onClick={submitReviewAndRating}>SUBMIT</BtnReview>
-                {noInput? <P>This field is required</P> : ''}
+                <BtnReview onClick={ submitReviewAndRating }>SUBMIT</BtnReview>
+                <P>
+                {
+                    !noInput ? '' : 'This field is required'
+                }
+                </P>
             </MainContainer>
                 
             <Footer />

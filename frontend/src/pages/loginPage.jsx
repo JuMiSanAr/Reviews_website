@@ -4,9 +4,8 @@ import HeaderNavi from '../components/headerNavi/index';
 import { loginAction } from '../store/actions/loginActions';
 import { InputField, LoginTitle, LoginWrapper, MainContainer } from '../styles/pageStyles/loginStyles';
 import loginFetch from "../store/fetches/login_fetches";
-import {Redirect, useHistory} from 'react-router-dom';
-import {getLoggedInUserInfoFetch} from "../store/fetches/users_fetches";
-import {getUserInfoAction} from "../store/actions/usersActions";
+import { useHistory } from 'react-router-dom';
+
 
 //############################# Component ################################
 

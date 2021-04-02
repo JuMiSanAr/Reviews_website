@@ -13,7 +13,7 @@ const LeftSection = (props) => {
     const filterHandler = () => {
         console.log(filter);
     }
-    // console.log('from lower left section: ',props)
+    console.log('from lower left section: ',props)
 
     return(
         <LowerLeftSection>

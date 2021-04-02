@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { stars } from '../../styles';
 import like from '../../assets/like.svg';
@@ -8,6 +9,9 @@ import { CancelButton, CommentButton, CommentContent, CommentDate, CommentHeader
     ReviewBody, ReviewCardContainer, ReviewCardHeader, ReviewCommentContainer, ReviewCommentRow, 
     ReviewContent, ReviewDate, ReviewDateSection, ReviewerDetails, ReviewerImage, ReviewerName, 
     ReviewFooter, Score, ViewCommentsButton } from '../../styles/componentStyles/restaurant/reviewCard';
+import { likeOrUnlikeReviewFetch } from '../../store/fetches/review_fetches';
+import { passRestaurantData } from '../../store/actions/restaurantActions';
+import { useHistory } from 'react-router';
 
 
 
@@ -16,23 +20,34 @@ const avatarIfAuthorDoesNotHaveOne = 'https://res.cloudinary.com/tennam/image/up
 
 
 const ReviewCard = (props) => {
-        const { author, comments, liked_by, modified, rating, text_content } = props.review;
+    const history = useHistory();
+
+    const dispatch = useDispatch()
+    const { author, comments, liked_by, modified, rating, text_content } = props.review;
+
+    const likeHandler = (event) => {
+        // event.preventDefault();
+        likeOrUnlikeReviewFetch(props.review.id)
+        .then(data => {
+            const action = passRestaurantData(data)
+            dispatch(action)
+        }) 
+        history.push("/restaurant");
+    };
+
+    const [ showCommentInput, setShowCommentInput ] = useState(false);
     
-        const likeHandler = () => {
-            console.log('liked');
-        };
+    const showCommentInputHandler = () => { setShowCommentInput(!showCommentInput) };
 
-        const [ showCommentInput, setShowCommentInput ] = useState(false);
-        
-        const showCommentInputHandler = () => { setShowCommentInput(!showCommentInput) };
+    const [ newComment, setNewComment ] = useState('');
+    const postCommentHandler = () => {
+        console.log(newComment);
+    }
 
-        const [ newComment, setNewComment ] = useState('');
-        const postCommentHandler = () => {
-            console.log(newComment);
-        }
+    const [ showAllComments, setShowAllComments ] = useState(false);
+    const showAllCommentHandler = () => { setShowAllComments(!showAllComments) };
 
-        const [ showAllComments, setShowAllComments ] = useState(false);
-        const showAllCommentHandler = () => { setShowAllComments(!showAllComments) };
+
     return(
         <ReviewCardContainer>
             <ReviewCardHeader>
@@ -57,7 +72,7 @@ const ReviewCard = (props) => {
                             {
                                 !showCommentInput ? 
                                     <>
-                                    <LikesButton onClick={ likeHandler }><LikeIcon src={ like }/>Like { liked_by.length }</LikesButton>
+                                    <LikesButton onClick={ (event) => likeHandler(event) }><LikeIcon src={ like }/>Like { liked_by.length }</LikesButton>
                                     <CommentButton onClick={ showCommentInputHandler }>Comment { comments.length }</CommentButton>
                                     </>
                                     :   <>

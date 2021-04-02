@@ -16,26 +16,31 @@ import { passRestaurantData } from '../store/actions/restaurantActions';
 
 
 const RestaurantPage = () => {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
+    // let restaurant = JSON.parse(localStorage.getItem('restaurant'));
+    
+    // const action = passRestaurantData(restaurant);
+    // dispatch(action);
 
-    let restaurant = JSON.parse(localStorage.getItem('restaurant'));
-    const action = passRestaurantData(restaurant);
-    dispatch(action);
     const restaurant_data = useSelector(state => state.restaurantsReducer.restaurant_data.data);
-    console.log(restaurant_data)
+
+        console.log(restaurant_data)
+        
+
+    
     return(
         <>
             <HeaderNavi/>
             <RestaurantBanner>
                 <RestaurantInfoBanner>
-                    <RestaurantTitle restaurant_data={restaurant_data ? restaurant_data : restaurant}/>
-                        <LittleMap restaurant_data={restaurant_data ? restaurant_data : restaurant}/>
+                    <RestaurantTitle restaurant_data={ restaurant_data }/>
+                        <LittleMap restaurant_data={ restaurant_data }/>
                 </RestaurantInfoBanner>
             </RestaurantBanner>
             <LowerSection>
-                <LeftSection restaurant_reviews={restaurant_data ? restaurant_data.restaurant_reviews : restaurant.restaurant_reviews}/>
+                <LeftSection restaurant_reviews={ restaurant_data.restaurant_reviews }/>
 
-                <RightSection restaurant_data={restaurant_data ? restaurant_data : restaurant}/>
+                <RightSection restaurant_data={ restaurant_data }/>
             </LowerSection>
             <Footer/>
         </>

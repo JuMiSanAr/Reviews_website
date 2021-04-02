@@ -75,7 +75,6 @@ const SearchPage = () => {
              });
     }, []);
 
-
     return (
         <>
         <MainContainer>
@@ -87,13 +86,7 @@ const SearchPage = () => {
                 <span></span>
                 <select>
                     <option value="">Select a category&hellip;</option>
-                    {
-                         allRestaurants ? allRestaurants.map((data, index)=> {
-                            return (
-                                <option key={index} >{data.categories.map(category => category.name)}</option>
-                                     );
-                                }) : "....loading"
-                    }
+
                 </select>
                 </SelectCategory>
             </SearchSelectContainer>
@@ -109,32 +102,13 @@ const SearchPage = () => {
             </TabsContainer>
             <ResCardContainer> 
                 <div className={toggleState === 1 ? " active-content" : "content"}>
-                    {
-                        allRestaurants.map((data, index)=> {
-
-                                return (
-
-                                     <CardRestaurant key={index} restaurant_data={data}/>
-
-                                            );
-                                 })
-                    }
 
                 </div>
                 <div className={toggleState === 2 ? "active-content" : "content"}>
-                   <CardReview/>
-                    <CardReview/>
-                    <CardReview/>
-                    <CardReview/>
+
                 </div>
                 <div className={toggleState === 3 ? "active-content" : "content"}>
-                    {
-                        allUsersList.map((users, index)=> {
-                            return (
-                                  <CardUser all_user={users}/>
-                            )
-                        })
-                    }
+
                 </div>
             </ResCardContainer>  
             </ContentWrapper>

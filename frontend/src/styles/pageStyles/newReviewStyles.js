@@ -81,7 +81,7 @@ export const P = styled.p`
 export const RatingField = styled.div `
         position: relative;
         
-        width: 832px;
+        width: 555px;
         margin: 30px 15px 1px 110px;
         padding: 0;
         align-items: center;

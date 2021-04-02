@@ -123,7 +123,6 @@ const ReviewPage = () => {
     const action = passRestaurantData(restaurant);
     dispatch(action);
     const restaurant_data = useSelector(state => state.restaurantsReducer.restaurant_data.data);
-    console.log(restaurant_data)
 
     // const writeReviewHandler = (event) => {
     //     console.log(event);

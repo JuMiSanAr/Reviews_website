@@ -12,7 +12,7 @@ import money from '../../assets/money.svg';
 
 const RightSection = (props) => {
     const history = useHistory();
-    const { opening_hours_from, opening_hours_to, price_level, owner} = props.restaurant_data
+    const { opening_hours, price_level, owner} = props.restaurant_data
     console.log(owner)
 
     const writeReviewHandler = () => {
@@ -32,7 +32,7 @@ const RightSection = (props) => {
     return(
         <LowerRightSection>
             <LowerRightRow>
-                <OpeningHours><Icon src={clock}/>{opening_hours_from} - {opening_hours_to}</OpeningHours>
+                <OpeningHours><Icon src={clock}/>{opening_hours}</OpeningHours>
             </LowerRightRow>
             <LowerRightRow>
                 <PriceLevel><Icon src={money}/>Price level: {priceLevel(Number(price_level))}</PriceLevel>

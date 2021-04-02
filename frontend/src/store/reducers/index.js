@@ -4,6 +4,7 @@ import {  restaurantsReducer } from './restaurantsReducer';
 import {searchReducer} from "./searchReducer";
 import {usersReducer} from "./usersReducer";
 import {categoriesReducer} from "./categoriesReducer";
+import {reviewsReducer} from "./reviewsReducer";
 
 
 const rootReducer = combineReducers({
@@ -11,7 +12,8 @@ const rootReducer = combineReducers({
     searchReducer,
     restaurantsReducer,
     categoriesReducer,
-    usersReducer
+    usersReducer,
+    reviewsReducer
 });
 
 export default rootReducer;

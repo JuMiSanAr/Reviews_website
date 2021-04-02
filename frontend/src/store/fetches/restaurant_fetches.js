@@ -2,6 +2,16 @@ import {fetchAPI} from "../fetchAPI";
 import {headers, headersWithToken, headersWithTokenAndImage} from "../constants";
 
 
+export const aRestaurantsFetch = (id) => {
+
+    return fetchAPI(
+        `restaurants/${id}`,
+        false,
+        'GET',
+        headers
+    )
+}
+
 export const allRestaurantsFetch = () => {
 
     return fetchAPI(

@@ -7,10 +7,6 @@ import restaurant from '../assets/restaurant.svg'
 import edit from '../assets/edit.svg'
 import { useState } from "react";
 import EditProfileForm from '../components/editProfileForm'
-import homeCardFetch from "../store/fetches/home_card_fetches";
-import {homeCardAction} from "../store/actions/homeCardActions";
-import {allRestaurantsFetch} from "../store/fetches/restaurant_fetches";
-import {getAllRestaurants} from "../store/actions/restaurantActions";
 import {
     AboutWrapper,
     CommentWrapper,

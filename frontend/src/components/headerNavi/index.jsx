@@ -4,9 +4,13 @@ import { HeaderNaviStyle, RightHeaderSection, LunaLogo,
     StyledLoginButton, StyledSignupButton, StyledTab, StyledSignoutButton } from '../../styles/componentStyles/headerNavi';
 
 import {useHistory} from "react-router-dom";
+import {loginAction} from "../../store/actions/loginActions";
+import {useDispatch} from "react-redux";
 
   
 const HeaderNavi = () => {
+
+    const dispatch = useDispatch();
 
 
     const token = localStorage.getItem('token');
@@ -34,6 +38,8 @@ const HeaderNavi = () => {
 
     const logoutHandler = () => {
         localStorage.clear();
+        const action = loginAction(null,false);
+        dispatch(action);
         history.push("/");
     };
         

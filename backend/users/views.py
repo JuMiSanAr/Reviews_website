@@ -6,8 +6,8 @@ from rest_framework.generics import ListAPIView, RetrieveUpdateAPIView, Retrieve
 
 from restaurant.models import Restaurant
 from restaurant.serializers import serializers_main as restaurant_serializers
-from reviews import serializers as review_serializers
 from reviews.models import Review
+from reviews.serializers import serializers_main as review_serializers
 from users.serializers import serializers_main as user_serializers
 from users.serializers.serializers_main import UserSerializer
 

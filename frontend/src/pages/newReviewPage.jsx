@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { passRestaurantData } from '../store/actions/restaurantActions';
 
 import {Rating} from "@material-ui/lab";
+import {useHistory} from "react-router-dom";
 
 
 
@@ -28,8 +29,10 @@ const ReviewPage = () => {
      const [ratingValue, setValue] = React.useState(0);
     const [noInput, setNoInputMessage] = useState(false);
 
-     // const dispatch = useDispatch();
-     // let restaurant = JSON.parse(localStorage.getItem('restaurant'));
+    const history = useHistory();
+     const dispatch = useDispatch();
+     let restaurant = JSON.parse(localStorage.getItem('restaurant'));
+
      // const action = passRestaurantData(restaurant);
      // dispatch(action);
      // const restaurant_data = useSelector(state => state.restaurantsReducer.restaurant_data.data);
@@ -44,14 +47,14 @@ const ReviewPage = () => {
         }else
             setNoInputMessage(false);
 
-        newReviewFetch(reviewInput, ratingValue)
+        newReviewFetch(reviewInput, ratingValue, restaurant.id)
             .then(data => {
-                console.log(data);
+                history.push('/');
             })
             .catch(() => {
                 setNoInputMessage(true)
             })
-     };
+    };
 
     const handleText = (e) => {
         setReviewInput(e.target.value);

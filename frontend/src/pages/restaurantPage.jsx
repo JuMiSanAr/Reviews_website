@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 // ================ components ================
 import Footer from '../components/footer';
@@ -8,7 +8,6 @@ import LittleMap from '../components/restaurantPageComponents/map';
 // ===================================================
 // ================ styled components ================
 import { LowerSection, RestaurantBanner, RestaurantInfoBanner } from '../styles/pageStyles/restaurantStyles';
-import { passRestaurantData } from '../store/actions/restaurantActions';
 import { useHistory } from 'react-router';
 import { Icon, LowerRightRow, LowerRightSection, OpeningHours, PriceLevel, RightSideButton } from '../styles/componentStyles/restaurant/lowerRightSection';
 // ===================================================

@@ -2,12 +2,10 @@ import {fetchAPI} from "../fetchAPI";
 import {headers, headersWithToken} from "../constants";
 
 
-export const newReviewFetch = (input, rating) => {
-    // export const newReviewFetch = (input, rating, restaurantID) => {
-console.log(headersWithToken)
+export const newReviewFetch = (input, rating, restaurantID) => {
+
     return fetchAPI(
-        // `reviews/new/${restaurantID}`,
-         `reviews/new/1`,
+        `reviews/new/${restaurantID}/`,
         {review: input, rating: rating},
         'POST',
         headersWithToken

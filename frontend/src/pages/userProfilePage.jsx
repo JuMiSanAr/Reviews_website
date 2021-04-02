@@ -26,7 +26,7 @@ import {
 } from "../styles/pageStyles/profileStyles";
 import { useDispatch, useSelector } from 'react-redux';
 import { stars } from '../styles';
-import {Redirect, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 
 const UserProfile = () => {
@@ -72,29 +72,11 @@ const UserProfile = () => {
                     setAuth(true)
                 })
         }
-
-        
-        
-        // getLoggedInUserReviewComments()
-        //     .then(data => {
-        //         const action = usersActions(data.results[2]);
-        //         dispatch(action);
-        //     });
-        
-
-       //  homeCardFetch()
-       //      .then(data => {
-       //          const action = homeCardAction(data.results[0].best_four);
-       //          dispatch(action);
-       //      });
-       //
-       // allRestaurantsFetch()
-       //      .then(data => {
-       //          const action = getAllRestaurants(data.results);
-       //          dispatch(action);
-       //      });
     }, []);
 
+    const createRestaurant = () => {
+        history.push('/newRestaurant');
+    }
 
     return(
         <>
@@ -104,8 +86,8 @@ const UserProfile = () => {
            <div className="userdetails">
                <h2>{auth ? loggedInUser.data['username'] : ''}</h2>
                <span>{auth ? loggedInUser.data['location'] : ''}</span>
-               <p><span>{reviewsFromUser ? reviewsFromUser.length : '0'}</span>reviews</p>
-               <p><span>5</span>comments</p>
+               <p><span>{reviewsFromUser ? reviewsFromUser.length : '0'}</span> reviews</p>
+               <p><span>5</span> comments</p>
            </div>
         </ProfileBanner>
         <ProfileWrapper>
@@ -179,7 +161,7 @@ const UserProfile = () => {
                             service.</p>
                     </div>
                     <div className="editbutton">
-                     <button>Create Restaurant</button>
+                     <button onClick={createRestaurant}>Create Restaurant</button>
                     </div>
                     </RestaurantWrapper>
                     <EditProfileWrapper className={toggleState === 4 ? " active-content" : "content"}>

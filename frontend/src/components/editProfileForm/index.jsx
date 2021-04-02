@@ -1,6 +1,9 @@
 import React, {useState} from 'react'
 import {ButtonWrapper, FormWrapper} from "../../styles/componentStyles/editProfile/profile";
-import {userProfilePatch} from "../../store/fetches/profile_edit_fetches";
+import {userProfileDelete, userProfilePatch} from "../../store/fetches/profile_edit_fetches";
+import {getUserInfoAction} from "../../store/actions/usersActions";
+import {useDispatch} from "react-redux";
+import {LoginWrapper} from "../../styles/pageStyles/loginStyles";
 
 
 const EditProfileForm = () => {
@@ -9,17 +12,40 @@ const EditProfileForm = () => {
 	 const [ last_name, setLast_name ] = useState('');
 	 const [ email, setEmail ] = useState('');
 	 const [ location, setLocation ] = useState('');
-	  const [ phone, setPhone ] = useState('');
+	 const [ phone, setPhone ] = useState('');
 	 const [ things_i_like, setThings_i_like ] = useState('');
 	 const [ description, setDescription ] = useState('');
+
+	 // const [errorMessage, setErrorMessage] = useState(false);
+     const [saveMessage, setSaveMessage] = useState(false);
+
+	 const dispatch = useDispatch();
+
 
 	 const editHandler = () => {
 		userProfilePatch(username,first_name,
 			last_name, email, location, phone,
 			things_i_like, description)
-			.then()
+			.then(data => {
+				 const action = getUserInfoAction(data);
+            dispatch(action);
+             console.log(data)
+			})
+			// .catch(() => {
+			// 	setErrorMessage(true);
+			// })
+		 setSaveMessage(true)
+
     }
 
+    // const deleteHandler = () => {
+	//  	userProfileDelete()
+	// 		.then(data => {
+	// 				 const action = getUserInfoAction(data);
+	// 			dispatch(action);
+	// 			 console.log(data)
+	// 			})
+	// }
 
     return (
         <FormWrapper>
@@ -66,8 +92,10 @@ const EditProfileForm = () => {
 		</div> 
         <ButtonWrapper>
             <button type="submit"  onClick={editHandler}>Save</button>
-            <span>Delete account</span>
+            {/*<span onClick={deleteHandler}>Delete account</span>*/}
         </ButtonWrapper>
+			{/*<h3 className="errormessage">{errorMessage ? '** You need to LogIn' : ''}</h3>*/}
+			<h3 className="errormessage">{saveMessage ? '** Your changes is saved' : ''}</h3>
         </FormWrapper>
     )
 }

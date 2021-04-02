@@ -13,22 +13,22 @@ export const ReviewBanner = styled.div `
 `;
 
 export const MainContainer = styled.div `
-min-height: 60vh;
-width: 100%;
+    min-height: 60vh;
+    width: 100%;
 `;
 
 export const InputReviewField = styled.div`
-display: flex;
-justify-content: center;
-align-items: left;
-flex-direction: column;
-margin: 20px 10px 10px 250px;
-border: 1px solid #E3E3E3;
-box-sizing: border-box;
-border-radius: 3px;
-width: 832px;
-height: 264.5px;
-background: #FFFFFF;
+        display: flex;
+        justify-content: center;
+        align-items: left;
+        flex-direction: column;
+        margin: 20px 10px 10px 250px;
+        border: 1px solid #E3E3E3;
+        box-sizing: border-box;
+        border-radius: 3px;
+        width: 832px;
+        height: 264.5px;
+        background: #FFFFFF;
 
     input {
         font-style: normal;
@@ -81,7 +81,7 @@ export const P = styled.p`
 export const RatingField = styled.div `
         position: relative;
         
-        width: 832px;
+        width: 555px;
         margin: 30px 15px 1px 110px;
         padding: 0;
         align-items: center;
@@ -116,7 +116,7 @@ export const BtnReview = styled.button`
         border-style:none;
         margin-left: 880px;
         margin-bottom: 100px;
-        font-family: Helvetica; // needs to be changed to Roboto!!
+        font-family: Roboto, sans-serif;
         font-style: normal;
         font-weight: normal;
         font-size: 20px;

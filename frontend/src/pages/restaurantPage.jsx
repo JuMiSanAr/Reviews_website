@@ -22,7 +22,7 @@ const RestaurantPage = () => {
     const action = passRestaurantData(restaurant);
     dispatch(action);
     const restaurant_data = useSelector(state => state.restaurantsReducer.restaurant_data.data);
-    console.log(restaurant_data)
+
     return(
         <>
             <HeaderNavi/>

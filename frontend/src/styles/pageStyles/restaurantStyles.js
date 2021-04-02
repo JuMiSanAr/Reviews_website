@@ -25,7 +25,7 @@ export const RestaurantInfoBanner = styled.div `
 export const LowerSection = styled.div `
     display: flex;
     flex-direction:row;
-    height: 60vh;
+    min-height: 60vh;
     width: 100vw;
     background-color: #F7F7F7;
 `

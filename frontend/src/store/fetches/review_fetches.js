@@ -22,3 +22,13 @@ export const getAllReviewsFetch = () => {
     )
 }
 
+
+export const likeOrUnlikeReviewFetch = (reviewId) => {
+    return fetchAPI(
+        `reviews/like/${reviewId}/`,
+        false,
+        'PATCH',
+        headersWithToken
+    )
+
+}

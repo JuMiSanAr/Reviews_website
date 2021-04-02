@@ -31,6 +31,15 @@ import {useHistory} from "react-router-dom";
 // THE RELATED CSS YOU'LL FIND IN "newRestaurantStyles.js"
 
 
+// ===== api key to convert address to lat & lon ===== 
+// const apiKey = 'pk.90118e3bf831e84aa39b925394cce279&q'
+// ===================================================
+    // fetch(`https://us1.locationiq.com/v1/search.php?key=${apiKey}=${street}%20${streetNumber}%2C%20${city}%20${zipCode}%2C%20${country}&format=json`)
+    // .then(response => response.json())
+    // .then(data => {
+    //     // data ? setPosition([data[0].lat, data[0].lon]) : setPosition([47.0269, 8.3023])
+    // });
+
 
 
 const NewRestaurantFormPage = () => {
@@ -106,8 +115,6 @@ const NewRestaurantFormPage = () => {
             .catch(error => {
                 console.log('error', error)
             })
-
-
     }
 
     return (

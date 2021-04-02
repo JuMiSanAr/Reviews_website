@@ -56,6 +56,9 @@ const ReviewPage = () => {
             })
     };
 
+    const handleText = (e) => {
+        setReviewInput(e.target.value);
+    }
 
     return(
         <>
@@ -84,8 +87,8 @@ const ReviewPage = () => {
                 <p>Please don't review this business if you received a freebie for writing this review, <br />or if you're connected in any way to the owner or employees.</p>
 
                 <input
-                    value={reviewInput}
-                    onChange= {e => setReviewInput(e.target.value)}
+                    value={ reviewInput }
+                    onChange= { handleText }
                     type='text'
                     required/>
 

@@ -14,7 +14,7 @@ const RestaurantTitle = props => {
 
     const restaurantCategories = categories => {
         let resCat = '';
-        if (categories.length > 1) return 'Restaurant';
+        if (!categories) return 'Restaurant';
         else categories.forEach((category, index) => {
                 index === categories.length-1 ? resCat += category.name : resCat += `${ category.name } & `})
         return resCat

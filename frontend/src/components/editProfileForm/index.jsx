@@ -1,9 +1,5 @@
 import React, {useState} from 'react'
 import {ButtonWrapper, FormWrapper} from "../../styles/componentStyles/editProfile/profile";
-import loginFetch from "../../store/fetches/login_fetches";
-import {loginAction} from "../../store/actions/loginActions";
-import {getLoggedInUserInfoFetch} from "../../store/fetches/users_fetches";
-import {getUserInfoAction} from "../../store/actions/usersActions";
 import {userProfilePatch} from "../../store/fetches/profile_edit_fetches";
 
 

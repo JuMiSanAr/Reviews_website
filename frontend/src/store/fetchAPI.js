@@ -5,7 +5,6 @@ export const fetchAPI = (url, body, method, headers = true, expectData = true, f
 
     const thisUrl = `${baseUrlLocal}${url}`;
     let config = {};
-
     if (headers && body && !fileExpected) {
         config = {
             method: method,

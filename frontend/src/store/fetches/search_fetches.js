@@ -2,7 +2,7 @@ import {fetchAPI} from "../fetchAPI";
 import {headers} from "../constants";
 
 
-const searchResFetch = (search) => {
+export const searchResFetch = (search) => {
 
     return fetchAPI(
         `search/?type=restaurants&search=${search}`,
@@ -12,4 +12,23 @@ const searchResFetch = (search) => {
     )
 }
 
-export default searchResFetch;
+
+export const searchReviewsFetch = (search) => {
+
+    return fetchAPI(
+        `search/?type=reviews&search=${search}`,
+        false,
+        'GET',
+        headers
+    )
+}
+
+export const searchUsersFetch = (search) => {
+
+    return fetchAPI(
+        `search/?type=users&search=${search}`,
+        false,
+        'GET',
+        headers
+    )
+}

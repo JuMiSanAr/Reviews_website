@@ -1,8 +1,8 @@
 import {fetchAPI} from "../fetchAPI";
-import {headersWithToken} from "../constants";
+import {headers, headersWithToken} from "../constants";
 
 
-const newReviewFetch = (addValueHere, rating= '3') => {
+export const newReviewFetch = (addValueHere, rating= '3') => {
 console.log(headersWithToken)
     return fetchAPI(
         'reviews/new/1/',
@@ -12,7 +12,13 @@ console.log(headersWithToken)
     )
 };
 
-export default newReviewFetch;
 
+export const getAllReviewsFetch = () => {
+        return fetchAPI(
+            `reviews/`,
+            false,
+            'GET',
+            headers
+    )
+}
 
-// rating: to be added to the body content

@@ -135,3 +135,9 @@ class ListOfLikedReviewsView(ListAPIView):
 
     def get_queryset(self):
         return Review.objects.filter(liked_by=self.request.user).distinct()
+
+
+class ListAllReviewsView(ListAPIView):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+    permission_classes = []

@@ -1,4 +1,4 @@
-import {SEARCH_RESTAURANTS} from "../constants";
+import {SEARCH_RESTAURANTS, SEARCH_REVIEWS, SEARCH_USERS} from "../constants";
 
 
 const initialState = {
@@ -12,6 +12,18 @@ export const  searchReducer = (state = initialState, action) => {
         return {
             ...state,
             restaurants: action.payload,
+        }
+    }
+    else if (action.type === SEARCH_REVIEWS) {
+        return {
+            ...state,
+            reviews: action.payload,
+        }
+    }
+    else if (action.type === SEARCH_USERS) {
+        return {
+            ...state,
+            users: action.payload,
         }
     }
     return state;

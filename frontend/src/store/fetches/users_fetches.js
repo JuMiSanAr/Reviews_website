@@ -22,10 +22,20 @@ export const allUsersFetch = () => {
     )
 }
 
-export const getLoggedInUserReviews = () => {
+export const getLoggedInUserReviews = (id) => {
 
     return fetchAPI(
-        'me/',
+        `reviews/user/${id}`,
+        false,
+        'GET',
+        headersWithToken
+    )
+}
+
+export const getLoggedInUserReviewComments = () => {
+
+    return fetchAPI(
+        'comment/',
         false,
         'GET',
         headersWithToken

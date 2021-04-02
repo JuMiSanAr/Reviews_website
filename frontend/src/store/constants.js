@@ -20,7 +20,8 @@ export const GET_USER_INFO = 'GET_USER_INFO';
 
 export const FILTER_RESTAURANT_DATA = 'FILTER_RESTAURANT_DATA';
 
-export const USER_REVIEW = 'USER_REVIEW'
+export const USER_REVIEW = 'USER_REVIEW';
+export const USER_REVIEW_COMMENT = 'USER_REVIEW_COMMENT';
 export const GET_ALL_REVIEWS = 'GET_ALL_REVIEWS';
 
 // Base URLs to use for fetching

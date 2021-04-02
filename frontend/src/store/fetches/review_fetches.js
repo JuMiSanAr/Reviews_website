@@ -22,5 +22,3 @@ export const getAllReviewsFetch = () => {
     )
 }
 
-
-// rating: to be added to the body content

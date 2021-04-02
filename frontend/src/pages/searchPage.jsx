@@ -57,10 +57,6 @@ const SearchPage = () => {
     const [showingReviews, setShowingReviews] = useState(<img src={loading} alt="...loading"/>);
     const [showingUsers, setShowingUsers] = useState(<img src={loading} alt="...loading"/>);
 
-    const handleChange = event => {
-    setSearchTerm(event.target.value)
-  };
-
     const toggleTab = (index) => {
       setToggleState(index);
     };
@@ -214,7 +210,7 @@ const SearchPage = () => {
             <HeaderNavi/>
             <SearchSelectContainer>
                 <SearchBox><input type="search" name=""  placeholder='Search..' value={searchTerm}
-                  onChange={handleChange}/></SearchBox>
+                  onChange={e => setSearchTerm(e.target.value)}/></SearchBox>
                 <SelectCategory>
                 <span></span>
                 <select>

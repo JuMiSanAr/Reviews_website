@@ -1,4 +1,4 @@
-Welcome to Luna Capricorn's Team Project! 
+Luna is a website where users can review their favorite restaurants, and restaurant owners can show their best dishes.
 
 -------------------------------------
 

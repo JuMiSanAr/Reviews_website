@@ -7,8 +7,7 @@ The core of this website is finished, but there are still some functionalities t
 
 
 # Frontend: 
-our website: https://luna.propulsion-learn.ch/
-feel free to contact us at: lunaproject2021@gmail.com
+Mare using JavaScript (React)
 
 # Backend: 
 API's documentation: /api/docs/

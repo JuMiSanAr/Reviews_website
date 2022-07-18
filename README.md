@@ -6,7 +6,7 @@ Luna is a website where users can review their favorite restaurants, and restaur
 
 
 # Frontend: 
-Mare using JavaScript (React)
+Made using JavaScript (React)
 
 # Backend: 
 API's documentation: /api/docs/
